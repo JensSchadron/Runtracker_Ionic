@@ -1,27 +1,45 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import {Component, ViewChild} from '@angular/core';
+import {Platform, MenuController, Nav} from 'ionic-angular';
+import {StatusBar, Splashscreen} from 'ionic-native';
 
-import { HomePage } from '../pages/home/home';
+import {HomePage} from '../pages/home/home';
 import {ProfilePage} from "../pages/profile/profile";
-import { AuthService } from '../services/auth/auth.service';
+import {AuthService} from '../services/auth/auth.service';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = ProfilePage;
+  @ViewChild(Nav) nav: Nav;
 
-  constructor(platform: Platform, public auth: AuthService) {
-    platform.ready().then(() => {
+  rootPage: any = HomePage;
+  navDrawer: Array<{title: string, component: any}>;
+
+  constructor(public platform: Platform, public menu: MenuController, public auth: AuthService) {
+    this.initApp();
+
+    this.navDrawer = [
+      {title: "Home", component: HomePage},
+      {title: "Profile", component: ProfilePage}
+    ];
+  }
+
+  initApp() {
+    this.platform.ready().then(() => {
       // Schedule a token refresh on app start up
-      auth.startupTokenRefresh();
+      this.auth.startupTokenRefresh();
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  openPage(page){
+    this.menu.close();
+
+    this.nav.setRoot(page.component);
   }
 }
