@@ -8,8 +8,8 @@
 
   <ion-content>
     <ion-list>
-      <button ion-item *ngFor="let p of navDrawer" (click)="openPage(p)">
-        {{p.title}}
+      <button ion-item *ngFor="let menuItem of navDrawer" (click)="onItemSelected(menuItem)">
+        {{menuItem.title}}
       </button>
     </ion-list>
   </ion-content>
