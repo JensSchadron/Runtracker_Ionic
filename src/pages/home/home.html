@@ -9,9 +9,48 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding scroll="false">
+  <ion-slides pager id="dataslides">
+    <ion-slide>
+      <ion-card class="datacard">
+        <ion-card-header>
+          Kilometers
+        </ion-card-header>
+        <ion-card-content>
+          {{km}} Km
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card class="datacard">
+        <ion-card-header>
+          Runs
+        </ion-card-header>
+        <ion-card-content>
+          {{runs}}
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card class="datacard">
+        <ion-card-header>
+          Average pace
+        </ion-card-header>
+        <ion-card-content>
+          {{pace}} (Min/Km)
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card class="datacard">
+        <ion-card-header>
+          Total time
+        </ion-card-header>
+        <ion-card-content>
+          {{min}} Min
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
+
