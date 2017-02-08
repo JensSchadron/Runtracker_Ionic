@@ -3,7 +3,7 @@ import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 
 import {HomePage} from '../pages/home/home';
-import {ProfilePage} from "../pages/profile/profile";
+import {LoginPage} from "../pages/login/login";
 
 
 import {AUTH_PROVIDERS} from 'angular2-jwt';
@@ -25,7 +25,7 @@ export function getAuthHttp(http) {
   declarations: [
     MyApp,
     HomePage,
-    ProfilePage
+    LoginPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -34,7 +34,7 @@ export function getAuthHttp(http) {
   entryComponents: [
     MyApp,
     HomePage,
-    ProfilePage
+    LoginPage
   ],
   providers: [
     AuthService,

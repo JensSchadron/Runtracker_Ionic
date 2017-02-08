@@ -3,7 +3,7 @@ import {Platform, MenuController, Nav} from 'ionic-angular';
 import {StatusBar, Splashscreen} from 'ionic-native';
 
 import {HomePage} from '../pages/home/home';
-import {ProfilePage} from "../pages/profile/profile";
+import {LoginPage} from "../pages/login/login";
 import {AuthService} from '../services/auth/auth.service';
 
 
@@ -13,7 +13,7 @@ import {AuthService} from '../services/auth/auth.service';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any;
   navDrawer: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public menu: MenuController, public auth: AuthService) {
@@ -21,7 +21,7 @@ export class MyApp {
 
     this.navDrawer = [
       {title: "Home", component: HomePage},
-      {title: "Profile", component: ProfilePage}
+      {title: "Login", component: LoginPage}
     ];
   }
 
@@ -29,6 +29,9 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Schedule a token refresh on app start up
       this.auth.startupTokenRefresh();
+
+      this.rootPage = (this.auth.authenticated() ? HomePage : LoginPage);
+      console.log(this.auth.authenticated());
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
