@@ -11,17 +11,27 @@ import {AuthService} from '../services/auth/auth.service';
   templateUrl: 'app.html'
 })
 export class MyApp {
+  private loggedIn: boolean = false;
+
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any;
-  navDrawer: Array<{title: string, component: any}>;
+  navDrawer: Array<{title: string, componentOrFunction: any}>;
 
   constructor(public platform: Platform, public menu: MenuController, public auth: AuthService) {
     this.initApp();
 
     this.navDrawer = [
-      {title: "Home", component: HomePage},
-      {title: "Login", component: LoginPage}
+      {
+        title: "Home",
+        componentOrFunction: HomePage
+      },
+      {
+        title: "Log out",
+        componentOrFunction: function () {
+          auth.logout();
+        }
+      }
     ];
   }
 
@@ -31,7 +41,7 @@ export class MyApp {
       this.auth.startupTokenRefresh();
 
       this.rootPage = (this.auth.authenticated() ? HomePage : LoginPage);
-      console.log(this.auth.authenticated());
+      console.log("Init - logged in:" + this.auth.authenticated());
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -40,9 +50,20 @@ export class MyApp {
     });
   }
 
-  openPage(page){
+  ngDoCheck() {
+    if (this.loggedIn !== this.auth.authenticated()) {
+      this.rootPage = ((this.loggedIn = this.auth.authenticated()) ? HomePage : LoginPage);
+      console.debug("doCheck() - logged in: " + this.loggedIn);
+    }
+  }
+
+  onItemSelected(menuItem) {
     this.menu.close();
 
-    this.nav.setRoot(page.component);
+    if (!!(menuItem.componentOrFunction && menuItem.componentOrFunction.constructor && menuItem.componentOrFunction.call && menuItem.componentOrFunction.apply)) {
+      menuItem.componentOrFunction();
+    } else {
+      this.nav.setRoot(menuItem.componentOrFunction);
+    }
   }
 }
