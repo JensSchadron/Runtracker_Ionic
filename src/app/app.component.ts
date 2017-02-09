@@ -60,7 +60,9 @@ export class MyApp {
   onItemSelected(menuItem) {
     this.menu.close();
 
-    if (!!(menuItem.componentOrFunction && menuItem.componentOrFunction.constructor && menuItem.componentOrFunction.call && menuItem.componentOrFunction.apply)) {
+    // http://stackoverflow.com/a/6000016
+    // if (!!(menuItem.componentOrFunction && menuItem.componentOrFunction.constructor && menuItem.componentOrFunction.call && menuItem.componentOrFunction.apply)) {
+    if (typeof menuItem.componentOrFunction === 'function') {
       menuItem.componentOrFunction();
     } else {
       this.nav.setRoot(menuItem.componentOrFunction);
