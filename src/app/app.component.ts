@@ -38,10 +38,10 @@ export class MyApp {
   initApp() {
     this.platform.ready().then(() => {
       // Schedule a token refresh on app start up
-      this.auth.startupTokenRefresh();
+      this.auth.handleAuthentication();
 
-      this.rootPage = (this.auth.authenticated() ? HomePage : LoginPage);
-      console.log("Init - logged in:" + this.auth.authenticated());
+      this.rootPage = (this.auth.isAuthenticated() ? HomePage : LoginPage);
+      console.log("Init - logged in:" + this.auth.isAuthenticated());
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -51,8 +51,8 @@ export class MyApp {
   }
 
   ngDoCheck() {
-    if (this.loggedIn !== this.auth.authenticated()) {
-      this.rootPage = ((this.loggedIn = this.auth.authenticated()) ? HomePage : LoginPage);
+    if (this.loggedIn !== this.auth.isAuthenticated()) {
+      this.rootPage = ((this.loggedIn = this.auth.isAuthenticated()) ? HomePage : LoginPage);
       console.debug("doCheck() - logged in: " + this.loggedIn);
     }
   }

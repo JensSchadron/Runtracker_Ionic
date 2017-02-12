@@ -15,31 +15,31 @@
     </ion-card-header>
 
     <ion-card-content>
-      <button id="authGoogle" ion-button icon-left block  color="danger">
+      <button id="authGoogle" ion-button icon-left block  color="danger" (click)="auth.loginWithGoogle()">
         <ion-icon name="logo-google"></ion-icon>
         Login with Google
       </button>
 
-      <button id="authFacebook" ion-button icon-left block>
+      <button id="authFacebook" ion-button icon-left block (click)="auth.loginWithFacebook()">
         <ion-icon name="logo-facebook"></ion-icon>
         Login with Facebook
       </button>
 
       <ion-item>
         <ion-label floating>Mailaddress</ion-label>
-        <ion-input type="text" [(ngModel)]="mail"></ion-input>
+        <ion-input #mail type="text"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="pass"></ion-input>
+        <ion-input #pass type="password"></ion-input>
       </ion-item>
 
-      <button id="btn-login" ion-button block>Login</button>
+      <button id="btn-login" ion-button block (click)="loginWithErrorHandling(mail.value, pass.value)">Login</button>
     </ion-card-content>
   </ion-card>
 
-  <button id="btn-auth0-login" *ngIf="!auth.authenticated()" ion-button block (click)="auth.login()">Login</button>
+  <!--<button id="btn-auth0-login" *ngIf="!auth.isAuthenticated()" ion-button block (click)="auth.login()">Login</button>-->
 
   <!--<ion-card *ngIf="auth.authenticated()">-->
 
