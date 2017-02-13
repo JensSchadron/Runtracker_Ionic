@@ -1,14 +1,16 @@
-import { Storage } from '@ionic/storage';
-import { AuthHttp, JwtHelper, tokenNotExpired } from 'angular2-jwt';
-import { Injectable, NgZone } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import {Storage} from '@ionic/storage';
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
+import {Injectable, NgZone} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
 
-import { Auth0Vars } from '../../auth0-variables';
-import Auth0Lock from 'auth0-lock';
+import {Auth0Vars} from '../../auth0-variables';
 import Auth0 from 'auth0-js';
+import {App} from "ionic-angular";
+import {HomePage} from "../../pages/home/home";
+import {LoginPage} from "../../pages/login/login";
 
 // Avoid name not found warnings
-declare var auth0: any;
+declare let auth0: any;
 
 @Injectable()
 export class AuthService {
@@ -23,16 +25,17 @@ export class AuthService {
   });
 
   // private router: Router
-  constructor() {
+  constructor(private app: App) {
   }
 
   public handleAuthentication(): void {
+    console.log("handleAuthentication");
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
-        // this.router.navigate(['/home']);
+        this.app.getActiveNav().setRoot(HomePage);
       } else if (authResult && authResult.error) {
         alert('Error: ' + authResult.error);
       }
@@ -52,7 +55,7 @@ export class AuthService {
       }
       if (authResult && authResult.idToken && authResult.accessToken) {
         this.setUser(authResult);
-        // this.router.navigate(['/home']);
+        this.app.getActiveNav().setRoot(HomePage);
         return obs.complete();
       }
     }));
@@ -63,7 +66,7 @@ export class AuthService {
       connection: 'Username-Password-Authentication',
       email,
       password,
-    }, function(err) {
+    }, function (err) {
       if (err) {
         alert('Error: ' + err.description);
       }
@@ -93,6 +96,7 @@ export class AuthService {
     // Remove token from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
+    this.app.getActiveNav().setRoot(LoginPage);
   }
 
   private setUser(authResult): void {

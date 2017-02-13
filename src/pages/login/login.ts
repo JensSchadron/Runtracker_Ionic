@@ -12,7 +12,7 @@ export class LoginPage {
 
   }
 
-  loginWithErrorHandling(mailaddress, password){
+  loginWithErrorHandling(mailaddress, password) {
     console.log(mailaddress + ' - ' + password);
     this.auth.login(mailaddress, password).subscribe(data => {
       console.log('login succes');

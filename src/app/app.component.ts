@@ -50,13 +50,6 @@ export class MyApp {
     });
   }
 
-  ngDoCheck() {
-    if (this.loggedIn !== this.auth.isAuthenticated()) {
-      this.rootPage = ((this.loggedIn = this.auth.isAuthenticated()) ? HomePage : LoginPage);
-      console.debug("doCheck() - logged in: " + this.loggedIn);
-    }
-  }
-
   onItemSelected(menuItem) {
     this.menu.close();
 
