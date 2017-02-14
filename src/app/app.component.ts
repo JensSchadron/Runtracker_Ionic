@@ -11,8 +11,6 @@ import {AuthService} from '../services/auth/auth.service';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  private loggedIn: boolean = false;
-
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any;

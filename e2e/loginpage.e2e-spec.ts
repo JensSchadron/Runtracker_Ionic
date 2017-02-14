@@ -19,6 +19,33 @@ describe('Login page - general', () => {
     expect(navBarTitle.isPresent()).toBeTruthy();
     expect(navBarTitle.getText()).toBe('Login');
   });
+
+  it('should have segmentBar', () => {
+    let segmentBar = element(by.tagName('ion-segment'));
+    expect(segmentBar.isPresent()).toBeTruthy();
+  });
+
+  it('segmentBar should have segmentBar buttons', () => {
+    let segmentBarButtons = element.all(by.tagName('ion-segment-button'));
+    expect(segmentBarButtons.count()).toBe(2);
+  });
+
+  it('test segmentBar buttons', () => {
+    let segmentBarLoginButton = element.all(by.tagName('ion-segment-button')).get(0);
+    let segmentBarSingUpButton = element.all(by.tagName('ion-segment-button')).get(1);
+
+    segmentBarSingUpButton.click().then(() => {
+      browser.driver.sleep(2000);
+      let cardViewTitle = element(by.tagName('ion-card-title'));
+      expect(cardViewTitle.getText()).toBe('Sign up');
+    });
+
+    segmentBarLoginButton.click().then(() => {
+      browser.driver.sleep(2000);
+      let cardViewTitle = element(by.tagName('ion-card-title'));
+      expect(cardViewTitle.getText()).toBe('Login');
+    });
+  });
 });
 
 describe('Login page - login form', () => {
@@ -50,9 +77,9 @@ describe('Login page - login form', () => {
     });
   });
 
-  let inputMail = element.all(by.css('ion-input')).get(0);
-  let inputPass = element.all(by.css('ion-input')).get(1);
-  it('has mail/pass login field', () => {
+  let inputMail = element.all(by.css('#maillogin'));
+  let inputPass = element.all(by.css('#passlogin'));
+  it('has mail/pass login fields', () => {
     expect(inputMail.isPresent()).toBeTruthy();
     expect(inputPass.isPresent()).toBeTruthy();
   });
@@ -73,6 +100,48 @@ describe('Login page - login form', () => {
     btnLogin.click().then(() => {
       browser.driver.sleep(2000);
       expect(element.all(by.css('ion-title')).get(1).getText()).toBe("Home");
+
+      let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
+      btnMenuNavDrawer.click().then(() => {
+        browser.driver.sleep(2000);
+        let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
+        btnLogout.click().then(() => console.log("Log out button clicked."));
+      });
+    });
+  });
+});
+
+describe('Login page - sign up form', () => {
+  beforeEach(() => {
+    browser.get('');
+
+    let segmentBarSingUpButton = element.all(by.tagName('ion-segment-button')).get(1);
+    segmentBarSingUpButton.click().then(() => browser.driver.sleep(2000));
+  });
+
+  let inputMail = element.all(by.css('#mailsignup'));
+  let inputPass = element.all(by.css('#passsignup'));
+  it('has mail/pass sign up fields', () => {
+    expect(inputMail.isPresent()).toBeTruthy();
+    expect(inputPass.isPresent()).toBeTruthy();
+  });
+
+  let btnSignUp = element(by.id('btn-signup'));
+  it('should have sign up button', () => {
+    expect(btnSignUp.isPresent()).toBeTruthy();
+    expect(btnSignUp.getText()).toBe('SIGN UP');
+  });
+
+  it('test login mail/pass authentication (shouldn\'t sign up)', () => {
+    inputMail.all(by.tagName('input')).first().sendKeys("runtrackminds2017@gmail.com");
+    inputPass.all(by.tagName('input')).first().sendKeys("Team102017");
+
+    expect(inputMail.all(by.tagName('input')).first().getAttribute('value')).toEqual("runtrackminds2017@gmail.com");
+    expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("Team102017");
+
+    btnSignUp.click().then(() => {
+      browser.driver.sleep(2000);
+      expect(element.all(by.css('ion-title')).get(1).getText()).toBe("Login");
     });
   });
 });

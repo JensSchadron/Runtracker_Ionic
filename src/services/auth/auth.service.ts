@@ -61,16 +61,17 @@ export class AuthService {
     }));
   }
 
-  public signup(email, password): void {
-    this.auth0.redirect.signupAndLogin({
+  public signup(email: string, password: string): Observable<any> {
+    return new Observable(obs => this.auth0.redirect.signupAndLogin({
       connection: 'Username-Password-Authentication',
       email,
       password,
-    }, function (err) {
+    }, (err) => {
       if (err) {
-        alert('Error: ' + err.description);
+        return obs.error();
       }
-    });
+      return obs.complete();
+    }));
   }
 
   public loginWithGoogle(): void {
