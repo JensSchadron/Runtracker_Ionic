@@ -109,6 +109,91 @@ describe('Login page - login form', () => {
       });
     });
   });
+
+  it('test login mail/pass authentication (nothing)', () => {
+    expect(inputMail.all(by.tagName('input')).first().getAttribute('value')).toEqual("");
+    expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("");
+
+    btnLogin.click().then(() => {
+      browser.driver.sleep(2000);
+      expect(element.all(by.css('ion-title')).get(1).getText()).toEqual("Login");
+
+      let alert = element(by.tagName('ion-alert'));
+
+      expect(alert.isPresent()).toBeTruthy();
+
+      expect(alert.element(by.className("alert-title"))).toBeTruthy();
+      expect(alert.element(by.className("alert-title")).getText()).toEqual('Login error');
+      expect(alert.element(by.className("alert-sub-title"))).toBeTruthy();
+      expect(alert.element(by.className("alert-sub-title")).getText()).toEqual("An error has occurred while logging in.");
+
+      let btnOk = alert.element(by.tagName("button"));
+      expect(btnOk.isPresent()).toBeTruthy();
+      expect(btnOk.getText()).toBe("OK");
+      btnOk.click().then(() => {
+        browser.driver.sleep(2000);
+        expect(alert.isPresent()).toBeFalsy();
+      })
+    });
+  });
+
+  it('test login mail/pass authentication (no mailaddress)', () => {
+    inputPass.all(by.tagName('input')).first().sendKeys("Team102017");
+
+    expect(inputMail.all(by.tagName('input')).first().getAttribute('value')).toEqual("");
+    expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("Team102017");
+
+    btnLogin.click().then(() => {
+      browser.driver.sleep(2000);
+      expect(element.all(by.css('ion-title')).get(1).getText()).toEqual("Login");
+
+      let alert = element(by.tagName('ion-alert'));
+
+      expect(alert.isPresent()).toBeTruthy();
+
+      expect(alert.element(by.className("alert-title"))).toBeTruthy();
+      expect(alert.element(by.className("alert-title")).getText()).toEqual('Login error');
+      expect(alert.element(by.className("alert-sub-title"))).toBeTruthy();
+      expect(alert.element(by.className("alert-sub-title")).getText()).toEqual("An error has occurred while logging in.");
+
+      let btnOk = alert.element(by.tagName("button"));
+      expect(btnOk.isPresent()).toBeTruthy();
+      expect(btnOk.getText()).toBe("OK");
+      btnOk.click().then(() => {
+        browser.driver.sleep(2000);
+        expect(alert.isPresent()).toBeFalsy();
+      })
+    });
+  });
+
+  it('test login mail/pass authentication (no password)', () => {
+    inputMail.all(by.tagName('input')).first().sendKeys("runtrackminds2017@gmail.com");
+
+    expect(inputMail.all(by.tagName('input')).first().getAttribute('value')).toEqual("runtrackminds2017@gmail.com");
+    expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("");
+
+    btnLogin.click().then(() => {
+      browser.driver.sleep(2000);
+      expect(element.all(by.css('ion-title')).get(1).getText()).toEqual("Login");
+
+      let alert = element(by.tagName('ion-alert'));
+
+      expect(alert.isPresent()).toBeTruthy();
+
+      expect(alert.element(by.className("alert-title"))).toBeTruthy();
+      expect(alert.element(by.className("alert-title")).getText()).toEqual('Login error');
+      expect(alert.element(by.className("alert-sub-title"))).toBeTruthy();
+      expect(alert.element(by.className("alert-sub-title")).getText()).toEqual("An error has occurred while logging in.");
+
+      let btnOk = alert.element(by.tagName("button"));
+      expect(btnOk.isPresent()).toBeTruthy();
+      expect(btnOk.getText()).toBe("OK");
+      btnOk.click().then(() => {
+        browser.driver.sleep(2000);
+        expect(alert.isPresent()).toBeFalsy();
+      })
+    });
+  });
 });
 
 describe('Login page - sign up form', () => {
@@ -141,7 +226,24 @@ describe('Login page - sign up form', () => {
 
     btnSignUp.click().then(() => {
       browser.driver.sleep(2000);
-      expect(element.all(by.css('ion-title')).get(1).getText()).toBe("Login");
+      expect(element.all(by.css('ion-title')).get(1).getText()).toEqual("Login");
+
+      let alert = element(by.tagName('ion-alert'));
+
+      expect(alert.isPresent()).toBeTruthy();
+
+      expect(alert.element(by.className("alert-title"))).toBeTruthy();
+      expect(alert.element(by.className("alert-title")).getText()).toEqual('Sign up error');
+      expect(alert.element(by.className("alert-sub-title"))).toBeTruthy();
+      expect(alert.element(by.className("alert-sub-title")).getText()).toEqual("An error has occurred while signing up.");
+
+      let btnOk = alert.element(by.tagName("button"));
+      expect(btnOk.isPresent()).toBeTruthy();
+      expect(btnOk.getText()).toBe("OK");
+      btnOk.click().then(() => {
+        browser.driver.sleep(2000);
+        expect(alert.isPresent()).toBeFalsy();
+      })
     });
   });
 });
