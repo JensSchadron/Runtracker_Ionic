@@ -2,14 +2,16 @@ import {Component, ViewChild} from '@angular/core';
 import {Platform, MenuController, Nav} from 'ionic-angular';
 import {StatusBar, Splashscreen} from 'ionic-native';
 
-import {HomePage} from '../pages/home/home';
-import {LoginPage} from "../pages/login/login";
-import {AuthService} from '../services/auth/auth.service';
+import {HomePage}           from '../pages/home/home';
+import {LoginPage}          from "../pages/login/login";
+import {TrackingchoicePage} from "../pages/trackingchoice/trackingchoice";
 
+import {AuthService}        from '../services/auth/auth.service';
 
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
@@ -23,6 +25,10 @@ export class MyApp {
       {
         title: "Home",
         componentOrFunction: HomePage
+      },
+      {
+        title: "New Tracking",
+        componentOrFunction: TrackingchoicePage
       },
       {
         title: "Log out",

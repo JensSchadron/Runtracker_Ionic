@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component }      from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController }  from 'ionic-angular';
+
+import { TrackingchoicePage } from "../trackingchoice/trackingchoice";
 
 @Component({
   selector: 'page-home',
@@ -8,8 +10,10 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
+  trackingChoicePage: any = TrackingchoicePage;
+
   constructor(public navCtrl: NavController) {
-    
+
   }
 
 }
