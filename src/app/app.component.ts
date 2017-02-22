@@ -28,19 +28,19 @@ export class MyApp {
       {
         title: "Home",
         componentOrFunction: () => {
-          this.openPage(HomePage)
+          this.openPage(HomePage, true)
         }
       },
       {
         title: "New Tracking",
         componentOrFunction: () => {
-          this.openPage(TrackingchoicePage)
+          this.openPage(TrackingchoicePage, false)
         }
       },
       {
         title: "Profile",
         componentOrFunction: () => {
-          this.openPage(ProfilePage)
+          this.openPage(ProfilePage, false)
         }
       },
       {
@@ -67,8 +67,12 @@ export class MyApp {
     });
   }
 
-  private openPage(page) {
-    this.nav.setRoot(page);
+  private openPage(page, setRoot: boolean) {
+    if (setRoot){
+      this.nav.setRoot(page);
+    } else {
+      this.nav.push(page);
+    }
   }
 
   onItemSelected(menuItem) {
