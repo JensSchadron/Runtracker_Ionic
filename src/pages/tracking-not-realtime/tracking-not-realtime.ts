@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
-
+import {CountdownModal} from "../countdown/countdown-modal";
 
 declare var google;
 
@@ -21,11 +21,11 @@ export class TrackingNotRealtimePage {
   map: any;
   loadingPopup: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController) {
-
-    this.loadingPopup = this.loadingCtrl.create({
-      content: 'Fetching location...'
-    });
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private loadingCtrl: LoadingController,
+    public modalCtrl: ModalController) {
 
   }
 
@@ -35,8 +35,6 @@ export class TrackingNotRealtimePage {
   }
 
   loadMap() {
-
-    //this.loadingPopup.present();
 
     Geolocation.getCurrentPosition().then((position) => {
 
@@ -175,8 +173,6 @@ export class TrackingNotRealtimePage {
 
       this.addMarker();
 
-      //this.loadingPopup.dismiss();
-
     }, (err) => {
       console.log(err);
     });
@@ -207,6 +203,14 @@ export class TrackingNotRealtimePage {
       infoWindow.open(this.map, marker);
     });
 
+  }
+
+  presentCountdownModal() {
+    let countdownModal = this.modalCtrl.create(CountdownModal, { timerDuration: 10 });
+    countdownModal.onDidDismiss(message => {
+      console.log(message);
+    });
+    countdownModal.present();
   }
 
 }

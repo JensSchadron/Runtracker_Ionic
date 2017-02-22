@@ -4,12 +4,14 @@ import { MyApp }                    from './app.component';
 
 import { HomePage }                 from '../pages/home/home';
 import { LoginPage }                from "../pages/login/login";
-import {ProfilePage} from "../pages/profile/profile";
-import {EditprofilePage} from "../pages/editprofile/editprofile";
+import { ProfilePage }              from "../pages/profile/profile";
+import { EditprofilePage }          from "../pages/editprofile/editprofile";
 
 import { TrackingchoicePage }       from "../pages/trackingchoice/trackingchoice";
 import { TrackinggoalPage }         from "../pages/trackinggoal/trackinggoal";
 import { TrackingNotRealtimePage }  from "../pages/tracking-not-realtime/tracking-not-realtime";
+
+import { CountdownModal }           from "../pages/countdown/countdown-modal";
 
 import { EditProfileService }       from '../pages/editprofile/editprofile.service';
 import { AUTH_PROVIDERS }           from 'angular2-jwt';
@@ -36,7 +38,8 @@ export function getAuthHttp(http) {
     EditprofilePage,
     TrackingchoicePage,
     TrackinggoalPage,
-    TrackingNotRealtimePage
+    TrackingNotRealtimePage,
+    CountdownModal
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -50,7 +53,8 @@ export function getAuthHttp(http) {
     EditprofilePage,
     TrackingchoicePage,
     TrackinggoalPage,
-    TrackingNotRealtimePage
+    TrackingNotRealtimePage,
+    CountdownModal
   ],
   providers: [
     AuthService,
