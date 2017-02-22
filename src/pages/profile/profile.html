@@ -13,11 +13,11 @@
 
   <img id="profilepic" src="../../assets/img/profile-icon.jpg">
   <ion-card>
-    <button class="cogwheel" ion-button color="dark" icon-only clear>
+    <button class="cogwheel" ion-button color="dark" icon-only clear [navPush]="editProfilePage">
       <ion-icon name="cog"></ion-icon>
     </button>
-      <ion-card-title class="fullname">Firstname Lastename</ion-card-title>
-      <p class="username">username</p>
+    <ion-card-title class="fullname">{{user.firstname}} {{user.lastname}}</ion-card-title>
+    <p class="username">@{{user.username}}</p>
   </ion-card>
 </ion-content>
 
