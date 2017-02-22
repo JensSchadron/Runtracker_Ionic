@@ -1,12 +1,12 @@
-import {Component, ViewChild} from '@angular/core';
-import {Platform, MenuController, Nav} from 'ionic-angular';
-import {StatusBar, Splashscreen} from 'ionic-native';
+import { Component, ViewChild }     from '@angular/core';
+import { Platform, MenuController, Nav } from 'ionic-angular';
+import { StatusBar, Splashscreen }  from 'ionic-native';
 
-import {HomePage}           from '../pages/home/home';
-import {LoginPage}          from "../pages/login/login";
-import {TrackingchoicePage} from "../pages/trackingchoice/trackingchoice";
+import { HomePage }                 from '../pages/home/home';
+import { LoginPage }                from "../pages/login/login";
+import { TrackingchoicePage }       from "../pages/trackingchoice/trackingchoice";
 
-import {AuthService}        from '../services/auth/auth.service';
+import { AuthService }              from '../services/auth/auth.service';
 
 @Component({
   templateUrl: 'app.html'

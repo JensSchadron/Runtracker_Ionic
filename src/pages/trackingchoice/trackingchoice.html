@@ -7,22 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Choose Tracking Type</ion-title>
+    <ion-title>Tracking Type</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content class="card-background-page">
 
-<ion-content padding>
-
-  <ion-card>
-    <img src="../../assets/img/runningMan.png">
-    <button ion-button block [navPush]="trackingNotRealtime">Solo run</button>
+  <ion-card [navPush]="trackingNotRealtime">
+    <img src="../../assets/img/SoloRun_small.jpg"/>
+    <div class="card-title">Solo Run</div>
   </ion-card>
 
-  <ion-card>
-    <img src="../../assets/img/runningMan.png">
-    <button ion-button block [navPush]="trackingGoalPage">Challenge run</button>
+  <ion-card [navPush]="trackingGoalPage">
+    <img src="../../assets/img/Challenge_small.jpg"/>
+    <div class="card-title">Online Challenge</div>
   </ion-card>
 
 </ion-content>

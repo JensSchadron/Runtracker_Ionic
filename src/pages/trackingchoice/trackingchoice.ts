@@ -13,6 +13,7 @@ import { TrackinggoalPage } from '../trackinggoal/trackinggoal';
   selector: 'page-trackingchoice',
   templateUrl: 'trackingchoice.html'
 })
+
 export class TrackingchoicePage {
   trackingNotRealtime: any = TrackingNotRealtimePage;
   trackingGoalPage: any = TrackinggoalPage;
