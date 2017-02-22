@@ -1,30 +1,37 @@
-import {Component, ViewChild} from '@angular/core';
-import {Platform, MenuController, Nav, App} from 'ionic-angular';
-import {StatusBar, Splashscreen} from 'ionic-native';
+import { Component, ViewChild }     from '@angular/core';
+import { Platform, MenuController, Nav } from 'ionic-angular';
+import { StatusBar, Splashscreen }  from 'ionic-native';
 
-import {HomePage} from '../pages/home/home';
-import {ProfilePage} from '../pages/profile/profile'
-import {EditprofilePage} from "../pages/editprofile/editprofile";
-import {LoginPage} from "../pages/login/login";
-import {AuthService} from '../services/auth/auth.service';
+import { HomePage }                 from '../pages/home/home';
+import { LoginPage }                from "../pages/login/login";
+import { TrackingchoicePage }       from "../pages/trackingchoice/trackingchoice";
+import { ProfilePage } from '../pages/profile/profile'
+import { EditprofilePage } from "../pages/editprofile/editprofile";
+
+import { AuthService }              from '../services/auth/auth.service';
 
 
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any;
   navDrawer: Array<{title: string, componentOrFunction: any}>;
 
-  constructor(public platform: Platform, public menu: MenuController, public auth: AuthService, public app : App) {
+  constructor(public platform: Platform, public menu: MenuController, public auth: AuthService) {
     this.initApp();
 
     this.navDrawer = [
       {
         title: "Home",
         componentOrFunction: HomePage
+      },
+      {
+        title: "New Tracking",
+        componentOrFunction: TrackingchoicePage
       },
       {
         title: "Profile",
@@ -44,7 +51,7 @@ export class MyApp {
       // Schedule a token refresh on app start up
       this.auth.handleAuthentication();
 
-      this.rootPage = (this.auth.isAuthenticated() ? EditprofilePage : LoginPage);
+      this.rootPage = (this.auth.isAuthenticated() ? HomePage : LoginPage);
       console.log("Init - logged in:" + this.auth.isAuthenticated());
 
       // Okay, so the platform is ready and our plugins are available.
@@ -58,13 +65,11 @@ export class MyApp {
     this.menu.close();
 
     // http://stackoverflow.com/a/6000016
-     //if (!!(menuItem.componentOrFunction && menuItem.componentOrFunction.constructor && menuItem.componentOrFunction.call && menuItem.componentOrFunction.apply)) {
+    // if (!!(menuItem.componentOrFunction && menuItem.componentOrFunction.constructor && menuItem.componentOrFunction.call && menuItem.componentOrFunction.apply)) {
     if (typeof menuItem.componentOrFunction === 'function') {
       menuItem.componentOrFunction();
-      console.log("het is een functie " +menuItem.toString())
     } else {
-      console.log(menuItem);
-      this.nav.setRoot(menuItem.componentOrFunction).catch(() => console.log("Nav aangeroepen"));
+      this.nav.setRoot(menuItem.componentOrFunction);
     }
   }
 }
