@@ -55,8 +55,12 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <button ion-button block [navPush]="trackingChoicePage">New Tracking</button>
-  </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block [navPush]="trackingChoicePage">New Tracking</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-footer>
 

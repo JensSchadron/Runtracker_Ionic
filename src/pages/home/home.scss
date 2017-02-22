@@ -1,8 +1,16 @@
 page-home {
-  #dataslides{
-    height: 25%;
+
+  ion-content {
+    #dataslides {
+      height: 25%;
+    }
+    .datacard {
+      margin-top: -5%;
+    }
   }
-  .datacard{
-    margin-top: -5%;
+
+  ion-toolbar {
+    background-color: #387ef5;
   }
+
 }

@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
-import {CountdownModal} from "../countdown/countdown-modal";
+import { CountdownModal } from "../countdown-modal/countdown-modal";
+import {Observable, Observer} from "rxjs";
 
 declare var google;
 
@@ -19,13 +20,15 @@ declare var google;
 export class TrackingNotRealtimePage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  loadingPopup: any;
+  geocoder: any;
+  currentLocation: any = "\n";
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private loadingCtrl: LoadingController,
     public modalCtrl: ModalController) {
+
+    this.geocoder = new google.maps.Geocoder();
 
   }
 
@@ -35,10 +38,14 @@ export class TrackingNotRealtimePage {
   }
 
   loadMap() {
-
     Geolocation.getCurrentPosition().then((position) => {
-
       let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+      this.geocode(latLng).subscribe((results) => {
+        //alert(results[0].formatted_address);
+        let fullAddress = results[0].formatted_address.toString();
+        this.currentLocation = fullAddress.replace(/, België/gi, " ");
+      });
 
       let mapOptions = {
         center: latLng,
@@ -170,7 +177,6 @@ export class TrackingNotRealtimePage {
       };
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
       this.addMarker();
 
     }, (err) => {
@@ -179,34 +185,32 @@ export class TrackingNotRealtimePage {
 
   }
 
-  addMarker() {
+  geocode(latLng: any): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this.geocoder.geocode({ 'location': latLng }, (
+        (results, status) => {
+          if (status === google.maps.GeocoderStatus.OK) {
+            observer.next(results);
+            observer.complete();
+          } else {
+            console.log('Geocoding service: geocoder failed due to: ' + status);
+            observer.error(status);
+          }
+        })
+      );
+    });
+  }
 
+  private addMarker() {
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: this.map.getCenter()
     });
-
-    let content = "<h4>Information!</h4>";
-
-    this.addInfoWindow(marker, content);
-
   }
 
-  addInfoWindow(marker, content) {
-
-    let infoWindow = new google.maps.InfoWindow({
-      content: content
-    });
-
-    google.maps.event.addListener(marker, 'click', () => {
-      infoWindow.open(this.map, marker);
-    });
-
-  }
-
-  presentCountdownModal() {
-    let countdownModal = this.modalCtrl.create(CountdownModal, { timerDuration: 10 });
+  private presentCountdownModal() {
+    let countdownModal = this.modalCtrl.create(CountdownModal, { timerDuration: 5 });
     countdownModal.onDidDismiss(message => {
       console.log(message);
     });

@@ -13,32 +13,15 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  <ion-card id="non-realtime-tracking">
-    <ion-card-content>
-      <ion-grid>
-
-        <ion-row>
-          <ion-col text-center class="border-bottom padding-bottom">
-            <span id="time">00:00:00</span>
-            time passed
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col width-50 text-center class="border-right padding-top">
-            <span id="distance">0</span>
-            km
-          </ion-col>
-          <ion-col width-50 text-center class="padding-top">
-            <span id="speed">0</span>
-            km/u
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col id="location">
+        <p>Current location:<span id="curloc">{{currentLocation}}</span></p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <div #map id="map">
     <ion-spinner></ion-spinner>
@@ -47,9 +30,13 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <div text-center>
-      <button ion-button block (click)="presentCountdownModal()">Start Tracking</button>
-    </div>
-  </ion-toolbar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="presentCountdownModal()">Start Tracking</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-footer>
