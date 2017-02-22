@@ -27,19 +27,25 @@ export class MyApp {
     this.navDrawer = [
       {
         title: "Home",
-        componentOrFunction: HomePage
+        componentOrFunction: () => {
+          this.openPage(HomePage)
+        }
       },
       {
         title: "New Tracking",
-        componentOrFunction: TrackingchoicePage
+        componentOrFunction: () => {
+          this.openPage(TrackingchoicePage)
+        }
       },
       {
         title: "Profile",
-        componentOrFunction: ProfilePage
+        componentOrFunction: () => {
+          this.openPage(ProfilePage)
+        }
       },
       {
         title: "Log out",
-        componentOrFunction: function () {
+        componentOrFunction: () => {
           auth.logout();
         }
       }
@@ -61,15 +67,17 @@ export class MyApp {
     });
   }
 
+  private openPage(page) {
+    this.nav.setRoot(page);
+  }
+
   onItemSelected(menuItem) {
     this.menu.close();
-
+    console.log(typeof menuItem.componentOrFunction);
     // http://stackoverflow.com/a/6000016
     // if (!!(menuItem.componentOrFunction && menuItem.componentOrFunction.constructor && menuItem.componentOrFunction.call && menuItem.componentOrFunction.apply)) {
     if (typeof menuItem.componentOrFunction === 'function') {
       menuItem.componentOrFunction();
-    } else {
-      this.nav.setRoot(menuItem.componentOrFunction);
     }
   }
 }
