@@ -14,7 +14,34 @@
 
 
 <ion-content padding>
+
+  <ion-card id="non-realtime-tracking">
+    <ion-card-content>
+      <ion-grid>
+
+        <ion-row>
+          <ion-col text-center class="border-bottom padding-bottom">
+            <span id="time">00:00:00</span>
+            time passed
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col width-50 text-center class="border-right padding-top">
+            <span id="distance">0</span>
+            km
+          </ion-col>
+          <ion-col width-50 text-center class="padding-top">
+            <span id="speed">0</span>
+            km/u
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
   <div #map id="map"></div>
+
 </ion-content>
 
 <ion-footer>
