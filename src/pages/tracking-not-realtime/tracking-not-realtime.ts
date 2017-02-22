@@ -36,7 +36,7 @@ export class TrackingNotRealtimePage {
 
   loadMap() {
 
-    this.loadingPopup.present();
+    //this.loadingPopup.present();
 
     Geolocation.getCurrentPosition().then((position) => {
 
@@ -175,7 +175,7 @@ export class TrackingNotRealtimePage {
 
       this.addMarker();
 
-      this.loadingPopup.dismiss();
+      //this.loadingPopup.dismiss();
 
     }, (err) => {
       console.log(err);
