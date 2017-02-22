@@ -9,50 +9,62 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding scroll="false">
-  <ion-slides pager id="dataslides">
-    <ion-slide>
+<ion-content padding scroll="true" class="home-background-page">
       <ion-card class="datacard">
-        <ion-card-header>
-          Kilometers
-        </ion-card-header>
-        <ion-card-content>
-          {{km}} Km
-        </ion-card-content>
+        <img src="../../assets/img/home/totalDistance.jpg">
+        <div class="card-title">
+          Total distance
+        </div>
+        <div class="card-content">
+          {{user.totalDistance}} km
+        </div>
       </ion-card>
-    </ion-slide>
-    <ion-slide>
       <ion-card class="datacard">
-        <ion-card-header>
-          Runs
-        </ion-card-header>
-        <ion-card-content>
-          {{runs}}
-        </ion-card-content>
+        <img src="../../assets/img/home/competitionsWon2.jpg">
+        <div class="card-title">
+          Competitions won
+        </div>
+        <div class="card-content">
+          {{user.nrOfCompetitionsWon}}
+        </div>
       </ion-card>
-    </ion-slide>
-    <ion-slide>
       <ion-card class="datacard">
-        <ion-card-header>
-          Average pace
-        </ion-card-header>
-        <ion-card-content>
-          {{pace}} (Min/Km)
-        </ion-card-content>
+        <img src="../../assets/img/home/avgDistance2.jpg">
+        <div class="card-title">
+          Average distance
+        </div>
+        <div class="card-content">
+          {{user.avgDistance}} km
+        </div>
       </ion-card>
-    </ion-slide>
-    <ion-slide>
       <ion-card class="datacard">
-        <ion-card-header>
-          Total time
-        </ion-card-header>
-        <ion-card-content>
-          {{min}} Min
-        </ion-card-content>
+        <img src="../../assets/img/home/avgSpeed2.jpg">
+        <div class="card-title">
+          Average speed
+        </div>
+        <div class="card-content">
+          {{user.avgSpeed}} (min/km)
+        </div>
       </ion-card>
-    </ion-slide>
-  </ion-slides>
-</ion-content>
+      <ion-card class="datacard">
+        <img src="../../assets/img/home/maxDistance3.jpg">
+      <div class="card-title">
+          Maximum distance
+      </div>
+        <div class="card-content">
+          {{user.maxDistance}} km
+        </div>
+      </ion-card>
+  <ion-card class="datacard">
+    <img src="../../assets/img/home/maxSpeed2.jpg">
+    <div class="card-title">
+      Maximum speed
+    </div>
+    <div class="card-content">
+      {{user.maxSpeed}} km
+    </div>
+  </ion-card>
+  </ion-content>
 
 <ion-footer>
   <ion-toolbar>

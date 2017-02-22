@@ -13,7 +13,7 @@ import { TrackingNotRealtimePage }  from "../pages/tracking-not-realtime/trackin
 
 import { CountdownModal }           from "../pages/countdown/countdown-modal";
 
-import { EditProfileService }       from '../pages/editprofile/editprofile.service';
+import { EditProfileService }       from '../services/user/user.service';
 import { AUTH_PROVIDERS }           from 'angular2-jwt';
 import { AuthConfig, AuthHttp }     from 'angular2-jwt';
 import { AuthService }              from '../services/auth/auth.service';

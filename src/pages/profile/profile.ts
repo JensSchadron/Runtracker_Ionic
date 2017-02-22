@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {NavController, AlertController} from "ionic-angular";
 import {EditprofilePage} from '../editprofile/editprofile'
 
-import {EditProfileService} from '../editprofile/editprofile.service';
+import {EditProfileService} from '../../services/user/user.service';
 import {AuthService} from '../../services/auth/auth.service';
 import {User} from "../../app/model/user";
 

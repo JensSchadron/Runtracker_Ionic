@@ -14,7 +14,7 @@
   <ion-list>
     <ion-item>
       <ion-label color="primary">Username</ion-label>
-      <ion-input [(ngModel)]="user.username"></ion-input>
+      <ion-input (change)="onUsernameChange($event)" [(ngModel)]="user.username"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary">Firstname</ion-label>
@@ -38,7 +38,7 @@
     </ion-item>
   </ion-list>
     </ion-card>
-  <button id="btnSave" ion-button block>
+  <button id="btnSave" ion-button block (click)="onClickUpdateUser(user)">
     Save changes
   </button>
 </ion-content>

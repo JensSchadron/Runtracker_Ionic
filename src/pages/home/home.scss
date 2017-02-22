@@ -1,8 +1,33 @@
 page-home {
-  #dataslides{
-    height: 25%;
-  }
-  .datacard{
-    margin-top: -5%;
+
+  .home-background-page {
+    ion-card {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      height: 14%;
+      position: relative;
+      text-align: center;
+    }
+    img{
+      filter: brightness(45%);
+    }
+
+    .card-title {
+      position: absolute;
+      top: 15%;
+      font-size: 1.4em;
+      width: 100%;
+      font-weight: bold;
+      color: #fff;
+    }
+    .card-content{
+      position: absolute;
+      top: 60%;
+      font-size: 1.0em;
+      width: 100%;
+      color: #fff;
+    }
+
   }
 }

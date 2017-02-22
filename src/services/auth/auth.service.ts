@@ -129,8 +129,8 @@ export class AuthService {
 //   constructor(private authHttp: AuthHttp, zone: NgZone) {
 //     this.zoneImpl = zone;
 //     // Check if there is a login saved in local storage
-//     this.storage.get('profile').then(profile => {
-//       this.user = JSON.parse(profile);
+//     this.storage.get('user').then(user => {
+//       this.user = JSON.parse(user);
 //     }).catch(error => {
 //       console.log(error);
 //     });
@@ -144,22 +144,22 @@ export class AuthService {
 //       this.idToken = authResult.idToken;
 //
 //       // Fetch login information
-//       this.lock.getProfile(authResult.idToken, (error, profile) => {
+//       this.lock.getProfile(authResult.idToken, (error, user) => {
 //         if (error) {
 //           // Handle error
 //           alert(error);
 //           return;
 //         }
 //
-//         profile.user_metadata = profile.user_metadata || {};
-//         this.storage.set('profile', JSON.stringify(profile));
-//         this.user = profile;
+//         user.user_metadata = user.user_metadata || {};
+//         this.storage.set('user', JSON.stringify(user));
+//         this.user = user;
 //       });
 //
 //       this.lock.hide();
 //
 //       this.storage.set('refresh_token', authResult.refreshToken);
-//       this.zoneImpl.run(() => this.user = authResult.profile);
+//       this.zoneImpl.run(() => this.user = authResult.user);
 //       // Schedule a token refresh
 //       this.scheduleRefresh();
 //
@@ -176,7 +176,7 @@ export class AuthService {
 //   }
 //
 //   public logout() {
-//     this.storage.remove('profile');
+//     this.storage.remove('user');
 //     this.storage.remove('id_token');
 //     this.idToken = null;
 //     this.storage.remove('refresh_token');
