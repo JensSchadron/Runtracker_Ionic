@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {AlertController} from 'ionic-angular';
 import {AuthService} from '../../services/auth/auth.service';
 
@@ -10,7 +10,7 @@ export class LoginPage {
 
   // We need to inject AuthService so that we can
   // use it in the view
-  constructor(public auth: AuthService, public alertCtrl: AlertController) {
+  constructor( private auth: AuthService, public alertCtrl: AlertController) {
   }
 
   static allFieldsFilledIn(mailaddress, password): boolean {

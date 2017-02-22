@@ -4,11 +4,14 @@ import {MyApp} from './app.component';
 
 import {HomePage} from '../pages/home/home';
 import {LoginPage} from "../pages/login/login";
+import {ProfilePage} from "../pages/profile/profile";
+import {EditprofilePage} from "../pages/editprofile/editprofile";
 
 
 import {AUTH_PROVIDERS} from 'angular2-jwt';
 import {AuthConfig, AuthHttp} from 'angular2-jwt';
 import {AuthService} from '../services/auth/auth.service';
+import {EditProfileService} from '../pages/editprofile/editprofile.service';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 
@@ -25,7 +28,9 @@ export function getAuthHttp(http) {
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    ProfilePage,
+    EditprofilePage,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -34,7 +39,9 @@ export function getAuthHttp(http) {
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    ProfilePage,
+    EditprofilePage,
   ],
   providers: [
     AuthService,
@@ -43,10 +50,12 @@ export function getAuthHttp(http) {
       useFactory: getAuthHttp,
       deps: [Http]
     },
+    EditProfileService,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
     }
+
   ]
 })
 export class AppModule {

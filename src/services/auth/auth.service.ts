@@ -6,6 +6,8 @@ import {Auth0Vars} from '../../auth0-variables';
 import Auth0 from 'auth0-js';
 import {App} from "ionic-angular";
 import {HomePage} from "../../pages/home/home";
+import {ProfilePage} from "../../pages/profile/profile";
+import {EditprofilePage} from "../../pages/editprofile/editprofile";
 import {LoginPage} from "../../pages/login/login";
 
 // Avoid name not found warnings

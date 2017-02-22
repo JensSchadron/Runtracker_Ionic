@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Edit profile
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-title>Personal info</ion-card-title>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">Username</ion-label>
+      <ion-input [(ngModel)]="user.username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Firstname</ion-label>
+      <ion-input [(ngModel)]="user.firstname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Lastname</ion-label>
+      <ion-input [(ngModel)]="user.lastname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">City</ion-label>
+      <ion-input [(ngModel)]="user.city"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Birthday</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="user.birthday"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Gender</ion-label>
+      <ion-input [(ngModel)]="user.gender"></ion-input>
+    </ion-item>
+  </ion-list>
+    </ion-card>
+  <button id="btnSave" ion-button block>
+    Save changes
+  </button>
+</ion-content>
