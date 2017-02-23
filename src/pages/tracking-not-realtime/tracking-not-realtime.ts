@@ -1,7 +1,7 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
-import { Geolocation } from 'ionic-native';
-import { CountdownModal } from "../countdown-modal/countdown-modal";
+import {Component, ViewChild, ElementRef, OnChanges, SimpleChanges, NgZone} from '@angular/core';
+import {NavController, NavParams, LoadingController, ModalController} from 'ionic-angular';
+import {Geolocation} from 'ionic-native';
+import {CountdownModal} from "../countdown-modal/countdown-modal";
 import {Observable, Observer} from "rxjs";
 
 declare var google;
@@ -17,16 +17,21 @@ declare var google;
   templateUrl: 'tracking-not-realtime.html'
 })
 
-export class TrackingNotRealtimePage {
+export class TrackingNotRealtimePage implements OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("onChanges");
+    console.log(changes);
+  }
+
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   geocoder: any;
   currentLocation: any = "\n";
 
-  constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public modalCtrl: ModalController) {
+  constructor(private zone: NgZone,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public modalCtrl: ModalController) {
 
     this.geocoder = new google.maps.Geocoder();
 
@@ -42,9 +47,11 @@ export class TrackingNotRealtimePage {
       let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
       this.geocode(latLng).subscribe((results) => {
-        //alert(results[0].formatted_address);
+        // alert(results[0].formatted_address);
         let fullAddress = results[0].formatted_address.toString();
-        this.currentLocation = fullAddress.replace(/, België/gi, " ");
+        this.zone.run(() => {
+          this.currentLocation = fullAddress.replace(/, België/gi, " ");
+        });
       });
 
       let mapOptions = {
@@ -187,7 +194,7 @@ export class TrackingNotRealtimePage {
 
   geocode(latLng: any): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this.geocoder.geocode({ 'location': latLng }, (
+      this.geocoder.geocode({'location': latLng}, (
         (results, status) => {
           if (status === google.maps.GeocoderStatus.OK) {
             observer.next(results);
@@ -210,7 +217,7 @@ export class TrackingNotRealtimePage {
   }
 
   private presentCountdownModal() {
-    let countdownModal = this.modalCtrl.create(CountdownModal, { timerDuration: 5 });
+    let countdownModal = this.modalCtrl.create(CountdownModal, {timerDuration: 5});
     countdownModal.onDidDismiss(message => {
       console.log(message);
     });
