@@ -3,8 +3,8 @@
     "port": 9883,
     "ssl": true,
 
-    "user": "username",
-    "pass": "changeme",
+    "user": "mosquitto",
+    "pass": "Team102017",
 
     "subscribe": [
         "Testy"
