@@ -9,61 +9,59 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding scroll="true" class="home-background-page">
-      <ion-card class="datacard">
+<ion-content padding scroll="false" class="home-background-page">
+      <ion-card class="largecard">
         <img src="../../assets/img/home/totalDistance.jpg">
-        <div class="card-title">
-          Total distance
+        <div class="card-title" >
+          Distance
+        </div>
+        <div class="card-subtitle-middle">
+          Total
+        </div>
+        <div class="card-subtitle-left">
+          Maximum
+        </div>
+        <div class="card-subtitle-right">
+          Average
         </div>
         <div class="card-content">
-          {{user.totalDistance}} km
+          {{user.totalDistance}} m
+        </div>
+        <div class="card-content-left">
+          {{user.maxDistance}} m
+        </div>
+        <div class="card-content-right">
+          {{user.avgDistance}} m
         </div>
       </ion-card>
-      <ion-card class="datacard">
-        <img src="../../assets/img/home/competitionsWon2.jpg">
+  <ion-card class="largecard">
+    <img src="../../assets/img/home/speed.jpg">
+    <div class="card-title">
+      Speed
+    </div>
+    <div class="card-subtitle-left">
+      Maximum
+    </div>
+    <div class="card-subtitle-right">
+      Average
+    </div>
+    <div class="card-content-left">
+      {{user.maxSpeed}} km/h
+    </div>
+    <div class="card-content-right">
+      {{user.avgSpeed}} km/h
+    </div>
+  </ion-card>
+
+      <ion-card class="smallcard">
+        <img src="../../assets/img/home/competition.jpg">
         <div class="card-title">
           Competitions won
         </div>
-        <div class="card-content">
+        <div class="card-subtitle-middle">
           {{user.nrOfCompetitionsWon}}
         </div>
       </ion-card>
-      <ion-card class="datacard">
-        <img src="../../assets/img/home/avgDistance2.jpg">
-        <div class="card-title">
-          Average distance
-        </div>
-        <div class="card-content">
-          {{user.avgDistance}} km
-        </div>
-      </ion-card>
-      <ion-card class="datacard">
-        <img src="../../assets/img/home/avgSpeed2.jpg">
-        <div class="card-title">
-          Average speed
-        </div>
-        <div class="card-content">
-          {{user.avgSpeed}} (min/km)
-        </div>
-      </ion-card>
-      <ion-card class="datacard">
-        <img src="../../assets/img/home/maxDistance3.jpg">
-      <div class="card-title">
-          Maximum distance
-      </div>
-        <div class="card-content">
-          {{user.maxDistance}} km
-        </div>
-      </ion-card>
-  <ion-card class="datacard">
-    <img src="../../assets/img/home/maxSpeed2.jpg">
-    <div class="card-title">
-      Maximum speed
-    </div>
-    <div class="card-content">
-      {{user.maxSpeed}} km
-    </div>
-  </ion-card>
   </ion-content>
 
 <ion-footer>

@@ -8,7 +8,7 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content class="home-background-page">
   <ion-card>
     <ion-card-title>Personal info</ion-card-title>
   <ion-list>
@@ -34,11 +34,21 @@
     </ion-item>
     <ion-item>
       <ion-label color="primary">Gender</ion-label>
-      <ion-input [(ngModel)]="user.gender"></ion-input>
+      <ion-select [(ngModel)]="user.gender">
+        <ion-option value="MALE">Male</ion-option>
+        <ion-option value="FEMALE">Female</ion-option>
+        <ion-option value="UNDEFINED">Undefined</ion-option>
+      </ion-select>
     </ion-item>
   </ion-list>
-    </ion-card>
-  <button id="btnSave" ion-button block (click)="onClickUpdateUser(user)">
-    Save changes
-  </button>
+  </ion-card>
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="onClickUpdateUser(user)">Save changes</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

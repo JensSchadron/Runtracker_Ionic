@@ -14,10 +14,14 @@ import { TrackingchoicePage } from "../trackingchoice/trackingchoice";
 })
 export class HomePage {
   private user;
+  private competitionsDone;
   trackingChoicePage: any = TrackingchoicePage;
 
   ngOnInit(): void {
     this.user = this.editProfileService.getUser().subscribe((user: User) => this.user = user);
+    this.competitionsDone = this.user.trackings;
+
+
 
   }
 

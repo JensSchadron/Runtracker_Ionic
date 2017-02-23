@@ -23,17 +23,65 @@ page-home {
     }
     .card-content{
       position: absolute;
-      top: 60%;
+      top: 70%;
+      font-size: 1.0em;
+      width: 100%;
+      color: #fff;
+    }
+    .largecard{
+      top:-3%;
+      height: 35%;
+    }
+    .smallcard{
+      top:-3%;
+      height: 28%;
+    }
+    .card-subtitle-middle{
+      font-size: 1.3em;
+      position: absolute;
+      top: 45%;
+      width: 100%;
+      color: #fff;
+    }
+    .card-subtitle-right{
+      font-size: 1.3em;
+      position: absolute;
+      left: 30%;
+      top: 45%;
+      width: 100%;
+      color: #fff;
+    }
+    .card-subtitle-left{
+      font-size: 1.3em;
+      position: absolute;
+      left: -30%;
+      top: 45%;
+      width: 100%;
+      color: #fff;
+    }
+    .card-content-right{
+      position: absolute;
+      left: 30%;
+      top: 70%;
+      font-size: 1.0em;
+      width: 100%;
+      color: #fff;
+    }
+    .card-content-left{
+      position: absolute;
+      left: -30%;
+      top: 70%;
       font-size: 1.0em;
       width: 100%;
       color: #fff;
     }
 
   }
-}
-
   ion-toolbar {
     background-color: #387ef5;
   }
-
 }
+
+
+
+
