@@ -1,5 +1,5 @@
-import {Component, ViewChild, ElementRef, OnChanges, SimpleChanges, NgZone} from '@angular/core';
-import {NavController, NavParams, LoadingController, ModalController} from 'ionic-angular';
+import {Component, ViewChild, ElementRef, NgZone} from '@angular/core';
+import {NavController, NavParams, ModalController} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {CountdownModal} from "../countdown-modal/countdown-modal";
 import {Observable, Observer} from "rxjs";
@@ -17,11 +17,7 @@ declare var google;
   templateUrl: 'tracking-not-realtime.html'
 })
 
-export class TrackingNotRealtimePage implements OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("onChanges");
-    console.log(changes);
-  }
+export class TrackingNotRealtimePage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;

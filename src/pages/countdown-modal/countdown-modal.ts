@@ -77,6 +77,8 @@ export class CountdownModal {
   }
 
   private presentSolotrackingModal() {
+    this.counting = false;
+
     let solotrackingModal = this.modalCtrl.create(SolotrackingModal, { timerDuration: 10 });
     solotrackingModal.onDidDismiss(message => {
       console.log(message);
