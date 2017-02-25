@@ -2,18 +2,28 @@ page-ranking{
   .ranking-header{
     font-weight:bold;
   }
-  .ranking-rows:first-child{
+  .first-row{
     background-color: #fae157;
     font-size: 3rem;
     font-weight: bold;
   }
   #orderby-select {
-    margin-top: 2rem;
+    margin-top: 4rem;
     margin-bottom: 7rem;
     color: grey;
   }
-  i {
+  .gold{
     color: #fae157;
+    margin-bottom: 2rem;
+  }
+  .btn-passive{
+    background-color:white;
+  }
+  .btn-active{
+    background-color:lightgray;
+  }
+  ion-select{
+    margin:auto;
   }
 }
 

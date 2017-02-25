@@ -10,14 +10,21 @@ import {User} from "../../app/model/user";
 })
 export class RankingPage implements OnInit{
   private users: User[];
-  private orderOption = 1;
+  private orderOption;
   private friends: boolean;
+  private btnWorld;
+  private btnFriends;
 
   constructor(private rankingService:RankingService) {
   }
 
   ngOnInit(): void {
     this.friends = false;
+    this.btnWorld = document.getElementById('button-world');
+    this.btnFriends = document.getElementById('button-friends');
+    RankingPage.setButtonActive(this.btnWorld)
+    this.orderOption = 1;
+    this.getUsers(this.orderOption);
   }
 
   onChangeOrder(option):void{
@@ -25,6 +32,8 @@ export class RankingPage implements OnInit{
   }
 
   getFriends(option):void{
+    RankingPage.setButtonPassive(this.btnWorld);
+    RankingPage.setButtonActive(this.btnFriends);
     this.friends = true;
     this.rankingService.getFriends(option).subscribe(
       (users) => {
@@ -37,14 +46,28 @@ export class RankingPage implements OnInit{
   }
 
   getUsers(option):void{
+    console.log(this.orderOption);
+    RankingPage.setButtonPassive(this.btnFriends);
+    RankingPage.setButtonActive(this.btnWorld);
     this.friends = false;
     this.rankingService.getUsers(option).subscribe(
       (users) => {
         this.users = users;
+        console.log(users);
       },
       error => {
         console.log(error as string);
       }
     );
   }
+
+  static setButtonActive(button):void{
+    button.classList.remove('btn-passive');
+    button.classList.add('btn-active');
+  };
+
+  static setButtonPassive(button):void{
+    button.classList.remove('btn-active');
+    button.classList.add('btn-passive');
+  };
 }
