@@ -1,0 +1,159 @@
+<!--
+<ion-header xmlns:color="http://www.w3.org/1999/xhtml" xmlns:color="http://www.w3.org/1999/xhtml">
+    <ion-title>
+     Ranking
+    </ion-title>
+  <ion-icon name="ribbon-a"></ion-icon>
+</ion-header>
+
+<ion-content>
+  <div class = "tabs tabs-icon-top">
+    <a class = "tab-item">
+      World  <i class = "icon ion-planet"></i>
+    </a>
+
+    <a class = "tab-item">
+      Friends <i class = "icon ion-ios-people"></i>
+    </a>
+    <a class = "tab-item">
+      <i class = "icon ion-planet"></i>
+      Tab 3
+    </a>
+
+  </div>
+
+  <label class = "item item-input item-select item-positive">
+    <div class = "input-label">
+      Order by
+    </div>
+
+    <select id="order-option" [(ngModel)]="orderOption" name="order-option"
+            (ngModelChange)="onChangeOrder(orderOption)">
+      <option value="1">Average distance</option>
+      <option value="2">Average speed</option>
+      <option value="3">Max distance</option>
+      <option value="4">Max speed</option>
+      <option value="5">Nr. of competitions won</option>
+      <option value="6">Nr of competitions done</option>
+      <option value="7">Won ratio</option>
+      <option value="8">Total distance</option>
+    </select>
+  </label>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="col-xs-2">Rank</th>
+      <th class="col-xs-5">Username</th>
+      <td class="option-text col-xs-5 text-center" *ngIf="orderOption==1">Average distance</td>
+      <td class="option-text col-xs-5 text-center" *ngIf="orderOption==2">Average speed</td>
+      <td class="option-text col-xs-5 text-center" *ngIf="orderOption==3">Max distance</td>
+      <td class="option-text col-xs-5 text-center" *ngIf="orderOption==4">Max speed</td>
+      <td class="option-text col-xs-5 text-center" *ngIf="orderOption==5">Nr. of competitions won</td>
+      <td class="option-text col-xs-5 text-center" *ngIf="orderOption==6">Nr. of competitions done</td>
+      <td class="option-text col-xs-5 text-center" *ngIf="orderOption==7">Won ratio</td>
+      <td class="option-text col-xs-5 text-center" *ngIf="orderOption==8">Total distance</td>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let user of users; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{user.username}}</td>
+      <td class="text-center" *ngIf="orderOption==1">{{user.avgDistance / 1000}} km</td>
+      <td class="text-center" *ngIf="orderOption==2">{{user.avgSpeed}} km/h</td>
+      <td class="text-center" *ngIf="orderOption==3">{{user.maxDistance / 1000}} km</td>
+      <td class="text-center" *ngIf="orderOption==4">{{user.maxSpeed}} km/h</td>
+      <td class="text-center" *ngIf="orderOption==5">{{user.nrOfCompetitionsWon}}</td>
+      <td class="text-center" *ngIf="orderOption==6">{{user.nrOfCompetitionsDone}}</td>
+      <td class="text-center" *ngIf="orderOption==7 && user.nrOfCompetitionsDone != 0">{{((user.nrOfCompetitionsWon /
+        user.nrOfCompetitionsDone)*100) | number : '1.0-2' }} %
+      </td>
+      <td class="text-center" *ngIf="orderOption==7 && user.nrOfCompetitionsDone == 0">0 %</td>
+      <td class="text-center" *ngIf="orderOption==8">{{user.totalDistance / 1000}} km</td>
+    </tr>
+    </tbody>
+  </table>
+
+</ion-content>
+-->
+<!--------------------------------------------->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Ranking
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="home-background-page">
+
+  <button (click)="getUsers(orderOption)" ion-button full outline icon-right>
+    World
+    <ion-icon name="md-globe"></ion-icon>
+  </button>
+
+  <button (click)="getFriends(orderOption)" ion-button full outline icon-right>
+    Friends
+    <ion-icon name="ios-people"></ion-icon>
+  </button>
+
+  <ion-item id="orderby-select">
+    <ion-label>Order by</ion-label>
+    <ion-select (ngModelChange)="onChangeOrder(orderOption)" [(ngModel)]="orderOption">
+      <ion-option value="1">Average distance</ion-option>
+      <ion-option value="2">Average speed</ion-option>
+      <ion-option value="3">Max distance</ion-option>
+      <ion-option value="4">Max speed</ion-option>
+      <ion-option value="5">Nr. of competitions won</ion-option>
+      <ion-option value="6">Nr of competitions done</ion-option>
+      <ion-option value="7">Won ratio</ion-option>
+      <ion-option value="8">Total distance</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-row class="ranking-header">
+    <ion-col>Rank</ion-col>
+    <ion-col>Username</ion-col>
+    <ion-col *ngIf="orderOption==1">Average distance</ion-col>
+    <ion-col *ngIf="orderOption==2">Average speed</ion-col>
+    <ion-col *ngIf="orderOption==3">Max distance</ion-col>
+    <ion-col *ngIf="orderOption==4">Max speed</ion-col>
+    <ion-col *ngIf="orderOption==5">Nr. of competitions won</ion-col>
+    <ion-col *ngIf="orderOption==6">Nr. of competitions done</ion-col>
+    <ion-col *ngIf="orderOption==7">Won ratio</ion-col>
+    <ion-col *ngIf="orderOption==8">Total distance</ion-col>
+  </ion-row>
+
+  <ion-row class="ranking-rows" *ngFor="let user of users; let i = index">
+    <ion-col> {{i + 1}}</ion-col>
+    <ion-col> {{user.username}}</ion-col>
+    <ion-col *ngIf="orderOption==1">{{user.avgDistance / 1000}} km</ion-col>
+    <ion-col *ngIf="orderOption==2">{{user.avgSpeed}} km/h</ion-col>
+    <ion-col *ngIf="orderOption==3">{{user.maxDistance / 1000}} km</ion-col>
+    <ion-col *ngIf="orderOption==4">{{user.maxSpeed}} km/h</ion-col>
+    <ion-col *ngIf="orderOption==5">{{user.nrOfCompetitionsWon}}</ion-col>
+    <ion-col *ngIf="orderOption==6">{{user.nrOfCompetitionsDone}}</ion-col>
+    <ion-col *ngIf="orderOption==7 && user.nrOfCompetitionsDone != 0">{{((user.nrOfCompetitionsWon /
+      user.nrOfCompetitionsDone)*100) | number : '1.0-2' }} %
+    </ion-col>
+    <ion-col *ngIf="orderOption==7 && user.nrOfCompetitionsDone == 0">0 %</ion-col>
+    <ion-col *ngIf="orderOption==8">{{user.totalDistance / 1000}} km</ion-col>
+  </ion-row>
+
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
+
+

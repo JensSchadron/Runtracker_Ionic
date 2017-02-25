@@ -1,0 +1,21 @@
+page-ranking{
+  .ranking-header{
+    font-weight:bold;
+  }
+  .ranking-rows:first-child{
+    background-color: #fae157;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  #orderby-select {
+    margin-top: 2rem;
+    margin-bottom: 7rem;
+    color: grey;
+  }
+  i {
+    color: #fae157;
+  }
+}
+
+
+
