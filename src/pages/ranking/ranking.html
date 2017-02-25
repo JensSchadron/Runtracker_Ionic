@@ -23,7 +23,7 @@
   </button>
 
   <ion-item id="orderby-select">
-    <ion-select (ngModelChange)="onChangeOrder(orderOption)" [(ngModel)]="orderOption">
+    <ion-select (ngModelChange)="onChangeOrder($event)" [(ngModel)]="orderOption">
       <ion-option value="1">Average distance</ion-option>
       <ion-option value="2">Average speed</ion-option>
       <ion-option value="3">Max distance</ion-option>
@@ -48,7 +48,7 @@
     <ion-col *ngIf="orderOption==8">Total distance</ion-col>
   </ion-row>
 
-  <ion-row class="ranking-rows" *ngFor="let user of users; let i = index">
+  <ion-row class="ranking-rows text-center" *ngFor="let user of users; let i = index">
 
     <!--first-child isn't possible in ionic-->
     <ion-row *ngIf="i==0">

@@ -22,13 +22,13 @@ export class RankingPage implements OnInit{
     this.friends = false;
     this.btnWorld = document.getElementById('button-world');
     this.btnFriends = document.getElementById('button-friends');
-    RankingPage.setButtonActive(this.btnWorld)
+    RankingPage.setButtonActive(this.btnWorld);
     this.orderOption = 1;
-    this.getUsers(this.orderOption);
+    this.getUsers(1);
   }
 
-  onChangeOrder(option):void{
-    (this.friends)?this.getFriends(option):this.getUsers(option);
+  onChangeOrder(event):void{
+    (this.friends)?this.getFriends(event):this.getUsers(event);
   }
 
   getFriends(option):void{
@@ -46,14 +46,12 @@ export class RankingPage implements OnInit{
   }
 
   getUsers(option):void{
-    console.log(this.orderOption);
     RankingPage.setButtonPassive(this.btnFriends);
     RankingPage.setButtonActive(this.btnWorld);
     this.friends = false;
     this.rankingService.getUsers(option).subscribe(
       (users) => {
         this.users = users;
-        console.log(users);
       },
       error => {
         console.log(error as string);
