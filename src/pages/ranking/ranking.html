@@ -8,19 +8,15 @@
 
 <ion-content class="home-background-page">
 
+
   <h1>Ranking
     <ion-icon name="md-trophy" class="gold"></ion-icon>
   </h1>
 
-  <button id="button-world" (click)="getUsers(orderOption)" ion-button full outline icon-right>
-    World
-    <ion-icon name="md-globe"></ion-icon>
-  </button>
-
-  <button id="button-friends" (click)="getFriends(orderOption)" ion-button full outline icon-right>
-    Friends
-    <ion-icon name="ios-people"></ion-icon>
-  </button>
+  <ion-row>
+  <button id="button-world" (click)="getUsers(orderOption)" ion-button full outline icon-right>World<ion-icon name="md-globe"></ion-icon></button>
+  <button id="button-friends" (click)="getFriends(orderOption)" ion-button full outline icon-right>Friends<ion-icon name="ios-people"></ion-icon></button>
+  </ion-row>
 
   <ion-item id="orderby-select">
     <ion-select (ngModelChange)="onChangeOrder($event)" [(ngModel)]="orderOption">
@@ -36,8 +32,8 @@
   </ion-item>
 
   <ion-row class="ranking-header">
-    <ion-col>Rank</ion-col>
-    <ion-col>Username</ion-col>
+    <ion-col width-10>Rank</ion-col>
+    <ion-col width-50>Username</ion-col>
     <ion-col *ngIf="orderOption==1">Average distance</ion-col>
     <ion-col *ngIf="orderOption==2">Average speed</ion-col>
     <ion-col *ngIf="orderOption==3">Max distance</ion-col>
@@ -53,8 +49,8 @@
     <!--first-child isn't possible in ionic-->
     <ion-row *ngIf="i==0">
       <ion-row class="first-row">
-        <ion-col> {{i + 1}}</ion-col>
-        <ion-col> {{user.username}}</ion-col>
+        <ion-col width-10> {{i + 1}}</ion-col>
+        <ion-col width-50> {{user.username}}</ion-col>
         <ion-col *ngIf="orderOption==1">{{user.avgDistance / 1000}} km</ion-col>
         <ion-col *ngIf="orderOption==2">{{user.avgSpeed}} km/h</ion-col>
         <ion-col *ngIf="orderOption==3">{{user.maxDistance / 1000}} km</ion-col>
@@ -69,8 +65,8 @@
       </ion-row>
     </ion-row>
     <ion-row *ngIf="i!=0">
-      <ion-col> {{i + 1}}</ion-col>
-      <ion-col> {{user.username}}</ion-col>
+      <ion-col width-10> {{i + 1}}</ion-col>
+      <ion-col width-50> {{user.username}}</ion-col>
       <ion-col *ngIf="orderOption==1">{{user.avgDistance / 1000}} km</ion-col>
       <ion-col *ngIf="orderOption==2">{{user.avgSpeed}} km/h</ion-col>
       <ion-col *ngIf="orderOption==3">{{user.maxDistance / 1000}} km</ion-col>
