@@ -61,12 +61,18 @@ export class SolotrackingPage {
   }
 
   trackCoordinates(): void {
-    Geolocation.getCurrentPosition().then((position) => {
+    let options = {
+      enableHighAccuracy: true,
+      maximumAge        : 30000,
+      timeout           : 1000
+    };
+
+    Geolocation.getCurrentPosition(options).then((position) => {
       this.zone.run(() => {
         this.lat = position.coords.latitude;
         this.lon = position.coords.longitude;
+        console.log(this.timerDisplay + ' ' + position.coords.latitude + ' ' + position.coords.longitude);
       });
-      console.log(this.timerDisplay + ' ' + position.coords.latitude + ' ' + position.coords.longitude);
     });
   }
 
