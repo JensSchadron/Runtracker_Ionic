@@ -11,11 +11,12 @@ import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choi
 import { SoloLocationPage }         from "../pages/solo-location/solo-location";
 import { CountdownPage }            from "../pages/countdown/countdown";
 import { SolotrackingPage }         from "../pages/solo-tracking/solo-tracking";
-
 import { RankingPage }              from "../pages/ranking/ranking";
 
 import { EditProfileService }       from '../services/user/user.service';
 import { GeocodingService }         from '../services/location/geocoding.service'
+import { CoordinateService }        from "../services/location/coordinate.service";
+
 import { AUTH_PROVIDERS }           from 'angular2-jwt';
 import { AuthConfig, AuthHttp }     from 'angular2-jwt';
 import { AuthService }              from '../services/auth/auth.service';
@@ -73,6 +74,11 @@ export function getAuthHttp(http) {
       useClass: IonicErrorHandler
     },
     GeocodingService,
+    {
+      provide: ErrorHandler,
+      useClass: IonicErrorHandler
+    },
+    CoordinateService,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler

@@ -1,0 +1,23 @@
+<ion-content padding id="countdown">
+
+  <div class="aligner">
+    <p>
+      <span id="title" *ngIf="showTitle">Countdown started</span>
+      <span id="timer">{{displayTime}}</span>
+    </p>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-50>
+        <button ion-button block color="light" outline (click)="addTenSeconds()">Add 10 seconds</button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button block color="danger" outline navPop (click)="cancelTimer()">Cancel</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
