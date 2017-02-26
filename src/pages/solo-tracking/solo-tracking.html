@@ -7,31 +7,36 @@
 
           <ion-row>
             <ion-col text-center class="border-bottom padding-bottom">
-              <span id="time">00:00:00</span>
-              time passed
+              <span id="time">{{timerDisplay}}</span>
+              running time
             </ion-col>
           </ion-row>
 
           <ion-row>
             <ion-col width-50 text-center class="border-right border-bottom padding-top">
-              <span id="distance">0</span>
+              <span id="distance">{{distance}}</span>
               km
             </ion-col>
             <ion-col width-50 text-center class="border-bottom padding-top">
-              <span id="speed">0</span>
+              <span id="speed">{{speed}}</span>
               avg speed
             </ion-col>
           </ion-row>
 
           <ion-row>
             <ion-col width-50 text-center class="border-right padding-top">
-              <span id="avg-speed">0</span>
+              <span id="avg-speed">{{avgSpeed}}</span>
               avg speed
             </ion-col>
             <ion-col width-50 text-center class="padding-top">
-              <span id="avg-pace">0</span>
+              <span id="avg-pace">{{avgPace}}</span>
               avg pace
             </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>{{lat}}</ion-col>
+            <ion-col>{{lon}}</ion-col>
           </ion-row>
 
         </ion-grid>
