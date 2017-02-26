@@ -5,7 +5,7 @@ import { NavController }  from 'ionic-angular';
 import {EditProfileService} from '../../services/user/user.service';
 import {User} from "../../app/model/user";
 
-import { TrackingchoicePage } from "../trackingchoice/trackingchoice";
+import { TrackingchoicePage } from "../tracking-choice/tracking-choice";
 
 @Component({
   selector: 'page-home',
@@ -20,9 +20,6 @@ export class HomePage {
   ngOnInit(): void {
     this.user = this.editProfileService.getUser().subscribe((user: User) => this.user = user);
     this.competitionsDone = this.user.trackings;
-
-
-
   }
 
   constructor(public navCtrl: NavController, private editProfileService: EditProfileService) {

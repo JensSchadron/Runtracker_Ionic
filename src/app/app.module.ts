@@ -7,19 +7,18 @@ import { LoginPage }                from "../pages/login/login";
 import { ProfilePage }              from "../pages/profile/profile";
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 
-import { TrackingchoicePage }       from "../pages/trackingchoice/trackingchoice";
-import { TrackinggoalPage }         from "../pages/trackinggoal/trackinggoal";
-import { TrackingNotRealtimePage }  from "../pages/tracking-not-realtime/tracking-not-realtime";
-
-import { CountdownModal }           from "../pages/countdown-modal/countdown-modal";
-import { SolotrackingModal }        from "../pages/solotracking-modal/solotracking-modal";
+import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
+import { SoloLocationPage }  from "../pages/solo-location/solo-location";
 
 import { EditProfileService }       from '../services/user/user.service';
+import { GeocodingService }         from '../services/location/geocoding.service'
 import { AUTH_PROVIDERS }           from 'angular2-jwt';
 import { AuthConfig, AuthHttp }     from 'angular2-jwt';
 import { AuthService }              from '../services/auth/auth.service';
 import { Http }                     from '@angular/http';
 import { Storage }                  from '@ionic/storage';
+import { CountdownPage }            from "../pages/countdown/countdown";
+import { SolotrackingPage }         from "../pages/solo-tracking/solo-tracking";
 
 let storage: Storage = new Storage();
 
@@ -38,10 +37,9 @@ export function getAuthHttp(http) {
     ProfilePage,
     EditprofilePage,
     TrackingchoicePage,
-    TrackinggoalPage,
-    TrackingNotRealtimePage,
-    CountdownModal,
-    SolotrackingModal
+    SoloLocationPage,
+    CountdownPage,
+    SolotrackingPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -54,10 +52,9 @@ export function getAuthHttp(http) {
     ProfilePage,
     EditprofilePage,
     TrackingchoicePage,
-    TrackinggoalPage,
-    TrackingNotRealtimePage,
-    CountdownModal,
-    SolotrackingModal
+    SoloLocationPage,
+    CountdownPage,
+    SolotrackingPage
   ],
   providers: [
     AuthService,
@@ -67,6 +64,11 @@ export function getAuthHttp(http) {
       deps: [Http]
     },
     EditProfileService,
+    {
+      provide: ErrorHandler,
+      useClass: IonicErrorHandler
+    },
+    GeocodingService,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler

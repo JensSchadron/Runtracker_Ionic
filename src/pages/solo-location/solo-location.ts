@@ -1,53 +1,52 @@
 import {Component, ViewChild, ElementRef, NgZone} from '@angular/core';
-import {NavController, NavParams, ModalController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
-import {CountdownModal} from "../countdown-modal/countdown-modal";
-import {Observable, Observer} from "rxjs";
+import {GeocodingService} from "../../services/location/geocoding.service";
+import {CountdownPage} from "../countdown/countdown";
+import {SolotrackingPage} from "../solo-tracking/solo-tracking";
 
 declare var google;
 
-/*
- Generated class for the TrackingNotRealtime page.
-
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
   selector: 'page-tracking-not-realtime',
-  templateUrl: 'tracking-not-realtime.html'
+  templateUrl: 'solo-location.html'
 })
 
-export class TrackingNotRealtimePage {
+export class SoloLocationPage {
 
-  @ViewChild('map') mapElement: ElementRef;
+  @ViewChild('map')
+  mapElement: ElementRef;
   map: any;
-  geocoder: any;
-  currentLocation: any = "\n";
+  currentLocation: any;
 
-  constructor(private zone: NgZone,
+  countdownSoloPage: Component;
+  params: any;
+
+  constructor(private geocodingservice: GeocodingService,
+              private zone: NgZone,
               public navCtrl: NavController,
-              public navParams: NavParams,
-              public modalCtrl: ModalController) {
-
-    this.geocoder = new google.maps.Geocoder();
-
+              public navParams: NavParams) {
+    this.countdownSoloPage = CountdownPage;
+    this.params = { timerDuration: 5, bgColor: "#387ef5", pageToPush: SolotrackingPage}
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TrackingNotRealtimePage');
+    console.log('ionViewDidLoad SoloLocationPage');
     this.loadMap();
   }
 
-  loadMap() {
+  private loadMap() {
     Geolocation.getCurrentPosition().then((position) => {
       let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-      this.geocode(latLng).subscribe((results) => {
-        // alert(results[0].formatted_address);
+      this.geocodingservice.geocode(latLng).subscribe((results) => {
         let fullAddress = results[0].formatted_address.toString();
+
+        // Oplossing voor het probleem dat currentLocation zich niet in de ngZone bevindt.
         this.zone.run(() => {
           this.currentLocation = fullAddress.replace(/, België/gi, " ");
         });
+
       });
 
       let mapOptions = {
@@ -188,36 +187,12 @@ export class TrackingNotRealtimePage {
 
   }
 
-  geocode(latLng: any): Observable<any> {
-    return new Observable((observer: Observer<any>) => {
-      this.geocoder.geocode({'location': latLng}, (
-        (results, status) => {
-          if (status === google.maps.GeocoderStatus.OK) {
-            observer.next(results);
-            observer.complete();
-          } else {
-            console.log('Geocoding service: geocoder failed due to: ' + status);
-            observer.error(status);
-          }
-        })
-      );
-    });
-  }
-
   private addMarker() {
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: this.map.getCenter()
     });
-  }
-
-  private presentCountdownModal() {
-    let countdownModal = this.modalCtrl.create(CountdownModal, {timerDuration: 5});
-    countdownModal.onDidDismiss(message => {
-      console.log(message);
-    });
-    countdownModal.present();
   }
 
 }

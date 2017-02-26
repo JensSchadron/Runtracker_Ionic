@@ -4,7 +4,7 @@ import { StatusBar, Splashscreen }  from 'ionic-native';
 
 import { HomePage }                 from '../pages/home/home';
 import { LoginPage }                from "../pages/login/login";
-import { TrackingchoicePage }       from "../pages/trackingchoice/trackingchoice";
+import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
 import { ProfilePage }              from '../pages/profile/profile'
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 
