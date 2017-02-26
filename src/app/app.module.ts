@@ -8,7 +8,11 @@ import { ProfilePage }              from "../pages/profile/profile";
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 
 import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
-import { SoloLocationPage }  from "../pages/solo-location/solo-location";
+import { SoloLocationPage }         from "../pages/solo-location/solo-location";
+import { CountdownPage }            from "../pages/countdown/countdown";
+import { SolotrackingPage }         from "../pages/solo-tracking/solo-tracking";
+
+import { RankingPage }              from "../pages/ranking/ranking";
 
 import { EditProfileService }       from '../services/user/user.service';
 import { GeocodingService }         from '../services/location/geocoding.service'
@@ -17,8 +21,6 @@ import { AuthConfig, AuthHttp }     from 'angular2-jwt';
 import { AuthService }              from '../services/auth/auth.service';
 import { Http }                     from '@angular/http';
 import { Storage }                  from '@ionic/storage';
-import { CountdownPage }            from "../pages/countdown/countdown";
-import { SolotrackingPage }         from "../pages/solo-tracking/solo-tracking";
 
 let storage: Storage = new Storage();
 
@@ -39,7 +41,8 @@ export function getAuthHttp(http) {
     TrackingchoicePage,
     SoloLocationPage,
     CountdownPage,
-    SolotrackingPage
+    SolotrackingPage,
+    RankingPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -54,7 +57,8 @@ export function getAuthHttp(http) {
     TrackingchoicePage,
     SoloLocationPage,
     CountdownPage,
-    SolotrackingPage
+    SolotrackingPage,
+    RankingPage
   ],
   providers: [
     AuthService,

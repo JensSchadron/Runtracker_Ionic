@@ -9,6 +9,7 @@ import { ProfilePage }              from '../pages/profile/profile'
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 
 import { AuthService }              from '../services/auth/auth.service';
+import {RankingPage} from "../pages/ranking/ranking";
 
 
 @Component({
@@ -41,6 +42,12 @@ export class MyApp {
         title: "Profile",
         componentOrFunction: () => {
           this.openPage(ProfilePage, false)
+        }
+      },
+      {
+        title: "Ranking",
+        componentOrFunction: () => {
+          this.openPage(RankingPage, false)
         }
       },
       {
