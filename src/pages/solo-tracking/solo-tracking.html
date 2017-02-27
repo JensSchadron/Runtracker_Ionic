@@ -1,0 +1,51 @@
+<ion-content padding>
+
+  <div class="aligner-top">
+    <ion-card id="tracking">
+      <ion-card-content>
+        <ion-grid>
+
+          <ion-row>
+            <ion-col text-center class="border-bottom padding-bottom">
+              <span id="time">{{timerDisplay}}</span>
+              running time
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col width-50 text-center class="border-right border-bottom padding-top">
+              <span id="distance">{{distance}}</span>
+              km
+            </ion-col>
+            <ion-col width-50 text-center class="border-bottom padding-top">
+              <span id="speed">{{speed}}</span>
+              avg speed
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col width-50 text-center class="border-right padding-top">
+              <span id="avg-speed">{{avgSpeed}}</span>
+              avg speed
+            </ion-col>
+            <ion-col width-50 text-center class="padding-top">
+              <span id="avg-pace">{{avgPace}}</span>
+              avg pace
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>{{lat}}</ion-col>
+            <ion-col>{{lon}}</ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="aligner-bottom">
+    <button ion-button block color="light" outline (click)="stopTracking()">Stop tracking</button>
+  </div>
+
+</ion-content>

@@ -22,6 +22,7 @@ export class User {
   trackings: Tracking[];
   userId: number;
   username: string;
+  online:boolean;
 
   constructor(username: string, firstname: string, lastname: string, gender: string) {
     this.username = username;

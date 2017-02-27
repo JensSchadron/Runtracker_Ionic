@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { TrackingNotRealtimePage } from "../tracking-not-realtime/tracking-not-realtime";
-import { TrackinggoalPage } from '../trackinggoal/trackinggoal';
+import { SoloLocationPage } from "../solo-location/solo-location";
 
 /*
   Generated class for the Trackingchoice page.
@@ -11,12 +10,11 @@ import { TrackinggoalPage } from '../trackinggoal/trackinggoal';
 */
 @Component({
   selector: 'page-trackingchoice',
-  templateUrl: 'trackingchoice.html'
+  templateUrl: 'tracking-choice.html'
 })
 
 export class TrackingchoicePage {
-  trackingNotRealtime: any = TrackingNotRealtimePage;
-  trackingGoalPage: any = TrackinggoalPage;
+  trackingNotRealtime: any = SoloLocationPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 

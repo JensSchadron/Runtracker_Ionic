@@ -1,15 +1,16 @@
-import {Component, ViewChild, OnDestroy}     from '@angular/core';
-import {Platform, MenuController, Nav} from 'ionic-angular';
-import {StatusBar, Splashscreen}  from 'ionic-native';
+import { Component, ViewChild, OnDestroy }     from '@angular/core';
+import { Platform, MenuController, Nav } from 'ionic-angular';
+import { StatusBar, Splashscreen }  from 'ionic-native';
 
-import {HomePage}                 from '../pages/home/home';
-import {LoginPage}                from "../pages/login/login";
-import {TrackingchoicePage}       from "../pages/trackingchoice/trackingchoice";
-import {ProfilePage}              from '../pages/profile/profile'
-import {EditprofilePage}          from "../pages/editprofile/editprofile";
+import { HomePage }                 from '../pages/home/home';
+import { LoginPage }                from "../pages/login/login";
+import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
+import { ProfilePage }              from '../pages/profile/profile'
+import { EditprofilePage }          from "../pages/editprofile/editprofile";
+import { RankingPage }              from "../pages/ranking/ranking";
 
-import {AuthService}              from '../services/auth/auth.service';
-import {UserService}              from "../services/auth/user.service";
+import { AuthService }              from '../services/auth/auth.service';
+import { UserService }              from "../services/auth/user.service";
 
 
 @Component({
@@ -42,6 +43,12 @@ export class MyApp implements OnDestroy {
         title: "Profile",
         componentOrFunction: () => {
           this.openPage(ProfilePage, false)
+        }
+      },
+      {
+        title: "Ranking",
+        componentOrFunction: () => {
+          this.openPage(RankingPage, false)
         }
       },
       {
