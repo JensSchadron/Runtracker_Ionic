@@ -1,27 +1,28 @@
-import { Component, ViewChild }     from '@angular/core';
-import { Platform, MenuController, Nav } from 'ionic-angular';
-import { StatusBar, Splashscreen }  from 'ionic-native';
+import {Component, ViewChild, OnDestroy}     from '@angular/core';
+import {Platform, MenuController, Nav} from 'ionic-angular';
+import {StatusBar, Splashscreen}  from 'ionic-native';
 
-import { HomePage }                 from '../pages/home/home';
-import { LoginPage }                from "../pages/login/login";
-import { TrackingchoicePage }       from "../pages/trackingchoice/trackingchoice";
-import { ProfilePage }              from '../pages/profile/profile'
-import { EditprofilePage }          from "../pages/editprofile/editprofile";
+import {HomePage}                 from '../pages/home/home';
+import {LoginPage}                from "../pages/login/login";
+import {TrackingchoicePage}       from "../pages/trackingchoice/trackingchoice";
+import {ProfilePage}              from '../pages/profile/profile'
+import {EditprofilePage}          from "../pages/editprofile/editprofile";
 
-import { AuthService }              from '../services/auth/auth.service';
+import {AuthService}              from '../services/auth/auth.service';
+import {UserService}              from "../services/auth/user.service";
 
 
 @Component({
   templateUrl: 'app.html'
 })
 
-export class MyApp {
+export class MyApp implements OnDestroy {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any;
   navDrawer: Array<{title: string, componentOrFunction: any}>;
 
-  constructor(public platform: Platform, public menu: MenuController, public auth: AuthService) {
+  constructor(public platform: Platform, public menu: MenuController, public auth: AuthService, public userService: UserService) {
     this.initApp();
 
     this.navDrawer = [
@@ -46,7 +47,12 @@ export class MyApp {
       {
         title: "Log out",
         componentOrFunction: () => {
-          auth.logout();
+          this.userService.setOffline()
+            .subscribe(() => {
+              console.log("User is now offline.");
+              auth.logout();
+            });
+          // console.log("User is now offline.");
         }
       }
     ];
@@ -57,7 +63,12 @@ export class MyApp {
       // Schedule a token refresh on app start up
       this.auth.handleAuthentication();
 
-      this.rootPage = (this.auth.isAuthenticated() ? HomePage : LoginPage);
+      // this.rootPage = (this.auth.isAuthenticated() ? HomePage : LoginPage);
+      if (this.auth.isAuthenticated()) {
+        this.rootPage = HomePage;
+      } else {
+        this.rootPage = LoginPage;
+      }
       console.log("Init - logged in:" + this.auth.isAuthenticated());
 
       // Okay, so the platform is ready and our plugins are available.
@@ -68,7 +79,7 @@ export class MyApp {
   }
 
   private openPage(page, setRoot: boolean) {
-    if (setRoot){
+    if (setRoot) {
       this.nav.setRoot(page);
     } else {
       this.nav.push(page);
@@ -82,6 +93,15 @@ export class MyApp {
     // if (!!(menuItem.componentOrFunction && menuItem.componentOrFunction.constructor && menuItem.componentOrFunction.call && menuItem.componentOrFunction.apply)) {
     if (typeof menuItem.componentOrFunction === 'function') {
       menuItem.componentOrFunction();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.auth.isAuthenticated()) {
+      // console.log("User is now offline.");
+      this.userService.setOffline().subscribe(() => {
+        console.log("User is now offline.");
+      });
     }
   }
 }
