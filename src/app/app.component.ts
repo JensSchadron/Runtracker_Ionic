@@ -8,7 +8,10 @@ import { TrackingchoicePage }       from "../pages/trackingchoice/trackingchoice
 import { ProfilePage }              from '../pages/profile/profile'
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 
+import { FriendsPage }              from "../pages/friends/friends";
+
 import { AuthService }              from '../services/auth/auth.service';
+
 
 
 @Component({
@@ -38,9 +41,15 @@ export class MyApp {
         }
       },
       {
+        title: "Friends",
+        componentOrFunction: () => {
+          this.openPage(FriendsPage, false)
+        }
+      },
+      {
         title: "Profile",
         componentOrFunction: () => {
-          this.openPage(ProfilePage, false)
+          this.openPage(EditprofilePage, false)
         }
       },
       {

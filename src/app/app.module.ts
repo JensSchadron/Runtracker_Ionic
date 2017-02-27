@@ -7,6 +7,8 @@ import { LoginPage }                from "../pages/login/login";
 import { ProfilePage }              from "../pages/profile/profile";
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 
+import { FriendsPage}          from "../pages/friends/friends";
+
 import { TrackingchoicePage }       from "../pages/trackingchoice/trackingchoice";
 import { TrackinggoalPage }         from "../pages/trackinggoal/trackinggoal";
 import { TrackingNotRealtimePage }  from "../pages/tracking-not-realtime/tracking-not-realtime";
@@ -37,6 +39,7 @@ export function getAuthHttp(http) {
     LoginPage,
     ProfilePage,
     EditprofilePage,
+    FriendsPage,
     TrackingchoicePage,
     TrackinggoalPage,
     TrackingNotRealtimePage,
@@ -53,6 +56,7 @@ export function getAuthHttp(http) {
     LoginPage,
     ProfilePage,
     EditprofilePage,
+    FriendsPage,
     TrackingchoicePage,
     TrackinggoalPage,
     TrackingNotRealtimePage,
