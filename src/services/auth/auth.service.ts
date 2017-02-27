@@ -45,7 +45,7 @@ export class AuthService {
 
         this.getUserInfoFromAuth0().then((profileInfo) => {
           this.userProfile = profileInfo;
-          this.userService.getCreateUserFromBackEnd(this.userProfile).subscribe(() => {
+          this.userService.getUser().subscribe(() => {
             console.log("Callback called!!!");
             this.userService.setOnline().subscribe(() => {
               console.log("User is now online.");
@@ -67,8 +67,6 @@ export class AuthService {
         password
       }, (err, authResult) => {
         if (err) {
-          // alert('Error: ' + err.description);
-          // return;
           return obs.error(err.description);
         }
         if (authResult && authResult.idToken && authResult.accessToken) {
@@ -77,7 +75,7 @@ export class AuthService {
 
           this.getUserInfoFromAuth0().then((profileInfo) => {
             this.userProfile = profileInfo;
-            this.userService.getCreateUserFromBackEnd(this.userProfile).subscribe(() => {
+            this.userService.getUser().subscribe(() => {
               console.log("Callback called!!!");
               this.userService.setOnline().subscribe(() => {
                 console.log("User is now online.");
