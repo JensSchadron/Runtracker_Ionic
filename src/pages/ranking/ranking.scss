@@ -3,10 +3,6 @@ page-ranking{
     font-weight:bold;
     text-align: left;
   }
-  .first-row{
-    font-size: 2rem;
-    font-weight: bold;
-  }
   #orderby-select {
     margin-top: 4rem;
     margin-bottom: 7rem;
@@ -18,12 +14,23 @@ page-ranking{
   }
   .btn-passive{
     background-color:white;
+    color:cornflowerblue;
   }
   .btn-active{
     background-color:lightgray;
+    color:cornflowerblue;
   }
   ion-select{
     margin:auto;
+  }
+  #button-world{
+    margin-left: 10%;
+  }
+  #button-friends{
+    margin-right: 10%;
+  }
+  h1{
+    text-align:center;
   }
 }
 
