@@ -5,7 +5,7 @@ import { NavController }  from 'ionic-angular';
 import {EditProfileService} from '../../services/user/user.service';
 import {User} from "../../app/model/user";
 
-import { TrackingchoicePage } from "../trackingchoice/trackingchoice";
+import { TrackingchoicePage } from "../tracking-choice/tracking-choice";
 
 @Component({
   selector: 'page-home',

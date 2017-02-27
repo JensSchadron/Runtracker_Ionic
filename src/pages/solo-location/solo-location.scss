@@ -1,0 +1,58 @@
+.ios, .md {
+
+  page-tracking-not-realtime {
+
+    .scroll-content {
+      height: 100%
+    }
+
+    #location {
+      height: 20%;
+    }
+
+    ion-col p {
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: lightgray;
+      font-size: 0.8em;
+      letter-spacing: 1px;
+    }
+
+    #curloc {
+      padding-top: 5px;
+      display: block;
+      text-align: center;
+      text-transform: none;
+      font-weight: 400;
+      font-size: 1.5em;
+      letter-spacing: 0;
+      color: #5e5e5e;
+    }
+
+    #map {
+      margin: 0 auto;
+      width: 100%;
+      height: 80%;
+      border-radius: 2px;
+    }
+
+    #map ion-spinner {
+      margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      height: 85px;
+      text-align: center;
+    }
+
+    ion-footer {
+      background-image: none;
+    }
+
+    .footer-md::before {
+      background-image: none;
+    }
+
+  }
+
+}

@@ -1,4 +1,4 @@
-export class Coordinate{
+export class coordinate{
   time:number;
   lat:number;
   lon:number;

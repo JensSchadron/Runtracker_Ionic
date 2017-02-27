@@ -1,0 +1,131 @@
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(255,255,255, 0.6);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgba(255,255,255, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(255,255,255, 0.6);
+    box-shadow: 0 0 0 0 rgba(255,255,255, 0.4);
+  }
+  70% {
+    -moz-box-shadow: 0 0 0 25px rgba(255,255,255, 0);
+    box-shadow: 0 0 0 25px rgba(255,255,255, 0);
+  }
+  100% {
+    -moz-box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+    box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+  }
+}
+
+#tracking {
+  border: 5px solid #387ef5;
+  border-radius: 20px;
+  box-shadow: 0 0 0 rgba(204,169,44, 0.6);
+  animation: pulse 1s infinite;
+}
+
+page-solotracking {
+
+  ion-content {
+
+    .fixed-content {
+      background-color: #387ef5;
+    }
+
+    .aligner-top {
+      height: 94%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #tracking {
+
+      ion-col {
+        text-transform: uppercase;
+        font-weight: 700;
+        color: lightgray;
+        font-size: 0.8em;
+        letter-spacing: 1px;
+      }
+
+      .border-bottom {
+        border-bottom: 1px solid lightgray;
+      }
+
+      .border-right {
+        border-right: 1px solid lightgray;
+      }
+
+      .padding-top {
+        padding-top: 10px;
+      }
+
+      .padding-bottom {
+        padding-bottom: 10px;
+      }
+
+      #time {
+        display: block;
+        text-transform: none;
+        font-weight: 400;
+        font-size: 2.5em;
+        letter-spacing: 0;
+        color: #5e5e5e;
+      }
+
+      #distance {
+        display: block;
+        text-transform: none;
+        font-weight: 400;
+        font-size: 1.5em;
+        letter-spacing: 0;
+        color: #5e5e5e;
+      }
+
+      #speed {
+        display: block;
+        text-transform: none;
+        font-weight: 400;
+        font-size: 1.5em;
+        letter-spacing: 0;
+        color: #5e5e5e;
+      }
+
+      #avg-speed {
+        display: block;
+        text-transform: none;
+        font-weight: 400;
+        font-size: 1.5em;
+        letter-spacing: 0;
+        color: #5e5e5e;
+      }
+
+      #avg-pace {
+        display: block;
+        text-transform: none;
+        font-weight: 400;
+        font-size: 1.5em;
+        letter-spacing: 0;
+        color: #5e5e5e;
+      }
+
+    }
+
+    .aligner-bottom {
+      height: 6%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+  }
+
+}
