@@ -1,6 +1,6 @@
 import {by, element, browser} from "protractor";
 describe('Home page - general', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     let inputMail = element.all(by.css('#maillogin'));
     let inputPass = element.all(by.css('#passlogin'));
     let btnLogin = element(by.id('btn-login'));
@@ -25,3 +25,4 @@ describe('Home page - general', () => {
     expect(btn.isPresent()).toBeTruthy();
   });
 });
+
