@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {AlertController} from 'ionic-angular';
 import {RankingService} from "../../services/ranking/ranking.service";
-import {User} from "../../app/model/user";
+import {User} from "../../model/user";
 
 @Component({
   selector: 'page-ranking',

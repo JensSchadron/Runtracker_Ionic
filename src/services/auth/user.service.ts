@@ -3,42 +3,24 @@ import {Response, Headers} from '@angular/http';
 import {User} from "../../model/user";
 import {Observable} from "rxjs/Observable";
 import * as myGlobals from "../../assets/globals";
-import {Profileinfo} from "../../model/profileinfo";
 import {AuthHttpImpl} from "./auth-http-impl";
 
 @Injectable()
 export class UserService {
 
-  constructor(private authHttp: AuthHttpImpl) {
-  }
+  constructor(private authHttp: AuthHttpImpl) {}
 
-  storeUserTokens(url: string) {
-    localStorage.setItem('access_token', url.split('=')[1].split('&')[0]);
-    localStorage.setItem('id_token', url.split('=')[5]);
-  }
-
-  getCreateUserFromBackEnd(profileInfo: Profileinfo): Observable<User|any> {
-    console.log("Is it crashing in getCreateUserFromBackEnd()?");
-    // let token = localStorage.getItem('id_token');
-    // console.log("id_token - " + token);
-    //
-    // let tokenSegment = new Headers([{'token': token}]);
-
-    return this.authHttp.getAuthHttp().get(myGlobals.BACKEND_BASEURL + '/api/users/getUser'
-      // , {
-      //   headers: tokenSegment
-      // }
-    )
+  getUser(): Observable<User|any> {
+    return this.authHttp.getAuthHttp().get(myGlobals.BACKEND_BASEURL + '/api/users/getUser')
       .map((res: Response) => res.json())
-      .catch(err => this.handleUserError(profileInfo, err));
+      .catch(err => this.handleUserError(err));
   }
 
-  private handleUserError(profileInfo: Profileinfo, error: Response | any): Observable<any> {
+  private handleUserError(error: Response | any): Observable<any> {
     console.log("User error");
     console.log(error);
-    console.log(profileInfo);
     if (error.status == 404) {
-      return this.createUser(profileInfo);
+      return this.createUser();
     } else {
       return this.handleError(error);
     }
@@ -56,8 +38,12 @@ export class UserService {
     return Observable.throw(errMsg);
   }
 
-  private createUser(profileInfo: Profileinfo): Observable<User|any> {
+  private createUser(): Observable<User|any> {
     //Social login ==> extra info
+    let strProfileInfo = localStorage.getItem('profile');
+    console.log("Creating user - %s", strProfileInfo);
+    let profileInfo = JSON.parse(strProfileInfo);
+
     let firstname: string = "";
     let lastname: string = "";
     let gender: string = "UNDEFINED";
@@ -98,7 +84,6 @@ export class UserService {
         return newUser;
       })
       .catch(err => this.handleError(err));
-    // (res: Response) => res.json()
   }
 
   setOnline(): Observable<any> {
@@ -115,5 +100,17 @@ export class UserService {
         console.log(res);
       })
       .catch(err => this.handleError(err));
+  }
+
+  updateUser(user : User): Observable<User>{
+    return this.authHttp.getAuthHttp().put(myGlobals.BACKEND_BASEURL + '/api/users/updateUser', user)
+      .map((res:Response) => res.json())
+      .catch(this.handleError);
+  }
+
+  checkUsernameAvailable(username: string): Observable<boolean>{
+    return this.authHttp.getAuthHttp().get(myGlobals.BACKEND_BASEURL + '/api/users/checkUsername/' + username)
+      .map((res:Response) => res.json())
+      .catch(this.handleError);
   }
 }

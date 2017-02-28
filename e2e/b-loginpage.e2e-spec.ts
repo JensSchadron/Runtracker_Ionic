@@ -90,26 +90,6 @@ describe('Login page - login form', () => {
     expect(btnLogin.getText()).toBe('LOGIN');
   });
 
-  it('test login mail/pass authentication', () => {
-    inputMail.all(by.tagName('input')).first().sendKeys("runtrackminds2017@gmail.com");
-    inputPass.all(by.tagName('input')).first().sendKeys("Team102017");
-
-    expect(inputMail.all(by.tagName('input')).first().getAttribute('value')).toEqual("runtrackminds2017@gmail.com");
-    expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("Team102017");
-
-    btnLogin.click().then(() => {
-      browser.driver.sleep(2000);
-      expect(element.all(by.css('ion-title')).get(1).getText()).toBe("Home");
-
-      let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
-      btnMenuNavDrawer.click().then(() => {
-        browser.driver.sleep(2000);
-        let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
-        btnLogout.click().then(() => console.log("Log out button clicked."));
-      });
-    });
-  });
-
   it('test login mail/pass authentication (nothing)', () => {
     expect(inputMail.all(by.tagName('input')).first().getAttribute('value')).toEqual("");
     expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("");
@@ -194,6 +174,29 @@ describe('Login page - login form', () => {
       })
     });
   });
+
+  it('test login mail/pass authentication', () => {
+    inputMail.all(by.tagName('input')).first().sendKeys("runtrackminds2017@gmail.com");
+    inputPass.all(by.tagName('input')).first().sendKeys("Team102017");
+
+    expect(inputMail.all(by.tagName('input')).first().getAttribute('value')).toEqual("runtrackminds2017@gmail.com");
+    expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("Team102017");
+
+    btnLogin.click().then(() => {
+      browser.driver.sleep(2000);
+      expect(element.all(by.css('ion-title')).get(1).getText()).toBe("Home");
+
+      let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
+      btnMenuNavDrawer.click().then(() => {
+        browser.driver.sleep(2000);
+
+        let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
+        btnLogout.click().then(() => {
+          browser.driver.sleep(6000);
+        });
+      });
+    });
+  });
 });
 
 describe('Login page - sign up form', () => {
@@ -225,7 +228,7 @@ describe('Login page - sign up form', () => {
     expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("Team102017");
 
     btnSignUp.click().then(() => {
-      browser.driver.sleep(2000);
+      browser.driver.sleep(6000);
       expect(element.all(by.css('ion-title')).get(1).getText()).toEqual("Login");
 
       let alert = element(by.tagName('ion-alert'));
