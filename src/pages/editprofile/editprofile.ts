@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {NavController, AlertController} from "ionic-angular";
-import {User} from "../../app/model/user";
+import {User} from "../../model/user";
 import {UserService} from "../../services/auth/user.service";
 import {AuthService} from "../../services/auth/auth.service";
 /**

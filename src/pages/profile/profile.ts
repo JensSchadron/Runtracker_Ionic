@@ -4,7 +4,7 @@ import {EditprofilePage} from '../editprofile/editprofile'
 
 import {UserService} from '../../services/auth/user.service';
 import {AuthService} from '../../services/auth/auth.service';
-import {User} from "../../app/model/user";
+import {User} from "../../model/user";
 
 /**
  * Created by stijnergeerts on 20/02/17.

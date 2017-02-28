@@ -1,7 +1,7 @@
 import {Component, NgZone}    from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation}  from 'ionic-native';
-import {Coordinate}   from "../../app/model/coordinate";
+import {Coordinate}   from "../../model/coordinate";
 import {Observable}   from "rxjs";
 
 @Component({

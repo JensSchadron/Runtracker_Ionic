@@ -3,7 +3,7 @@ import { Component }      from '@angular/core';
 import { NavController }  from 'ionic-angular';
 
 import {UserService} from '../../services/auth/user.service';
-import {User} from "../../app/model/user";
+import {User} from "../../model/user";
 
 import { TrackingchoicePage } from "../tracking-choice/tracking-choice";
 
