@@ -11,7 +11,6 @@ export class UserService {
   constructor(private authHttp: AuthHttpImpl) {}
 
   getUser(): Observable<User|any> {
-    console.log("Is it crashing in getUser()?");
     return this.authHttp.getAuthHttp().get(myGlobals.BACKEND_BASEURL + '/api/users/getUser')
       .map((res: Response) => res.json())
       .catch(err => this.handleUserError(err));
