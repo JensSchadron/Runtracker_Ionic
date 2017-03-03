@@ -32,6 +32,14 @@ import { AuthService }              from '../services/auth/auth.service';
 import { UserService }              from "../services/auth/user.service";
 import { AuthHttpImpl }             from "../services/auth/auth-http-impl";
 
+import { ConfigService }            from "../services/mqtt/config/config.service";
+import { MQTTService }              from "../services/mqtt/mqtt.service";
+
+import { ChallengeFriendsPage }     from "../pages/challenge-friends/challenge-friends";
+import { ChallengeDistancePage }    from "../pages/challenge-distance/challenge-distance";
+import { ChallengeLoadPage }        from "../pages/challenge-load/challenge-load";
+import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-tracking";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -47,6 +55,10 @@ import { AuthHttpImpl }             from "../services/auth/auth-http-impl";
     SoloLocationPage,
     CountdownPage,
     SolotrackingPage,
+    ChallengeFriendsPage,
+    ChallengeDistancePage,
+    ChallengeLoadPage,
+    ChallengeTrackingPage,
     RankingPage
   ],
   imports: [
@@ -67,6 +79,10 @@ import { AuthHttpImpl }             from "../services/auth/auth-http-impl";
     SoloLocationPage,
     CountdownPage,
     SolotrackingPage,
+    ChallengeFriendsPage,
+    ChallengeDistancePage,
+    ChallengeLoadPage,
+    ChallengeTrackingPage,
     RankingPage
   ],
   providers: [
@@ -86,7 +102,9 @@ import { AuthHttpImpl }             from "../services/auth/auth-http-impl";
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
-    }
+    },
+    ConfigService,
+    MQTTService
   ]
 })
 export class AppModule {}

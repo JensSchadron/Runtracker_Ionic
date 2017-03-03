@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 
-import {Subject} from 'rxjs/Rx';
+import {Subject, Observable} from 'rxjs/Rx';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
-import {Config} from '../config';
+import {Config} from './config';
 import {TransportService, TransportState} from './transport.service';
 
 import 'mqtt';
@@ -30,14 +30,14 @@ export const StateLookup: string[] = [
  */
 @Injectable()
 export class MQTTService implements TransportService {
-
   /* Service parameters */
 
   // State of the MQTTService
   public state: BehaviorSubject<TransportState>;
 
   // Publishes new messages to Observers
-  public messages: Subject<Packet>;
+  public userMessages: Subject<Packet>;
+  public compMessages: Subject<Packet>;
 
   // Configuration structure with MQ creds
   private config: Config;
@@ -50,7 +50,8 @@ export class MQTTService implements TransportService {
 
   /** Constructor */
   public constructor() {
-    this.messages = new Subject<Packet>();
+    this.userMessages = new Subject<Packet>();
+    this.compMessages = new Subject<Packet>();
     this.state = new BehaviorSubject<TransportState>(TransportState.CLOSED);
   }
 
@@ -59,11 +60,11 @@ export class MQTTService implements TransportService {
   public configure(config?: Config): void {
 
     // Check for errors:
-    if (this.state.getValue() !== TransportState.CLOSED) {
-      throw Error('Already running!');
-    }
     if (config === null && this.config === null) {
       throw Error('No configuration provided!');
+    }
+    if (this.state.getValue() !== TransportState.CLOSED) {
+      throw Error('MQTT already running!');
     }
 
     // Set our configuration
@@ -127,41 +128,64 @@ export class MQTTService implements TransportService {
 
 
   /** Disconnect the client and clean up */
-  public disconnect(): void {
+  public disconnect(): Promise<void> {
 
     // Notify observers that we are disconnecting!
     this.state.next(TransportState.DISCONNECTING);
 
-    // Disconnect. Callback will set CLOSED state
-    if (this.client) {
-      this.client.end(
-        false,
-        () => this.state.next(TransportState.CLOSED)
-      );
-    }
+    const client = this.client;
+    const state = this.state;
+    return new Promise(function (resolve, reject) {
+      // Disconnect. Callback will set CLOSED state
+      try {
+        if (client) {
+          client.end(
+            false,
+            () => {
+              state.next(TransportState.CLOSED);
+              resolve();
+            }
+          );
+        }
+      } catch (err){
+        reject(err);
+      }
+    });
+
+
   }
 
+  private publishOptions: any = {qos: 2, retain: false};
 
-  /** Send a message to all topics */
-  public publish(message?: string) {
-
-    for (const t of this.config.publish) {
-      this.client.publish(t, message);
-    }
+  /** Send a message to the competition topic */
+  public publishInCompTopic(message?: string): void {
+    this.client.publish(this.config.competitionTopic, message, this.publishOptions);
   }
 
+  public publishInFriendTopic(topic: string, message?: string): void {
+    this.client.publish(topic, message, this.publishOptions);
+  }
+
+  /** Send a message to all topics, or just those in the array */
+  public publishInOwnTopic(message?: string): void {
+    this.client.publish(this.config.userTopic, message, this.publishOptions);
+  }
 
   /** Subscribe to server message queues */
   public subscribe(): void {
-
+    let subscribeOptions: any = {qos: 2};
     // Subscribe to our configured queues
     // Callback is set at client instantiation (assuming we don't need separate callbacks per queue.)
-    for (const t of this.config.subscribe) {
-      console.log('subscribing: ' + t);
-      this.client.subscribe(t);
+    if (this.config.userTopic !== null) {
+      console.log('subscribing: ' + this.config.userTopic);
+      this.client.subscribe(this.config.userTopic, subscribeOptions);
     }
-    // Update the state
-    if (this.config.subscribe.length > 0) {
+    if (this.config.competitionTopic !== null) {
+      console.log('subscribing: ' + this.config.competitionTopic);
+      this.client.subscribe(this.config.competitionTopic, subscribeOptions);
+    }
+
+    if (this.config.userTopic !== null || this.config.competitionTopic !== null) {
       this.state.next(TransportState.SUBSCRIBED);
     }
   }
@@ -228,8 +252,8 @@ export class MQTTService implements TransportService {
       // Attempt reconnection
       console.log("Reconnecting in 5 seconds...");
       setTimeout(() => {
-          this.configure();
-          this.try_connect();
+        this.configure();
+        this.try_connect();
       }, 5000);
     }
   };
@@ -238,17 +262,28 @@ export class MQTTService implements TransportService {
   // On message RX, notify the Observable with the message object
   public on_message = (...args: any[]) => {
 
-    const topic = args[0],
+    const topic: string = args[0],
       message = args[1],
       packet: Packet = args[2];
 
     // Log it to the console
-    // console.log(topic);
-    // console.log(message);
-    // console.log(packet.messageId);
+    console.log(topic);
+    console.log(message);
+    console.log(packet);
+
 
     if (message.toString()) {
-      this.messages.next(message);
+      switch (topic) {
+        case this.config.userTopic:
+          this.userMessages.next(message);
+          break;
+        case this.config.competitionTopic:
+          this.compMessages.next(message);
+          break;
+        default:
+          console.warn("Unknown topic: %s", topic);
+          console.warn("Message: %s", message);
+      }
     } else {
       console.warn('Empty message received!');
     }

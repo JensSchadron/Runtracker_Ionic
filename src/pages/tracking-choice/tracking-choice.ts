@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SoloLocationPage } from "../solo-location/solo-location";
+import {ChallengeFriendsPage} from "../challenge-friends/challenge-friends";
 
 /*
   Generated class for the Trackingchoice page.
@@ -15,6 +16,7 @@ import { SoloLocationPage } from "../solo-location/solo-location";
 
 export class TrackingchoicePage {
   trackingNotRealtime: any = SoloLocationPage;
+  trackingRealtime: any = ChallengeFriendsPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
