@@ -7,14 +7,17 @@ import { LoginPage }                from "../pages/login/login";
 import { ProfilePage }              from "../pages/profile/profile";
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 
-import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
 import { SoloLocationPage }         from "../pages/solo-location/solo-location";
 import { CountdownPage }            from "../pages/countdown/countdown";
 import { SolotrackingPage }         from "../pages/solo-tracking/solo-tracking";
 import { RankingPage }              from "../pages/ranking/ranking";
-import { FriendsPage}          from "../pages/friends/friends";
+import { FriendsPage}               from "../pages/friends/friends";
+import { FriendsRequestsPage}       from "../pages/friends/requests/friendrequests";
+import { AddFriendsPage }           from "../pages/friends/addfriends/addfriends";
+import { TabsPage }                 from "../pages/friends/tabs/tabs";
 
-import { TrackingchoicePage }       from "../pages/trackingchoice/trackingchoice";
+
+import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
 import { TrackinggoalPage }         from "../pages/trackinggoal/trackinggoal";
 import { TrackingNotRealtimePage }  from "../pages/tracking-not-realtime/tracking-not-realtime";
 
@@ -37,6 +40,9 @@ import { AuthHttpImpl }             from "../services/auth/auth-http-impl";
     ProfilePage,
     EditprofilePage,
     FriendsPage,
+    FriendsRequestsPage,
+    AddFriendsPage,
+    TabsPage,
     TrackingchoicePage,
     SoloLocationPage,
     CountdownPage,
@@ -54,6 +60,9 @@ import { AuthHttpImpl }             from "../services/auth/auth-http-impl";
     ProfilePage,
     EditprofilePage,
     FriendsPage,
+    FriendsRequestsPage,
+    AddFriendsPage,
+    TabsPage,
     TrackingchoicePage,
     SoloLocationPage,
     CountdownPage,

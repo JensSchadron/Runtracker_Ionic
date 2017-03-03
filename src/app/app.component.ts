@@ -10,6 +10,9 @@ import { EditprofilePage }          from "../pages/editprofile/editprofile";
 import { RankingPage }              from "../pages/ranking/ranking";
 
 import { FriendsPage }              from "../pages/friends/friends";
+import { TabsPage }              from "../pages/friends/tabs/tabs";
+import { FriendsRequestsPage }              from "../pages/friends/requests/friendrequests";
+
 
 import { AuthService }              from '../services/auth/auth.service';
 import { UserService }              from "../services/auth/user.service";
@@ -45,7 +48,7 @@ export class MyApp implements OnDestroy {
       {
         title: "Friends",
         componentOrFunction: () => {
-          this.openPage(FriendsPage, false)
+          this.openPage(TabsPage, false)
         }
       },
       {

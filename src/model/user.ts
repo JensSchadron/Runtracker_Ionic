@@ -12,6 +12,7 @@ export class User{
   friends:User[];
   gender:string;
   lastname:string;
+  online:boolean;
   maxDistance:number;
   maxSpeed:number;
   nrOfCompetitionsWon:number;
@@ -22,6 +23,7 @@ export class User{
   trackings:Tracking[];
   userId:number;
   username:string;
+  avatar:string;
 
   constructor(){}
 }
