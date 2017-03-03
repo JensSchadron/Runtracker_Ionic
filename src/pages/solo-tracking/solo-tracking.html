@@ -13,19 +13,15 @@
           </ion-row>
 
           <ion-row>
-            <ion-col width-50 text-center class="border-right border-bottom padding-top">
-              <span id="distance">{{distance}}</span>
-              km
-            </ion-col>
-            <ion-col width-50 text-center class="border-bottom padding-top">
-              <span id="speed">{{speed}}</span>
-              avg speed
+            <ion-col text-center class="border-bottom padding-top">
+              <span id="distance">{{distanceDisplay}}</span>
+              distance in km
             </ion-col>
           </ion-row>
 
           <ion-row>
             <ion-col width-50 text-center class="border-right padding-top">
-              <span id="avg-speed">{{avgSpeed}}</span>
+              <span id="avg-speed">{{avgSpeedDisplay}}</span>
               avg speed
             </ion-col>
             <ion-col width-50 text-center class="padding-top">
@@ -37,6 +33,11 @@
           <ion-row>
             <ion-col>{{lat}}</ion-col>
             <ion-col>{{lon}}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col color="danger">{{countSucces}}</ion-col>
+            <ion-col color="danger">{{countError}}</ion-col>
           </ion-row>
 
         </ion-grid>
