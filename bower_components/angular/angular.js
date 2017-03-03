@@ -17036,12 +17036,12 @@ function $$RAFProvider() { //rAF
 /**
  * DESIGN NOTES
  *
- * The design decisions behind the scope are heavily favored for speed and memory consumption.
+ * The design decisions behind the scope are heavily favored for currentSpeed and memory consumption.
  *
  * The typical use of scope is to watch the expressions, which most of the time return the same
  * value as last time so we optimize the operation.
  *
- * Closures construction is expensive in terms of speed as well as memory:
+ * Closures construction is expensive in terms of currentSpeed as well as memory:
  *   - No closures, instead use prototypical inheritance for API
  *   - Internal state needs to be stored on scope directly, which means that private state is
  *     exposed as $$____ properties
