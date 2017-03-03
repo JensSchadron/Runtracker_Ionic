@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnDestroy }     from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen }  from 'ionic-native';
 
@@ -6,11 +6,11 @@ import { HomePage }                 from '../pages/home/home';
 import { LoginPage }                from "../pages/login/login";
 import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
 import { ProfilePage }              from '../pages/profile/profile'
+import { EditprofilePage }          from "../pages/editprofile/editprofile";
 import { RankingPage }              from "../pages/ranking/ranking";
 
 import { FriendsPage }              from "../pages/friends/friends";
-import { TabsPage }              from "../pages/friends/tabs/tabs";
-import { FriendsRequestsPage }              from "../pages/friends/requests/friendrequests";
+import { TabsPage }                 from "../pages/friends/tabs/tabs";
 
 
 import { AuthService }              from '../services/auth/auth.service';
