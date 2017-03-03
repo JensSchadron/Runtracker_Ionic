@@ -1,6 +1,6 @@
 
 <ion-tabs>
   <ion-tab [root]="tab1Root" tabTitle="Friends" tabIcon="people" tab></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Requests" tabIcon="person-add"></ion-tab>
+  <ion-tab *ngIf="requests.length==0"[root]="tab2Root" tabTitle="Requests" tabIcon="person-add"></ion-tab>
   <ion-tab *ngIf="requests.length!=0" [root]="tab3Root" tabTitle="Requests" tabIcon="person-add" tabBadge="{{requests.length}}" tabBadgeStyle="danger"></ion-tab>
 </ion-tabs>
