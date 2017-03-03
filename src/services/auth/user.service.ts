@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Response, Headers} from '@angular/http';
+import {Response} from '@angular/http';
 import {User} from "../../model/user";
 import {Observable} from "rxjs/Observable";
 import * as myGlobals from "../../assets/globals";
