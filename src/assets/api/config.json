@@ -1,17 +1,21 @@
 {
-    "host": "schadronds.synology.me",
-    "port": 9883,
-    "ssl": true,
+  "host": "192.168.0.101",
+  "port": 9883,
+  "ssl": true,
 
-    "user": "mosquitto",
-    "pass": "Team102017",
+  "user": "mosquitto",
+  "pass": "Team102017",
 
-    "subscribe": [
-        "Testy"
-    ],
-    "publish": [
-        "Testy"
-    ],
+  "userTopic": null,
 
-    "keepalive": 10
+  "competitionTopic": null,
+
+  "keepalive": 10,
+
+  "will": {
+    "topic": "uid-1655",
+    "payload": "offline",
+    "qos": 2,
+    "retain": false
+  }
 }

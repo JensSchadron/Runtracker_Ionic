@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { Config } from '../config';
+import { Config } from './config';
 
 
 /** possible states for the message queue */
@@ -20,7 +20,8 @@ export interface TransportService {
   state: BehaviorSubject<TransportState>;
 
   // Publishes new messages to Observers
-  messages: Subject<Object>;
+  userMessages: Subject<Object>;
+  compMessages: Subject<Object>;
 
   /** Callback run on successfully connecting to server */
   on_connect: () => void;
@@ -38,11 +39,17 @@ export interface TransportService {
   try_connect(): Promise<{}>;
 
   /** Disconnect the client and clean up */
-  disconnect(): void;
+  disconnect(): Promise<any>;
 
-  /** Send a message to all topics, or just those in the array */
-  publish(message?: string): void;
-
-  /** Subscribe to server message queues */
+  /** Subscribe to the user andcompetition topic message queues */
   subscribe(): void;
+
+  /** Send a message to the competition topic */
+  publishInCompTopic(message?: string): void;
+
+  /** Send a message to a friends topic */
+  publishInFriendTopic(topic?: string, message?: string): void;
+
+  /** Send a message to own userTopic */
+  publishInOwnTopic(message?: string): void;
 }

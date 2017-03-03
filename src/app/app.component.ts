@@ -6,7 +6,6 @@ import { HomePage }                 from '../pages/home/home';
 import { LoginPage }                from "../pages/login/login";
 import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
 import { ProfilePage }              from '../pages/profile/profile'
-import { EditprofilePage }          from "../pages/editprofile/editprofile";
 import { RankingPage }              from "../pages/ranking/ranking";
 
 import { AuthService }              from '../services/auth/auth.service';

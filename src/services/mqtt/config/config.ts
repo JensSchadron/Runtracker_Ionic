@@ -13,10 +13,21 @@ export interface Config {
   user: string;
   pass: string;
 
-  // Which queues?
-  publish: string[];
-  subscribe: string[];
+  // // Which queues?
+  // publish: string[];
+  // subscribe: string[];
+
+  userTopic: string;
+  competitionTopic: string;
 
   // How often to heartbeat?
   keepalive?: number;
-};
+
+  // Last will
+  will: {
+    topic: string;
+    payload: string;
+    qos: number;
+    retain: boolean;
+  };
+}

@@ -25,6 +25,7 @@ export class EditprofilePage {
   }
 
   onUsernameChange(event): void {
+    if (this.user.username == "" || !this.available || this.user.username.indexOf('.') >= 0)
     if (this.user.username == "") {
       this.errorMsg = "Username can not be empty. Please enter a valid username."
     } else {
@@ -57,7 +58,16 @@ export class EditprofilePage {
           buttons: ['Ok']
         });
         alert.present()
-      } else {
+      }else if(user.username.indexOf(".") >= 0) {
+        this.errorMsg = "Username may not contain \".\"."
+        let alert = this.alerCtrl.create({
+          title: 'Username may not contain \".\"',
+          message: 'Choose another username',
+          buttons: ['Ok']
+        });
+        alert.present()
+      }
+      else {
         this.errorMsg = "Username not available. Please choose another username."
         let alert = this.alerCtrl.create({
           title: 'Username already taken!',
