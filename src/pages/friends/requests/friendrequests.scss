@@ -1,0 +1,16 @@
+page-friendrequests{
+ .list-avatar-page-requests{
+   .accept{
+     color: limegreen;
+   }
+   .decline{
+     color: red;
+   }
+   .no-data{
+     text-align: center;
+     right: 20%;
+     left:20%;
+     top: 10%;
+   }
+ }
+}

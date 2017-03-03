@@ -8,8 +8,14 @@ import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choi
 import { ProfilePage }              from '../pages/profile/profile'
 import { RankingPage }              from "../pages/ranking/ranking";
 
+import { FriendsPage }              from "../pages/friends/friends";
+import { TabsPage }              from "../pages/friends/tabs/tabs";
+import { FriendsRequestsPage }              from "../pages/friends/requests/friendrequests";
+
+
 import { AuthService }              from '../services/auth/auth.service';
 import { UserService }              from "../services/auth/user.service";
+
 
 
 @Component({
@@ -39,9 +45,15 @@ export class MyApp implements OnDestroy {
         }
       },
       {
+        title: "Friends",
+        componentOrFunction: () => {
+          this.openPage(TabsPage, false)
+        }
+      },
+      {
         title: "Profile",
         componentOrFunction: () => {
-          this.openPage(ProfilePage, false)
+          this.openPage(EditprofilePage, false)
         }
       },
       {
