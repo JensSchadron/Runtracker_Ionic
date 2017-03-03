@@ -25,13 +25,13 @@
           Average
         </div>
         <div class="card-content">
-          {{user.totalDistance}} m
+          {{user?.totalDistance}} m
         </div>
         <div class="card-content-left">
-          {{user.maxDistance}} m
+          {{user?.maxDistance}} m
         </div>
         <div class="card-content-right">
-          {{user.avgDistance}} m
+          {{user?.avgDistance}} m
         </div>
       </ion-card>
   <ion-card class="largecard">
@@ -46,10 +46,10 @@
       Average
     </div>
     <div class="card-content-left">
-      {{user.maxSpeed}} km/h
+      {{user?.maxSpeed}} km/h
     </div>
     <div class="card-content-right">
-      {{user.avgSpeed}} km/h
+      {{user?.avgSpeed}} km/h
     </div>
   </ion-card>
 
@@ -59,7 +59,7 @@
           Competitions won
         </div>
         <div class="card-subtitle-middle">
-          {{user.nrOfCompetitionsWon}}
+          {{user?.nrOfCompetitionsWon}}
         </div>
       </ion-card>
   </ion-content>

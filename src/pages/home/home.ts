@@ -2,15 +2,15 @@ import { Component }      from '@angular/core';
 
 import { NavController }  from 'ionic-angular';
 
-import {EditProfileService} from '../../services/user/user.service';
-import {User} from "../../app/model/user";
+import {UserService} from '../../services/auth/user.service';
+import {User} from "../../model/user";
 
 import { TrackingchoicePage } from "../tracking-choice/tracking-choice";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [EditProfileService]
+  providers: [UserService]
 })
 export class HomePage {
   private user;
@@ -18,11 +18,11 @@ export class HomePage {
   trackingChoicePage: any = TrackingchoicePage;
 
   ngOnInit(): void {
-    this.user = this.editProfileService.getUser().subscribe((user: User) => this.user = user);
+    this.user = this.userService.getUser().subscribe((user: User) => this.user = user);
     this.competitionsDone = this.user.trackings;
   }
 
-  constructor(public navCtrl: NavController, private editProfileService: EditProfileService) {
+  constructor(public navCtrl: NavController, private userService: UserService) {
 
   }
 
