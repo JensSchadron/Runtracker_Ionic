@@ -24,8 +24,10 @@ export class ConfigService {
   }
 
 
-  /** Make an http request for a config file, and
-   * return a Promise for its resolution.
+  /** Make an https request for a config file, and
+   * returns a Promise for its resolution.
+   *
+   * @return {Promise<Config>}
    */
   public getConfig(): Promise<Config> {
     return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + "/api/mqtt/getConfig")
@@ -33,8 +35,10 @@ export class ConfigService {
       .toPromise();
   }
 
-  /** Make an http request for a config file, and
-   * return a Promise for its resolution.
+  /** Make an https request for a config file, and
+   * returns a Promise for its resolution.
+   *
+   * @return {Promise<Config>}
    */
   public getConfigWithCompTopic(compId: number): Promise<Config> {
     return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + "/api/mqtt/getConfig/" + compId)
