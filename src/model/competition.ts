@@ -10,4 +10,5 @@ export class Competition{
  usersRun:User[];
  topic:string;
  name:string;
+ time:Date;
 }

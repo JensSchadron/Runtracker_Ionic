@@ -1,0 +1,28 @@
+page-friends-profile{
+  .friends-profile-page{
+    .avatar{
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+      height:50%;
+      border-radius: 50%;
+    }
+    .full-name{
+      font-size: 2em;
+    }
+    .user-info{
+      margin-top: 5px;
+    }
+    .trophy{
+      font-size: 2em;
+    }
+    .trophy-won{
+      color: gold;
+      font-size: 2em;
+    }
+    .user-data{
+      font-size: 2em;
+    }
+  }
+
+}

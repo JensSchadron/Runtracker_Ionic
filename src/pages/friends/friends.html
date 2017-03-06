@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Friends
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="list-avatar-page">
+  <ion-searchbar [(ngModel)]="queryStringMyFriends"></ion-searchbar>
+  <ion-list>
+    <ion-list-header>Online</ion-list-header>
+    <div *ngFor="let friend of friends">
+    <ion-item *ngIf="friend.online" [navParams]="friend" [navPush]="friendsProfilePage">
+      <ion-avatar item-left>
+        <img src="../../assets/img/avatars/{{friend.avatar}}.png">
+      </ion-avatar>
+      <h2>{{friend.firstname}} {{friend.lastname}}</h2>
+      <p>{{friend.username}}</p>
+      <ion-note item-right><ion-icon class="is-online" name="radio-button-on"></ion-icon></ion-note>
+    </ion-item>
+    </div>
+
+  </ion-list>
+
+
+  <ion-list>
+    <ion-list-header>Offline</ion-list-header>
+    <div *ngFor="let friend of friends">
+      <ion-item *ngIf="!friend.online" [navParams]="friend" [navPush]="friendsProfilePage">
+        <ion-avatar item-left>
+          <img src="../../assets/img/avatars/{{friend.avatar}}.png">
+        </ion-avatar>
+        <h2>{{friend.firstname}} {{friend.lastname}}</h2>
+        <p>{{friend.username}}</p>
+        <ion-note item-right><ion-icon class="is-offline" name="radio-button-on"></ion-icon></ion-note>
+      </ion-item>
+    </div>
+  </ion-list>
+
+</ion-content>
+<!--<ion-content>
+  <ion-searchbar [(ngModel)]="queryStringMyFriends"></ion-searchbar>
+  <div class="no-data" *ngIf="potentialFriends==null || potentialFriends.length==0">
+    <h5>No friends found. You can do friendship requests by clicking the <strong> "Search friends" </strong>
+      tab or come back later.</h5>
+  </div>
+  <ul id="friends-list">
+    <li *ngFor="let friend of potentialFriends; let i = index">
+      <p> {{friend.username}}</p>
+    </li>
+  </ul>
+</ion-content>-->
+
+

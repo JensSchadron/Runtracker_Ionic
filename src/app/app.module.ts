@@ -4,7 +4,7 @@ import { MyApp }                    from './app.component';
 
 import { HomePage }                 from '../pages/home/home';
 import { LoginPage }                from "../pages/login/login";
-import { ProfilePage }              from "../pages/profile/profile";
+import { FriendsProfilePage }              from "../pages/friends-profile/friends-profile";
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 
 import { SoloLocationPage }         from "../pages/solo-location/solo-location";
@@ -37,15 +37,15 @@ import { MQTTService }              from "../services/mqtt/mqtt.service";
 
 import { ChallengeFriendsPage }     from "../pages/challenge-friends/challenge-friends";
 import { ChallengeDistancePage }    from "../pages/challenge-distance/challenge-distance";
-import { ChallengeLoadPage }        from "../pages/challenge-load/challenge-load";
-import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-tracking";
+//import { ChallengeLoadPage }        from "../pages/challenge-load/challenge-load";
+//import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-tracking";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
-    ProfilePage,
+    FriendsProfilePage,
     EditprofilePage,
     FriendsPage,
     FriendsRequestsPage,
@@ -57,8 +57,8 @@ import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-
     SolotrackingPage,
     ChallengeFriendsPage,
     ChallengeDistancePage,
-    ChallengeLoadPage,
-    ChallengeTrackingPage,
+    //ChallengeLoadPage,
+    //ChallengeTrackingPage,
     RankingPage
   ],
   imports: [
@@ -69,7 +69,7 @@ import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-
     MyApp,
     HomePage,
     LoginPage,
-    ProfilePage,
+    FriendsProfilePage,
     EditprofilePage,
     FriendsPage,
     FriendsRequestsPage,
@@ -81,8 +81,8 @@ import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-
     SolotrackingPage,
     ChallengeFriendsPage,
     ChallengeDistancePage,
-    ChallengeLoadPage,
-    ChallengeTrackingPage,
+    //ChallengeLoadPage,
+    //ChallengeTrackingPage,
     RankingPage
   ],
   providers: [
