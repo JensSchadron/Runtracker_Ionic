@@ -38,7 +38,7 @@ import { MQTTService }              from "../services/mqtt/mqtt.service";
 import { ChallengeFriendsPage }     from "../pages/challenge-friends/challenge-friends";
 import { ChallengeDistancePage }    from "../pages/challenge-distance/challenge-distance";
 import { ChallengeLoadPage }        from "../pages/challenge-load/challenge-load";
-import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-tracking";
+// import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-tracking";
 
 @NgModule({
   declarations: [
@@ -58,7 +58,7 @@ import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-
     ChallengeFriendsPage,
     ChallengeDistancePage,
     ChallengeLoadPage,
-    ChallengeTrackingPage,
+    // ChallengeTrackingPage,
     RankingPage
   ],
   imports: [
@@ -82,7 +82,7 @@ import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-
     ChallengeFriendsPage,
     ChallengeDistancePage,
     ChallengeLoadPage,
-    ChallengeTrackingPage,
+    // ChallengeTrackingPage,
     RankingPage
   ],
   providers: [

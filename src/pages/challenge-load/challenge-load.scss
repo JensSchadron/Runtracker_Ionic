@@ -1,0 +1,21 @@
+page-challenge-load {
+  ion-card {
+    background-color: #f53d3d;
+
+    .ready {
+      background-color: #2ec95c;
+    }
+  }
+
+  ion-content {
+    .fixed-content {
+      background-color: #387ef5;
+    }
+  }
+
+  ion-footer {
+    background-color: #387ef5;
+  }
+
+
+}

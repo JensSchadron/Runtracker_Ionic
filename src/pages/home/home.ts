@@ -13,6 +13,10 @@ import {Observable} from "rxjs";
 import {AuthHttpImpl} from "../../services/auth/auth-http-impl";
 import {BACKEND_BASEURL} from "../../assets/globals";
 import {Response} from "@angular/http";
+import {ChallengeLoadPage} from "../challenge-load/challenge-load";
+import {MQTTPacketType} from "../../services/mqtt/packet/mqtt.packet";
+import {InviteResponsePacket} from "../../services/mqtt/packet/inviteresponse.packet";
+import {InvitePacket} from "../../services/mqtt/packet/invite.packet";
 
 @Component({
   selector: 'page-home',
@@ -20,7 +24,7 @@ import {Response} from "@angular/http";
   providers: [UserService]
 })
 export class HomePage {
-  private user;
+  private user: User;
   private competitionsDone;
   private greeting = 'Hello';
   trackingChoicePage: any = TrackingchoicePage;
@@ -28,14 +32,14 @@ export class HomePage {
   public userMessages: Observable<Packet>;
 
   ngOnInit(): void {
-    this.user = this.userService.getUser().subscribe((user: User) => this.user = user);
+    this.userService.getUser().subscribe((user: User) => this.user = user);
     this.competitionsDone = this.user.trackings;
     this.setGreeting();
   }
 
   setGreeting() {
     let now = new Date();
-    if (now.getHours() < 12 && now.getHours() > 7) {
+    if (now.getHours() >= 7 && now.getHours() < 12) {
       this.greeting = 'Good morning';
     } else if (now.getHours() >= 12 && now.getHours() < 14) {
       this.greeting = 'Hello';
@@ -75,79 +79,86 @@ export class HomePage {
 
     // Subscribe a function to be run on_next message
     this.userMessages.subscribe(this.on_next);
-
-    // this.mqttService.publishInOwnTopic("online");
   };
 
   /** Consume a message from the _mqService */
   public on_next = (message: Packet) => {
-    let compInvite = JSON.parse(message.toString());
-    let alert = this.alertCtrl.create({
-      title: "New Challenge",
-      message: compInvite.user + " challenges you to a new competition with a distance of " + compInvite.goal.name,
-      buttons: [
-        {
-          text: "Decline",
-          handler: () => {
-            this.configService.getConfigWithCompTopic(compInvite.compId).then((config) => {
-              this.mqttService.disconnect().then(() => {
-                this.mqttService.configure(config);
-                this.mqttService.try_connect()
-                  .then(() => {
-                    this.on_connect();
-                    this.mqttService.publishInCompTopic(JSON.stringify({
-                      user: this.user.firstname + " " + this.user.lastname,
-                      accepted: false
-                    }));
-                    this.configService.getConfig().then((config) => {
-                      this.mqttService.disconnect().then(() => {
-                        this.mqttService.configure(config);
-                        this.mqttService.try_connect()
-                          .then(() => {
-                            this.on_connect();
-                          })
-                          .catch(() => {
-                            this.on_error()
-                          });
-                      })
+    let compInvite: InvitePacket = JSON.parse(message.toString());
+    console.log(MQTTPacketType.INVITE);
+    console.log(compInvite.type);
+    if (compInvite.type === MQTTPacketType.INVITE) {
+      let alert = this.alertCtrl.create({
+        title: "New Challenge",
+        message: compInvite.username + " challenges you to a new competition with a distance of " + compInvite.goal.name,
+        buttons: [
+          {
+            text: "Decline",
+            handler: () => {
+              this.configService.getConfigWithCompTopic(compInvite.compId).then((config) => {
+                this.mqttService.disconnect().then(() => {
+                  this.mqttService.configure(config);
+                  this.mqttService.try_connect()
+                    .then(() => {
+                      this.on_connect();
+                      let response = new InviteResponsePacket(compInvite.compId, this.user.userId, false);
+                      this.mqttService.publishInCompTopic(JSON.stringify(response));
+                      this.configService.getConfig().then((config) => {
+                        this.mqttService.disconnect().then(() => {
+                          this.mqttService.configure(config);
+                          this.mqttService.try_connect()
+                            .then(() => {
+                              this.on_connect();
+                            })
+                            .catch(() => {
+                              this.on_error();
+                            });
+                        })
+                      }).catch(() => {
+                        this.on_error();
+                      });
+                    }).catch(() => {
+                    this.on_error();
+                  });
+                }).catch(() => {
+                  this.on_error();
+                });
+              }).catch(() => {
+                this.on_error();
+              });
+            }
+          },
+          {
+            text: "Accept",
+            handler: () => {
+              this.authHttp.getAuthHttp().post(BACKEND_BASEURL + "/api/competitions/running/" + compInvite.compId, null)
+                .catch(err => this.handleError(err))
+                .subscribe(() => {
+                  this.configService.getConfigWithCompTopic(compInvite.compId).then((config) => {
+                    this.mqttService.disconnect().then(() => {
+                      this.mqttService.configure(config);
+                      this.mqttService.try_connect()
+                        .then(() => {
+                          this.on_connect();
+                          let response = new InviteResponsePacket(compInvite.compId, this.user.userId, true);
+                          this.mqttService.publishInCompTopic(JSON.stringify(response));
+                        })
+                        .catch(() => {
+                          this.on_error();
+                        });
+                    }).catch(() => {
+                      this.on_error();
                     });
-                  })
-                  .catch(() => {
-                    this.on_error()
+                  }).catch(() => {
+                    this.on_error();
                   });
-              });
-            });
+                  this.navCtrl.push(ChallengeLoadPage, {compId: compInvite.compId})
+                });
+            }
           }
-        },
-        {
-          text: "Accept",
-          handler: () => {
-            this.authHttp.getAuthHttp().post(BACKEND_BASEURL + "/api/competitions/running/" + compInvite.compId, null)
-              .catch(err => this.handleError(err))
-              .subscribe(() => {
-                console.log("Neemt nu deel aan competitie");
-              });
-            this.configService.getConfigWithCompTopic(compInvite.compId).then((config) => {
-              this.mqttService.disconnect().then(() => {
-                this.mqttService.configure(config);
-                this.mqttService.try_connect()
-                  .then(() => {
-                    this.on_connect();
-                    this.mqttService.publishInCompTopic(JSON.stringify({
-                      user: this.user.firstname + " " + this.user.lastname,
-                      accepted: true
-                    }));
-                  })
-                  .catch(() => {
-                    this.on_error()
-                  });
-              });
-            });
-          }
-        }
-      ]
-    });
-    alert.present();
+        ]
+      });
+      alert.present();
+    }
     // Store message in "historic messages" queue
     console.log(message.toString() + '\n');
   };
