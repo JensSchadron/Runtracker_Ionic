@@ -24,7 +24,7 @@ import {InvitePacket} from "../../services/mqtt/packet/invite.packet";
   providers: [UserService]
 })
 export class HomePage {
-  private user: User;
+  private user;
   private competitionsDone;
   private greeting = 'Hello';
   trackingChoicePage: any = TrackingchoicePage;
@@ -32,9 +32,13 @@ export class HomePage {
   public userMessages: Observable<Packet>;
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe((user: User) => this.user = user);
-    this.competitionsDone = this.user.trackings;
-    this.setGreeting();
+    this.user = this.userService.getUser().subscribe((user: User) =>{
+      this.user = user;
+      this.competitionsDone = this.user.trackings;
+      this.setGreeting();
+    });
+
+
   }
 
   setGreeting() {
