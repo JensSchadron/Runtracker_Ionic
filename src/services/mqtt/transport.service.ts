@@ -45,11 +45,11 @@ export interface TransportService {
   subscribe(): void;
 
   /** Send a message to the competition topic */
-  publishInCompTopic(message?: string): void;
+  publishInCompTopic(message: string): void;
 
   /** Send a message to a friends topic */
-  publishInFriendTopic(topic?: string, message?: string): void;
+  publishInFriendTopic(topic: number, message: string): void;
 
   /** Send a message to own userTopic */
-  publishInOwnTopic(message?: string): void;
+  publishInOwnTopic(message: string): void;
 }

@@ -158,16 +158,16 @@ export class MQTTService implements TransportService {
   private publishOptions: any = {qos: 2, retain: false};
 
   /** Send a message to the competition topic */
-  public publishInCompTopic(message?: string): void {
+  public publishInCompTopic(message: string): void {
     this.client.publish(this.config.competitionTopic, message, this.publishOptions);
   }
 
-  public publishInFriendTopic(topic: string, message?: string): void {
-    this.client.publish(topic, message, this.publishOptions);
+  public publishInFriendTopic(userId: number, message: string): void {
+    this.client.publish("uid-" + userId, message, this.publishOptions);
   }
 
   /** Send a message to all topics, or just those in the array */
-  public publishInOwnTopic(message?: string): void {
+  public publishInOwnTopic(message: string): void {
     this.client.publish(this.config.userTopic, message, this.publishOptions);
   }
 
@@ -267,9 +267,9 @@ export class MQTTService implements TransportService {
       packet: Packet = args[2];
 
     // Log it to the console
-    console.log(topic);
-    console.log(message);
-    console.log(packet);
+    // console.log(topic);
+    // console.log(message);
+    // console.log(packet);
 
 
     if (message.toString()) {
