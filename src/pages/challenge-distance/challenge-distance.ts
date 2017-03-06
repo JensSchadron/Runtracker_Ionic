@@ -10,6 +10,8 @@ import {MQTTService} from "../../services/mqtt/mqtt.service";
 import {User} from "../../model/user";
 import {UserService} from "../../services/auth/user.service";
 import {Observable} from "rxjs";
+import {InvitePacket} from "../../services/mqtt/packet/invite.packet";
+import {ConfigService} from "../../services/mqtt/config/config.service";
 
 /*
  Generated class for the ChallengeDistance page.
@@ -22,12 +24,14 @@ import {Observable} from "rxjs";
   templateUrl: 'challenge-distance.html'
 })
 export class ChallengeDistancePage {
+  private loadingPage: any = ChallengeLoadPage;
+
   private challengedFriend: User;
   private goals: Goal[];
 
   private competition: Competition = new Competition();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authHttp: AuthHttpImpl, public mqttService: MQTTService, private userService: UserService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authHttp: AuthHttpImpl, public mqttService: MQTTService, private configService: ConfigService, private userService: UserService) {
     this.challengedFriend = this.navParams.get("friend");
     this.authHttp.getAuthHttp().get(BACKEND_BASEURL + "/api/goals/getGoals")
       .map((res: Response) => res.json())
@@ -49,12 +53,20 @@ export class ChallengeDistancePage {
       .map((res: Response) => res.json())
       .catch(err => this.handleError(err))
       .subscribe((comp: Competition) => {
-        let mqttPayload = {
-          compId: comp.competitionId,
-          user: comp.userCreated.firstname + " " + comp.userCreated.lastname,
-          goal: comp.goal
-        };
-        this.mqttService.publishInFriendTopic("uid-" + this.challengedFriend.userId, JSON.stringify(mqttPayload));
+        this.configService.getConfigWithCompTopic(comp.competitionId).then((config) => {
+          this.mqttService.disconnect().then(() => {
+            this.mqttService.configure(config);
+            this.mqttService.try_connect()
+              .then(() => {
+                let mqttPayload = new InvitePacket(comp.competitionId, comp.userCreated.firstname + " " + comp.userCreated.lastname, comp.goal);
+                this.mqttService.publishInFriendTopic(this.challengedFriend.userId, JSON.stringify(mqttPayload));
+
+                this.navCtrl.push(this.loadingPage, {
+                  compId: comp.competitionId
+                });
+              });
+          });
+        });
       });
   }
 
