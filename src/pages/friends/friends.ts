@@ -5,7 +5,6 @@ import { NavController }  from 'ionic-angular';
 import {FriendsService} from '../../services/friends/friends.service';
 import {User} from "../../model/user";
 
-import {SearchPipe} from './searchpipe'
 import {FriendsProfilePage} from '../friends-profile/friends-profile'
 
 
@@ -13,7 +12,7 @@ import {FriendsProfilePage} from '../friends-profile/friends-profile'
 @Component({
     selector: 'page-friends',
   templateUrl:'friends.html',
-  providers: [FriendsService, SearchPipe]
+  providers: [FriendsService]
 }
 )
 export class FriendsPage implements OnInit{
