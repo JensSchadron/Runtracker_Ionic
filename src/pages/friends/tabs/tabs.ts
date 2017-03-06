@@ -24,6 +24,7 @@ export class TabsPage implements OnInit{
     this.FriendsService.getFriendrequests().subscribe(
       (friends) => {
         this.requests = friends;
+
       },
       error => {
         console.log(error as string);

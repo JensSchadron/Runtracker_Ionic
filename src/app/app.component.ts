@@ -5,7 +5,7 @@ import { StatusBar, Splashscreen }  from 'ionic-native';
 import { HomePage }                 from '../pages/home/home';
 import { LoginPage }                from "../pages/login/login";
 import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
-import { ProfilePage }              from '../pages/profile/profile'
+import { FriendsProfilePage }              from '../pages/friends-profile/friends-profile'
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 import { RankingPage }              from "../pages/ranking/ranking";
 
@@ -15,6 +15,7 @@ import { TabsPage }                 from "../pages/friends/tabs/tabs";
 
 import { AuthService }              from '../services/auth/auth.service';
 import { UserService }              from "../services/auth/user.service";
+import {LocationService} from "../services/location/location.service";
 
 
 
@@ -28,7 +29,7 @@ export class MyApp implements OnDestroy {
   rootPage: any;
   navDrawer: Array<{title: string, componentOrFunction: any}>;
 
-  constructor(public platform: Platform, public menu: MenuController, public auth: AuthService, public userService: UserService) {
+  constructor(public platform: Platform, public menu: MenuController, public auth: AuthService, public userService: UserService, private locationService: LocationService) {
     this.initApp();
 
     this.navDrawer = [
@@ -93,6 +94,9 @@ export class MyApp implements OnDestroy {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+
+      // Start location tracking.
+      this.locationService.startTracking();
     });
   }
 
@@ -115,6 +119,9 @@ export class MyApp implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // Stop location tracking.
+    this.locationService.stopTracking();
+
     if (this.auth.isAuthenticated()) {
       // console.log("User is now offline.");
       this.userService.setOffline().subscribe(() => {

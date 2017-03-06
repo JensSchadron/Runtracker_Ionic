@@ -12,15 +12,15 @@ export class CoreInfo{
   totalDistance: number;
 
   constructor(user: User){
-    this.avgDistance = user.avgDistance;
+    this.avgDistance = user.avgDistance / 1000;
     this.avgSpeed = user.avgSpeed;
-    this.maxDistance = user.maxDistance;
+    this.maxDistance = user.maxDistance / 1000;
     this.maxSpeed = user.maxSpeed;
-    this.nrOfCompetitionsWon = user.competitionsWon.length;
-    this.nrOfCompetitionsDone = user.competitionsRun.length;
-    this.totalDistance = user.totalDistance;
+    this.nrOfCompetitionsWon = user.nrOfCompetitionsWon;
+    this.nrOfCompetitionsDone = user.nrOfCompetitionsDone;
+    this.totalDistance = user.totalDistance / 1000;
     this.ranMarathon = user.maxDistance >= 42194.988;
     this.ranTenKm = user.maxDistance >= 10000;
-    this.ranTwentyKm = user.maxDistance >= 10000;
+    this.ranTwentyKm = user.maxDistance >= 20000;
   }
 }
