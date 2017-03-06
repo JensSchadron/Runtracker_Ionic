@@ -6,7 +6,7 @@
 -->
 <ion-content padding>
   <ion-card *ngFor="let challenger of challengers"
-            [ngClass]="{'ready': (challenger.userId === currUser.userId ? userReady : challengerReady)}">
+            >
     <ion-card-content>
       <ion-item>
         <ion-avatar item-left>
@@ -19,6 +19,7 @@
           {{challenger.username}}
         </h3>
       </ion-item>
+      <div class="readyIndicator" [ngClass]="{'ready': (challenger.userId === currUser.userId ? userReady : challengerReady)}"> </div>
     </ion-card-content>
   </ion-card>
 </ion-content>
