@@ -17,6 +17,7 @@ import {ChallengeLoadPage} from "../challenge-load/challenge-load";
 import {MQTTPacketType} from "../../services/mqtt/packet/mqtt.packet";
 import {InviteResponsePacket} from "../../services/mqtt/packet/inviteresponse.packet";
 import {InvitePacket} from "../../services/mqtt/packet/invite.packet";
+import {TransportState} from "../../services/mqtt/transport.service";
 
 @Component({
   selector: 'page-home',
@@ -61,16 +62,18 @@ export class HomePage {
               public mqttService: MQTTService,
               private configService: ConfigService,
               public alertCtrl: AlertController) {
-    configService.getConfig().then((config) => {
-      mqttService.configure(config);
-      mqttService.try_connect()
-        .then(() => {
-          this.on_connect()
-        })
-        .catch(() => {
-          this.on_error()
-        });
-    });
+    if (mqttService.state.getValue() === TransportState.CLOSED){
+      configService.getConfig().then((config) => {
+        mqttService.configure(config);
+        mqttService.try_connect()
+          .then(() => {
+            this.on_connect()
+          })
+          .catch(() => {
+            this.on_error()
+          });
+      });
+    }
   }
 
   /** Callback on_connect to queue */
