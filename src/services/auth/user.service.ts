@@ -75,7 +75,8 @@ export class UserService {
       "ranTenKm": false,
       "ranTwentyKm": false,
       "ranMarathon": false,
-      "nrOfCompetitionsWon": 0
+      "nrOfCompetitionsWon": 0,
+      "avatar": "cool-guy"
     };
     console.log("Creating user");
     return this.authHttp.getAuthHttp().post(myGlobals.BACKEND_BASEURL + '/api/users/createUser', newUser)
