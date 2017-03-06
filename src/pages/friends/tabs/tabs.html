@@ -1,4 +1,7 @@
-
+<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
 <ion-tabs>
   <ion-tab [root]="tab1Root" tabTitle="Friends" tabIcon="people" tab></ion-tab>
   <ion-tab *ngIf="requests.length==0"[root]="tab2Root" tabTitle="Requests" tabIcon="person-add"></ion-tab>
