@@ -4379,7 +4379,7 @@ function annotate(fn, strictDi, name) {
 
  * @example
  *
- * The following example shows how to create a simple event tracking service and register it using
+ * The following example shows how to create a simple event isTracking service and register it using
  * {@link auto.$provide#provider $provide.provider()}.
  *
  * ```js
@@ -4429,7 +4429,7 @@ function annotate(fn, strictDi, name) {
  *      expect(eventTracker.event('login')).toEqual(2);
  *    }));
  *
- *    it('saves to the tracking url', inject(function(eventTracker, $http) {
+ *    it('saves to the isTracking url', inject(function(eventTracker, $http) {
  *      postSpy = spyOn($http, 'post');
  *      eventTracker.event('login');
  *      eventTracker.save();

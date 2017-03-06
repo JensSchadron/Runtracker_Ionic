@@ -4,7 +4,7 @@ import { MyApp }                    from './app.component';
 
 import { HomePage }                 from '../pages/home/home';
 import { LoginPage }                from "../pages/login/login";
-import { FriendsProfilePage }              from "../pages/friends-profile/friends-profile";
+import { FriendsProfilePage }       from "../pages/friends-profile/friends-profile";
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 
 import { SoloLocationPage }         from "../pages/solo-location/solo-location";
@@ -23,6 +23,7 @@ import { TrackingNotRealtimePage }  from "../pages/tracking-not-realtime/trackin
 
 import { CountdownModal }           from "../pages/countdown-modal/countdown-modal";
 import { SolotrackingModal }        from "../pages/solotracking-modal/solotracking-modal";
+import { TrackingResultPage }       from "../pages/tracking-result/tracking-result";
 
 import { GeocodingService }         from '../services/location/geocoding.service'
 import { CoordinateService }        from "../services/location/coordinate.service";
@@ -31,6 +32,8 @@ import { AUTH_PROVIDERS }           from 'angular2-jwt';
 import { AuthService }              from '../services/auth/auth.service';
 import { UserService }              from "../services/auth/user.service";
 import { AuthHttpImpl }             from "../services/auth/auth-http-impl";
+import { LocationService }          from "../services/location/location.service"
+import { TrackingService }          from "../services/tracking/tracking.service"
 
 import { ConfigService }            from "../services/mqtt/config/config.service";
 import { MQTTService }              from "../services/mqtt/mqtt.service";
@@ -55,6 +58,8 @@ import { ChallengeDistancePage }    from "../pages/challenge-distance/challenge-
     SoloLocationPage,
     CountdownPage,
     SolotrackingPage,
+    RankingPage,
+    TrackingResultPage,
     ChallengeFriendsPage,
     ChallengeDistancePage,
     //ChallengeLoadPage,
@@ -79,6 +84,8 @@ import { ChallengeDistancePage }    from "../pages/challenge-distance/challenge-
     SoloLocationPage,
     CountdownPage,
     SolotrackingPage,
+    RankingPage,
+    TrackingResultPage,
     ChallengeFriendsPage,
     ChallengeDistancePage,
     //ChallengeLoadPage,
@@ -99,6 +106,16 @@ import { ChallengeDistancePage }    from "../pages/challenge-distance/challenge-
       useClass: IonicErrorHandler
     },
     CoordinateService,
+    {
+      provide: ErrorHandler,
+      useClass: IonicErrorHandler
+    },
+    LocationService,
+    {
+      provide: ErrorHandler,
+      useClass: IonicErrorHandler
+    },
+    TrackingService,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler

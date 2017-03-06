@@ -17,7 +17,7 @@ describe('Home page - general', () => {
   });
 
   //Other parts already tested in loginpage.e2e
-  it('should have a correct navbar title & button new tracking', () => {
+  it('should have a correct navbar title & button new isTracking', () => {
     let navBarTitle = element.all(by.css('ion-title')).get(1);
     expect(navBarTitle.isPresent()).toBeTruthy();
     expect(navBarTitle.getText()).toBe('Home');
