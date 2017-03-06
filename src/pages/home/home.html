@@ -30,13 +30,13 @@
           Average
         </div>
         <div class="card-content">
-          {{user?.totalDistance}} m
+          {{(user?.totalDistance/1000) | number : '1.0-2' }} km
         </div>
         <div class="card-content-left">
-          {{user?.maxDistance}} m
+          {{(user?.maxDistance/1000) | number : '1.0-2' }} km
         </div>
         <div class="card-content-right">
-          {{user?.avgDistance}} m
+          {{(user?.avgDistance/1000) | number : '1.0-2' }} km
         </div>
       </ion-card>
   <ion-card class="largecard">
@@ -51,10 +51,10 @@
       Average
     </div>
     <div class="card-content-left">
-      {{user?.maxSpeed}} km/h
+      {{user?.maxSpeed | number : '1.0-2' }} km/h
     </div>
     <div class="card-content-right">
-      {{user?.avgSpeed}} km/h
+      {{user?.avgSpeed | number : '1.0-2' }} km/h
     </div>
   </ion-card>
 
