@@ -1,16 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Friends
-    </ion-title>
+
   </ion-navbar>
 </ion-header>
 <ion-content class="list-avatar-page">
   <ion-searchbar [(ngModel)]="queryStringMyFriends"></ion-searchbar>
   <ion-list>
     <ion-list-header>Online</ion-list-header>
-    <div *ngFor="let friend of friends">
-    <ion-item *ngIf="friend.online" [navParams]="friend" [navPush]="friendsProfilePage">
+    <div *ngFor="let friend of friends" (click)="onFriendClick(friend)">
+    <ion-item *ngIf="friend.online" >
       <ion-avatar item-left>
         <img src="../../assets/img/avatars/{{friend.avatar}}.png">
       </ion-avatar>
@@ -26,7 +24,7 @@
   <ion-list>
     <ion-list-header>Offline</ion-list-header>
     <div *ngFor="let friend of friends">
-      <ion-item *ngIf="!friend.online" [navParams]="friend" [navPush]="friendsProfilePage">
+      <ion-item *ngIf="!friend.online" (click)="onFriendClick(friend)">
         <ion-avatar item-left>
           <img src="../../assets/img/avatars/{{friend.avatar}}.png">
         </ion-avatar>

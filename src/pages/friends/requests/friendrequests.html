@@ -1,13 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Friendrequests
-    </ion-title>
+
   </ion-navbar>
 </ion-header>
 <ion-content class="list-avatar-page-requests">
 
-  <div class="no-data" *ngIf="requests.length==0">
+  <div class="no-data" *ngIf="requests.length === 0">
     <h5>No friendship requests at the moment. You can do friendship requests yourself by clicking the <strong>
       "Search friends" </strong>
       tab or come back later.</h5>
@@ -17,14 +15,17 @@
 
     <ion-list-header>Requests</ion-list-header>
     <div *ngFor="let request of requests">
-    <ion-item>
-      <ion-avatar item-left>
-        <img src="./../assets/img/avatars/{{request.avatar}}.png">
-      </ion-avatar>
-      <h2>{{request.firstname}} {{request.lastname}}</h2>
-      <p>{{request.username}}</p>
-      <ion-note item-right><ion-icon class="accept" name="checkmark-circle" (click)="onClickAcceptFriend(request.username)"></ion-icon>     <ion-icon class="decline" name="close-circle" (click)="onClickRemoveFriend(request.username)"></ion-icon></ion-note>
-    </ion-item>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="./../assets/img/avatars/{{request.avatar}}.png">
+        </ion-avatar>
+        <h2>{{request.firstname}} {{request.lastname}}</h2>
+        <p>{{request.username}}</p>
+        <ion-note item-right>
+          <ion-icon class="accept" name="checkmark-circle" (click)="onClickAcceptFriend(request.username)"></ion-icon>
+          <ion-icon class="decline" name="close-circle" (click)="onClickRemoveFriend(request.username)"></ion-icon>
+        </ion-note>
+      </ion-item>
     </div>
 
   </ion-list>
@@ -33,7 +34,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block [navPush]="trackingChoicePage">Add New Friend</button>
+        <button ion-button block (click)="onAddFriendsBtnClick()">Add New Friend</button>
       </ion-col>
     </ion-row>
   </ion-grid>

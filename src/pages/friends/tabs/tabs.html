@@ -1,6 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{this.tabRef?.getSelected()?.tabTitle}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
-<ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Friends" tabIcon="people" tab></ion-tab>
-  <ion-tab *ngIf="requests.length==0"[root]="tab2Root" tabTitle="Requests" tabIcon="person-add"></ion-tab>
-  <ion-tab *ngIf="requests.length!=0" [root]="tab3Root" tabTitle="Requests" tabIcon="person-add" tabBadge="{{requests.length}}" tabBadgeStyle="danger"></ion-tab>
+<ion-tabs #tabs>
+  <ion-tab [root]="friendsPage" tabTitle="Friends" tabIcon="people" tab></ion-tab>
+  <ion-tab *ngIf="requests.length === 0" [root]="friendRequestsPage" tabTitle="Requests" tabIcon="person-add"></ion-tab>
+  <ion-tab *ngIf="requests.length !== 0" [root]="friendRequestsPage" tabTitle="Requests" tabIcon="person-add"
+           tabBadge="{{requests.length}}" tabBadgeStyle="danger"></ion-tab>
 </ion-tabs>

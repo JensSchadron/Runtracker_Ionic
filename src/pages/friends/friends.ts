@@ -1,35 +1,33 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {AlertController} from 'ionic-angular';
-import { Platform } from 'ionic-angular';
-import { NavController }  from 'ionic-angular';
+import {AlertController, App} from 'ionic-angular';
+import {Platform} from 'ionic-angular';
+import {NavController}  from 'ionic-angular';
 import {FriendsService} from '../../services/friends/friends.service';
 import {User} from "../../model/user";
 
 import {FriendsProfilePage} from '../friends-profile/friends-profile'
 
 
-
 @Component({
     selector: 'page-friends',
-  templateUrl:'friends.html',
-  providers: [FriendsService]
-}
+    templateUrl: 'friends.html',
+    providers: [FriendsService]
+  }
 )
-export class FriendsPage implements OnInit{
+export class FriendsPage implements OnInit {
+  public pageTitle: string = "Friends";
+
   private potentialFriends: User[] = [];
   private friends: User[] = [];
   private requests: User[] = [];
-  friendsProfilePage = FriendsProfilePage
+  friendsProfilePage = FriendsProfilePage;
 
   queryString: string = "";
   queryStringMyFriends: string = "";
 
 
-
-
-
   ngOnInit(): void {
-    this.FriendsService.getPotentialFriends().subscribe(
+    this.friendsService.getPotentialFriends().subscribe(
       (users) => {
         this.potentialFriends = users;
 
@@ -39,7 +37,7 @@ export class FriendsPage implements OnInit{
       }
     );
 
-    this.FriendsService.getFriends().subscribe(
+    this.friendsService.getFriends().subscribe(
       (friends) => {
         this.friends = friends;
       },
@@ -48,7 +46,7 @@ export class FriendsPage implements OnInit{
       }
     );
 
-    this.FriendsService.getFriendrequests().subscribe(
+    this.friendsService.getFriendrequests().subscribe(
       (friends) => {
         this.requests = friends;
       },
@@ -59,24 +57,35 @@ export class FriendsPage implements OnInit{
   }
 
   onClickAddFriend(username): void {
-    this.FriendsService.addFriend(username).subscribe(val => console.log(val), err => console.log(err));
-    setTimeout(() => this.ngOnInit(), 2000);
+    this.friendsService.addFriend(username).subscribe(val => {
+      console.log(val);
+      this.ngOnInit();
+    }, err => console.log(err));
+    // setTimeout(() => this.ngOnInit(), 2000);
   }
 
   onClickRemoveFriend(username): void {
-    this.FriendsService.deleteFriend(username).subscribe(val => console.log(val), err => console.log(err));
-    setTimeout(() => this.ngOnInit(), 2000);
+    this.friendsService.deleteFriend(username).subscribe(val => {
+      console.log(val);
+      this.ngOnInit();
+    }, err => console.log(err));
+    // setTimeout(() => this.ngOnInit(), 2000);
   }
 
   onClickAcceptFriend(username): void {
-    this.FriendsService.acceptFriend(username).subscribe(val => console.log(val), err => console.log(err));
-    setTimeout(() => this.ngOnInit(), 2000);
+    this.friendsService.acceptFriend(username).subscribe(val => {
+      console.log(val);
+      this.ngOnInit();
+    }, err => console.log(err));
+    // setTimeout(() => this.ngOnInit(), 2000);
+  }
+
+  onFriendClick(friend): void {
+    this.appCtrl.getRootNav().push(this.friendsProfilePage, friend);
   }
 
 
-
-  constructor(private FriendsService: FriendsService, public NavCtrl: NavController) {
-
+  constructor(private friendsService: FriendsService, public navCtrl: NavController, public appCtrl: App) {
   }
 }
 
