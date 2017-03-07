@@ -10,7 +10,10 @@
 </ion-header>
 
 <ion-content padding class="friends-profile-page">
-
+  <div class="spinner" *ngIf="coreInfo==null">
+    <ion-spinner></ion-spinner>
+  </div>
+<div *ngIf="coreInfo!=null">
   <div class="aligner-top">
     <ion-card>
       <ion-grid>
@@ -149,6 +152,7 @@
     </ion-card>
   </div>
   <button ion-button full (click)="onClickRemoveFriend(userFromParam.username)" color="danger">Delete friend</button>
+</div>
 </ion-content>
 
 

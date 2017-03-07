@@ -1,5 +1,12 @@
 page-friends-profile{
   .friends-profile-page{
+    .spinner{
+      margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      height: 85px;
+      text-align: center;
+    }
     .avatar{
       margin-left: auto;
       margin-right: auto;

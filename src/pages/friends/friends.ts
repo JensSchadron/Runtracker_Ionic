@@ -20,6 +20,7 @@ export class FriendsPage implements OnInit {
   private friends: User[] = [];
   private requests: User[] = [];
   friendsProfilePage = FriendsProfilePage;
+  private friendsLoaded: boolean = false;
 
   queryString: string = "";
   queryStringMyFriends: string = "";
@@ -34,7 +35,7 @@ export class FriendsPage implements OnInit {
       this.init();
     }, err => console.log(err));
   }
-  
+
   onClickAcceptFriend(username): void {
     this.friendsService.acceptFriend(username).subscribe(val => {
       console.log(val);
@@ -60,6 +61,7 @@ export class FriendsPage implements OnInit {
     this.friendsService.getFriends().subscribe(
       (friends) => {
         this.friends = friends;
+        this.friendsLoaded=true;
       },
       error => {
         console.log(error as string);

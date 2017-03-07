@@ -1,5 +1,22 @@
 page-editprofile{
   .home-background-page {
+    .spinner{
+      margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      height: 85px;
+      text-align: center;
+    }
+    .avatar{
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 3%;
+      margin-bottom: 3%;
+      width: 50%;
+      height:50%;
+      border-radius: 50%;
+    }
+
     ion-card-title {
       padding-left: 4.8%;
       padding-top: 4.8%;
@@ -11,6 +28,16 @@ page-editprofile{
     }
     .btn-save{
 
+    }
+    .trophy{
+      font-size: 2em;
+    }
+    .trophy-won{
+      color: gold;
+      font-size: 2em;
+    }
+    .user-data{
+      font-size: 2em;
     }
   }
 

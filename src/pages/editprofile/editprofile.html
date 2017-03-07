@@ -6,6 +6,13 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="home-background-page">
+  <div class="spinner" *ngIf="coreInfo==null">
+  <ion-spinner></ion-spinner>
+  </div>
+  <div *ngIf="coreInfo!=null">
+  <ion-avatar>
+    <img class="avatar" src="../../assets/img/avatars/{{user.avatar}}.png">
+  </ion-avatar>
   <ion-card>
     <ion-card-title>Personal info</ion-card-title>
   <ion-list>
@@ -39,13 +46,101 @@
     </ion-item>
   </ion-list>
   </ion-card>
+  <div>
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col  width-33.3 text-center>
+            <div *ngIf="coreInfo?.ranTenKm==null">
+              <ion-icon class="trophy"  name="trophy"></ion-icon>
+            </div>
+            <div *ngIf="coreInfo?.ranTenKm==false">
+              <ion-icon class="trophy"  name="trophy"></ion-icon>
+            </div>
+            <div *ngIf="coreInfo?.ranTenKm==true">
+              <ion-icon class="trophy-won"  name="trophy"></ion-icon>
+            </div>
+            10 km
+          </ion-col>
+          <ion-col  width-33.3 text-center>
+            <div *ngIf="coreInfo?.ranTenKm==null">
+              <ion-icon class="trophy"  name="trophy"></ion-icon>
+            </div>
+            <div *ngIf="coreInfo?.ranTwentyKm==false">
+              <ion-icon class="trophy"  name="trophy"></ion-icon>
+            </div>
+            <div *ngIf="coreInfo?.ranTwentyKm==true">
+              <ion-icon class="trophy-won"  name="trophy"></ion-icon>
+            </div>
+            20 km
+          </ion-col>
+          <ion-col  width-33.3 text-center>
+            <div *ngIf="coreInfo?.ranTenKm==null">
+              <ion-icon class="trophy"  name="trophy"></ion-icon>
+            </div>
+            <div *ngIf="coreInfo?.ranMarathon==false">
+              <ion-icon class="trophy"  name="trophy"></ion-icon>
+            </div>
+            <div *ngIf="coreInfo?.ranMarathon==true">
+              <ion-icon class="trophy-won"  name="trophy"></ion-icon>
+            </div>
+            Marathon
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </div>
+  <div *ngIf="coreInfo!=null">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col  width-33.3 text-center>
+            <div class="user-data">
+              {{coreInfo?.nrOfCompetitionsWon}}
+            </div>
+            Competitions won
+            <div class="user-data">
+              {{coreInfo?.nrOfCompetitionsDone}}
+            </div>
+            Competitions done
+          </ion-col>
+          <ion-col  width-33.3 text-center>
+            <div class="user-data">
+              {{coreInfo?.totalDistance}} km
+            </div>
+            Total distance
+            <div class="user-data">
+              {{coreInfo?.avgDistance}} km
+            </div>
+            Average distance
+            <div class="user-data">
+              {{coreInfo?.maxDistance}} km
+            </div>
+            Maximum distance
+          </ion-col>
+          <ion-col  width-33.3 text-center>
+            <div class="user-data">
+              {{coreInfo?.avgSpeed}}
+            </div>
+            Average speed
+            <div class="user-data">
+              {{coreInfo?.maxSpeed}} km/h
+            </div>
+            Maximum speed
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </div>
+  </div>
 </ion-content>
 <ion-footer>
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block ngdisabled="true" (click)="onClickUpdateUser(user)">Save changes</button>
+        <button *ngIf="coreInfo!=null" ion-button block ngdisabled="true" (click)="onClickUpdateUser(user)">Save changes</button>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-footer>
+

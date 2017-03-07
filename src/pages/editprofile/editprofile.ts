@@ -3,6 +3,8 @@ import {NavController, AlertController} from "ionic-angular";
 import {User} from "../../model/user";
 import {UserService} from "../../services/auth/user.service";
 import {AuthService} from "../../services/auth/auth.service";
+import {FriendProfilePageService} from "../../services/friendsprofile/friend-profilepage.service";
+import {CoreInfo} from "../../model/coreinfo";
 /**
  * Created by stijnergeerts on 21/02/17.
  */
@@ -10,17 +12,23 @@ import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'page-editprofile',
+  providers: [FriendProfilePageService],
   templateUrl: 'editprofile.html'
 })
 export class EditprofilePage {
   private user;
+  private coreInfo;
   private errorMsg;
   private available: boolean;
 
 
   ngOnInit(): void {
-    this.user = this.userService.getUser().subscribe((user: User) => this.user = user);
+    this.user = this.userService.getUser().subscribe((user: User) =>{
+      this.user = user;
+      this.coreInfo = new CoreInfo(this.user);
+    }), err => console.error(err);
     this.onUsernameChange(this.user.username);
+
 
   }
 
@@ -83,7 +91,7 @@ export class EditprofilePage {
   }
 
 
-  constructor(public navCtrl: NavController, private userService: UserService, private alerCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private userService: UserService, private friendProfilePageService: FriendProfilePageService, private alerCtrl: AlertController) {
 
   }
 
