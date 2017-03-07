@@ -18,6 +18,7 @@ export class FriendsRequestsPage implements OnInit {
   private potentialFriends: User[] = [];
   private friends: User[] = [];
   private requests: User[] = [];
+  private requestsLoaded:boolean = false;
   queryString: string = "";
   queryStringMyFriends: string = "";
   addFriendsPage: any = AddFriendsPage;
@@ -85,6 +86,7 @@ export class FriendsRequestsPage implements OnInit {
     this.friendsService.getFriendrequests().subscribe(
       (friends) => {
         this.requests = friends;
+        this.requestsLoaded=true;
       },
       error => {
         console.log(error as string);

@@ -1,5 +1,12 @@
 page-friendrequests{
  .list-avatar-page-requests{
+   .spinner{
+     margin: auto;
+     position: absolute;
+     top: 0; left: 0; bottom: 0; right: 0;
+     height: 85px;
+     text-align: center;
+   }
    .accept{
      color: limegreen;
    }
@@ -8,9 +15,9 @@ page-friendrequests{
    }
    .no-data{
      text-align: center;
-     right: 20%;
-     left:20%;
-     top: 10%;
+     margin-right: 5%;
+     margin-left:5%;
+     margin-top: 10%;
    }
  }
 }

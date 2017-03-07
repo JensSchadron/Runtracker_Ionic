@@ -4,9 +4,12 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="list-avatar-page-requests">
-
+  <div class="spinner" *ngIf="!requestsLoaded">
+    <ion-spinner></ion-spinner>
+  </div>
+<div *ngIf="requestsLoaded">
   <div class="no-data" *ngIf="requests.length === 0">
-    <h5>No friendship requests at the moment. You can do friendship requests yourself by clicking the <strong>
+    <h5 class="no-data">No friendship requests at the moment. You can do friendship requests yourself by clicking the <strong>
       "Search friends" </strong>
       tab or come back later.</h5>
   </div>
@@ -29,6 +32,7 @@
     </div>
 
   </ion-list>
+</div>
 </ion-content>
 <ion-footer>
   <ion-grid>
