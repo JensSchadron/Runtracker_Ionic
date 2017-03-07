@@ -10,7 +10,7 @@ export class AuthHttpImpl {
 
   getAuthHttp(): AuthHttp {
     let tokenValue = localStorage.getItem('id_token');
-    console.log('token found in localStorage: ' + tokenValue);
+    // console.log('token found in localStorage: ' + tokenValue);
     if (tokenValue.length > 0) {
       return new AuthHttp(new AuthConfig({
         globalHeaders: [
