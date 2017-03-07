@@ -29,8 +29,10 @@ export class AddFriendsPage implements OnInit{
   }
 
   onClickAddFriend(username): void {
-    this.FriendsService.addFriend(username).subscribe(val => console.log(val), err => console.log(err));
-    setTimeout(() => this.ngOnInit(), 2000);
+    this.FriendsService.addFriend(username).subscribe(val => {
+      console.log(val);
+      this.ngOnInit();
+    }, err => console.log(err));
   }
 
 
