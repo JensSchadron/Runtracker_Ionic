@@ -37,7 +37,13 @@ page-editprofile{
       font-size: 2em;
     }
     .user-data{
-      font-size: 2em;
+      font-size: 2rem;
+      margin-top:1rem;
+      color:#777777;
+      font-weight: normal;
+    }
+    ion-col{
+      font-weight: 500;
     }
   }
 

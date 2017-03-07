@@ -94,39 +94,51 @@
     <ion-card>
       <ion-grid>
         <ion-row>
-          <ion-col  width-33.3 text-center>
+          <ion-col width-50 text-center>
             <div class="user-data">
               {{coreInfo?.nrOfCompetitionsWon}}
             </div>
             Competitions won
+          </ion-col>
+          <ion-col width-50 text-center>
             <div class="user-data">
               {{coreInfo?.nrOfCompetitionsDone}}
             </div>
             Competitions done
           </ion-col>
-          <ion-col  width-33.3 text-center>
+        </ion-row>
+        <ion-row>
+          <ion-col width-50 text-center>
             <div class="user-data">
-              {{coreInfo?.totalDistance}} km
+              {{coreInfo?.maxSpeed | number : '1.0-2'}} km/h
             </div>
-            Total distance
+            Maximum speed
+          </ion-col>
+          <ion-col width-50 text-center>
             <div class="user-data">
-              {{coreInfo?.avgDistance}} km
+              {{coreInfo?.avgSpeed | number : '1.0-2'}} km/h
             </div>
-            Average distance
+            Average speed
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col width-33 text-center>
             <div class="user-data">
-              {{coreInfo?.maxDistance}} km
+              {{coreInfo?.maxDistance | number : '1.0-2'}} km
             </div>
             Maximum distance
           </ion-col>
-          <ion-col  width-33.3 text-center>
+          <ion-col width-33 text-center>
             <div class="user-data">
-              {{coreInfo?.avgSpeed}}
+              {{coreInfo?.avgDistance | number : '1.0-2'}} km
             </div>
-            Average speed
+            Average distance
+          </ion-col>
+          <ion-col width-33 text-center>
             <div class="user-data">
-              {{coreInfo?.maxSpeed}} km/h
+              {{coreInfo?.totalDistance | number : '1.0-2'}} km
             </div>
-            Maximum speed
+            Total distance
           </ion-col>
         </ion-row>
       </ion-grid>
