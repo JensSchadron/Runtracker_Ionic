@@ -20,10 +20,10 @@ export class SolotrackingPage {
   timerDisplay: any = "00:00:00";
 
   distance: number = 0;
-  distanceDisplay: string = "0";
+  distanceDisplay: string = "0.000";
   speedStamps: number[] = [];
   avgSpeed: number = 0;
-  avgSpeedDisplay: string = "0";
+  avgSpeedDisplay: string = "0.00";
   avgPace: number = 0;
   avgPaceDisplay: string = "00:00:00";
 
@@ -157,12 +157,12 @@ export class SolotrackingPage {
     this.timerSubscription.unsubscribe();
     this.locationSubscription.unsubscribe();
     let newTracking = this.createTracking();
-    this.trackingService.createTracking(newTracking);
+    this.trackingService.saveTracking(newTracking).subscribe(() => { });
 
     let params = { tracking: newTracking };
     this.navCtrl.setRoot(TrackingResultPage, params);
 
-    console.log("Stopped isTracking!");
+    console.log("Stopped Tracking!");
   }
 
   private createTracking(): Tracking {
@@ -175,7 +175,7 @@ export class SolotrackingPage {
     tracking.totalDistance = this.distance;
     tracking.totalDuration = this.timeInSeconds * 1000; // milliseconds
 
-    alert(JSON.stringify(tracking, null, 2));
+    //alert(JSON.stringify(tracking, null, 2));
 
     return tracking;
   }
