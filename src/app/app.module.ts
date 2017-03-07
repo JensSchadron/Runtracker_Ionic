@@ -41,6 +41,7 @@ import { MQTTService }              from "../services/mqtt/mqtt.service";
 import { ChallengeFriendsPage }     from "../pages/challenge-friends/challenge-friends";
 import { ChallengeDistancePage }    from "../pages/challenge-distance/challenge-distance";
 import { ChallengeLoadPage }        from "../pages/challenge-load/challenge-load";
+import {SearchPipe} from "../pages/friends/searchpipe";
 // import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-tracking";
 
 @NgModule({
@@ -64,7 +65,8 @@ import { ChallengeLoadPage }        from "../pages/challenge-load/challenge-load
     ChallengeDistancePage,
     ChallengeLoadPage,
     // ChallengeTrackingPage,
-    RankingPage
+    RankingPage,
+    SearchPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp)
