@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 import {User} from "../../model/user";
 import {Observable} from "rxjs/Observable";
-import * as myGlobals from "../../assets/globals";
+import {BACKEND_BASEURL} from "../../assets/globals";
 import {AuthHttpImpl} from "./auth-http-impl";
 
 @Injectable()
@@ -11,7 +11,7 @@ export class UserService {
   constructor(private authHttp: AuthHttpImpl) {}
 
   getUser(): Observable<User|any> {
-    return this.authHttp.getAuthHttp().get(myGlobals.BACKEND_BASEURL + '/api/users/getUser')
+    return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + '/api/users/getUser')
       .map((res: Response) => res.json())
       .catch(err => this.handleUserError(err));
   }
@@ -79,7 +79,7 @@ export class UserService {
       "avatar": "cool-guy"
     };
     console.log("Creating user");
-    return this.authHttp.getAuthHttp().post(myGlobals.BACKEND_BASEURL + '/api/users/createUser', newUser)
+    return this.authHttp.getAuthHttp().post(BACKEND_BASEURL + '/api/users/createUser', newUser)
       .map((res: Response) => {
         console.log("User hopefully created: " + res);
         return newUser;
@@ -88,7 +88,7 @@ export class UserService {
   }
 
   setOnline(): Observable<any> {
-    return this.authHttp.getAuthHttp().put(myGlobals.BACKEND_BASEURL + '/api/users/setOnline', "{}")
+    return this.authHttp.getAuthHttp().put(BACKEND_BASEURL + '/api/users/setOnline', "{}")
       .map((res: Response) => {
         console.log(res);
       })
@@ -96,7 +96,7 @@ export class UserService {
   }
 
   setOffline(): Observable<any> {
-    return this.authHttp.getAuthHttp().put(myGlobals.BACKEND_BASEURL + '/api/users/setOffline', "{}")
+    return this.authHttp.getAuthHttp().put(BACKEND_BASEURL + '/api/users/setOffline', "{}")
       .map((res: Response) => {
         console.log(res);
       })
@@ -104,13 +104,13 @@ export class UserService {
   }
 
   updateUser(user : User): Observable<User>{
-    return this.authHttp.getAuthHttp().put(myGlobals.BACKEND_BASEURL + '/api/users/updateUser', user)
+    return this.authHttp.getAuthHttp().put(BACKEND_BASEURL + '/api/users/updateUser', user)
       .map((res:Response) => res.json())
       .catch(this.handleError);
   }
 
   checkUsernameAvailable(username: string): Observable<boolean>{
-    return this.authHttp.getAuthHttp().get(myGlobals.BACKEND_BASEURL + '/api/users/checkUsername/' + username)
+    return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + '/api/users/checkUsername/' + username)
       .map((res:Response) => res.json())
       .catch(this.handleError);
   }

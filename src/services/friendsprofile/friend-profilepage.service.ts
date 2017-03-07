@@ -3,25 +3,17 @@ import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {User} from "../../model/user";
 import {Observable} from "rxjs/Observable";
 import {AuthService} from '../auth/auth.service';
-import * as myGlobals from "../../assets/globals";
+import {BACKEND_BASEURL} from "../../assets/globals";
+import {AuthHttpImpl} from "../auth/auth-http-impl";
 
 @Injectable()
 export class FriendProfilePageService {
-  private authHeader;
-  private jwt = localStorage.getItem('id_token');
-
-  constructor(private http: Http, private auth: AuthService) {
-    this.authHeader = new Headers();
-    if(this.jwt) {
-      this.authHeader.append('token', this.jwt);
-    }
+  constructor(private authHttp: AuthHttpImpl, private auth: AuthService) {
   }
 
 
   getUser(username): Observable<User> {
-    return this.http.get(myGlobals.BACKEND_BASEURL + '/api/users/getUser/' + username,{
-        headers: this.authHeader
-      })
+    return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + '/api/users/getUser/' + username)
       .map((res: Response) =>  res.json())
       .catch(this.handleErrorObservable);
   }

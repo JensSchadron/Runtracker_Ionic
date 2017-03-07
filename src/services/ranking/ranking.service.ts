@@ -2,31 +2,28 @@ import {Http,Headers,Response} from '@angular/http';
 import {User} from "../../model/user";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from '@angular/core';
-import * as myGlobals from "../../assets/globals";
+import {BACKEND_BASEURL} from "../../assets/globals";
+import {AuthHttpImpl} from "../auth/auth-http-impl";
 
 @Injectable()
 export class RankingService {
   private jwt = localStorage.getItem('id_token');
   private authHeader = new Headers();
 
-  constructor(private http:Http){
+  constructor(private authHttp:AuthHttpImpl){
     if(this.jwt) {
       this.authHeader.append('token', this.jwt);
     }
   }
 
   getFriends(sortoption): Observable<User[]>{
-    return this.http.get(myGlobals.BACKEND_BASEURL + '/api/users/getAllFriendsSorted/' + sortoption, {
-        headers: this.authHeader
-      })
+    return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + '/api/users/getAllFriendsSorted/' + sortoption)
       .map((res: Response) => res.json())
       .catch(this.handleErrorObservable);
   }
 
   getUsers(sortoption): Observable<User[]>{
-    return this.http.get(myGlobals.BACKEND_BASEURL + '/api/users/getAllUsersSorted/' + sortoption, {
-        headers: this.authHeader
-      })
+    return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + '/api/users/getAllUsersSorted/' + sortoption)
       .map((res: Response) => res.json())
       .catch(this.handleErrorObservable);
   }

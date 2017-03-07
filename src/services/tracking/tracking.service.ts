@@ -2,7 +2,7 @@ import { Injectable }   from "@angular/core";
 import { Response }     from '@angular/http';
 import { Observable }   from "rxjs/Observable";
 import { Tracking }     from "../../model/tracking";
-import * as myGlobals   from "../../assets/globals";
+import {BACKEND_BASEURL}   from "../../assets/globals";
 import { AuthHttpImpl } from "../auth/auth-http-impl";
 
 @Injectable()
@@ -15,7 +15,7 @@ export class TrackingService {
   public saveTracking(tracking: Tracking): Observable<any> {
     console.log("Saving tracking...");
 
-    return this.authHttp.getAuthHttp().post(myGlobals.BACKEND_BASEURL + "/api/trackings/createTracking", tracking)
+    return this.authHttp.getAuthHttp().post(BACKEND_BASEURL + "/api/trackings/createTracking", tracking)
       .map((res: Response) => {
         console.log("Create tracking status: " + res.status);
       })

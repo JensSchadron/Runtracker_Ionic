@@ -1,51 +1,38 @@
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import {Injectable} from '@angular/core';
-import * as myGlobals from "../../assets/globals";
+import {BACKEND_BASEURL} from "../../assets/globals";
 import {User} from "../../model/user";
+import {AuthHttpImpl} from "../auth/auth-http-impl";
 
 @Injectable()
 export class FriendsService {
-  private jwt = localStorage.getItem('id_token');
-  private authHeader = new Headers();
-  private authHeaderTwo = new Headers();
+  constructor(private authHttp: AuthHttpImpl) {
 
-  constructor(private http: Http) {
-    if (this.jwt) {
-      this.authHeader.append('token', this.jwt);
-      this.authHeaderTwo.append('token', this.jwt);
-      this.authHeaderTwo.append('Content-Type', 'application/json');
-    }
   }
 
   getPotentialFriends(): Observable<User[]> {
-    return this.http.get(myGlobals.BACKEND_BASEURL + '/api/users/getAllPotentialFriends', {
-      headers: this.authHeader
-    })
+    return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + '/api/users/getAllPotentialFriends')
       .map((res: Response) => res.json())
       .catch(this.handleErrorObservable);
   }
 
   getFriends(): Observable<User[]> {
-    return this.http.get(myGlobals.BACKEND_BASEURL + '/api/users/getAllFriends', {
-      headers: this.authHeader
-    })
+    return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + '/api/users/getAllFriends')
       .map((res: Response) => res.json())
       .catch(this.handleErrorObservable);
   }
 
   getFriendrequests(): Observable<User[]> {
-    return this.http.get(myGlobals.BACKEND_BASEURL + '/api/users/getFriendrequests', {
-      headers: this.authHeader
-    })
+    return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + '/api/users/getFriendrequests')
       .map((res: Response) => res.json())
       .catch(this.handleErrorObservable);
   }
 
   addFriend(username): Observable<any> {
-    let options = new RequestOptions({headers: this.authHeaderTwo});
+    // let options = new RequestOptions({headers: this.authHeaderTwo});
 
-    return this.http.put(myGlobals.BACKEND_BASEURL + '/api/users/addFriend/' + username, "", options)
+    return this.authHttp.getAuthHttp().put(BACKEND_BASEURL + '/api/users/addFriend/' + username, "")
       .map((res: Response) => {
           res.json();
           console.log(res);
@@ -55,9 +42,9 @@ export class FriendsService {
   }
 
   acceptFriend(username): Observable<any> {
-    let options = new RequestOptions({headers: this.authHeaderTwo});
+    // let options = new RequestOptions({headers: this.authHeaderTwo});
 
-    return this.http.put(myGlobals.BACKEND_BASEURL + '/api/users/acceptFriend/' + username, "", options)
+    return this.authHttp.getAuthHttp().put(BACKEND_BASEURL + '/api/users/acceptFriend/' + username, "")
       .map((res: Response) => {
           res.json();
           console.log(res);
@@ -67,9 +54,7 @@ export class FriendsService {
   }
 
   deleteFriend(username): Observable<any> {
-    return this.http.delete(myGlobals.BACKEND_BASEURL + '/api/users/removeFriend/' + username, {
-      headers: this.authHeader
-    })
+    return this.authHttp.getAuthHttp().delete(BACKEND_BASEURL + '/api/users/removeFriend/' + username)
       .map((res: Response) => {
           res.json();
         }
