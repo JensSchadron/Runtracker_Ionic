@@ -17,7 +17,7 @@
         <ion-row>
           <ion-col text-center class="border-bottom padding-bottom">
             <ion-avatar>
-              <img class="avatar" src="../../assets/img/avatars/{{userFromParam.avatar}}.png">
+              <img class="avatar" [src]="'assets/img/avatars/' + userFromParam.avatar + '.png'">
             </ion-avatar>
           </ion-col>
         </ion-row>

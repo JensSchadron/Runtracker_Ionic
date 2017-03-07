@@ -8,14 +8,16 @@
   <ion-list>
     <ion-list-header>Online</ion-list-header>
     <div *ngFor="let friend of friends" (click)="onFriendClick(friend)">
-    <ion-item *ngIf="friend.online" >
-      <ion-avatar item-left>
-        <img src="../../assets/img/avatars/{{friend.avatar}}.png">
-      </ion-avatar>
-      <h2>{{friend.firstname}} {{friend.lastname}}</h2>
-      <p>{{friend.username}}</p>
-      <ion-note item-right><ion-icon class="is-online" name="radio-button-on"></ion-icon></ion-note>
-    </ion-item>
+      <ion-item *ngIf="friend.online">
+        <ion-avatar item-left>
+          <img src="assets/img/avatars/{{friend.avatar}}.png">
+        </ion-avatar>
+        <h2>{{friend.firstname}} {{friend.lastname}}</h2>
+        <p>{{friend.username}}</p>
+        <ion-note item-right>
+          <ion-icon class="is-online" name="radio-button-on"></ion-icon>
+        </ion-note>
+      </ion-item>
     </div>
 
   </ion-list>
@@ -26,11 +28,13 @@
     <div *ngFor="let friend of friends">
       <ion-item *ngIf="!friend.online" (click)="onFriendClick(friend)">
         <ion-avatar item-left>
-          <img src="../../assets/img/avatars/{{friend.avatar}}.png">
+          <img [src]="'assets/img/avatars/' + friend.avatar + '.png'">
         </ion-avatar>
         <h2>{{friend.firstname}} {{friend.lastname}}</h2>
         <p>{{friend.username}}</p>
-        <ion-note item-right><ion-icon class="is-offline" name="radio-button-on"></ion-icon></ion-note>
+        <ion-note item-right>
+          <ion-icon class="is-offline" name="radio-button-on"></ion-icon>
+        </ion-note>
       </ion-item>
     </div>
   </ion-list>

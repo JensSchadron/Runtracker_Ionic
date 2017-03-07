@@ -17,7 +17,7 @@
     <div *ngFor="let request of requests">
       <ion-item>
         <ion-avatar item-left>
-          <img src="./../assets/img/avatars/{{request.avatar}}.png">
+          <img [src]="'assets/img/avatars/' + request.avatar + '.png'">
         </ion-avatar>
         <h2>{{request.firstname}} {{request.lastname}}</h2>
         <p>{{request.username}}</p>
