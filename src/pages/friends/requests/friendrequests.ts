@@ -3,7 +3,7 @@ import {App, Events} from 'ionic-angular';
 import {NavController}  from 'ionic-angular';
 import {FriendsService} from '../../../services/friends/friends.service';
 import {User} from "../../../model/user";
-import {AddFriendsPage} from "../addfriends/addfriends"
+import {AddFriendsPage} from "../add-friends/addfriends"
 
 
 @Component({
