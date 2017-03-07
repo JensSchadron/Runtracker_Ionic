@@ -40,7 +40,6 @@ export class FriendsProfilePage implements OnInit {
   onClickRemoveFriend(username): void {
     this.friendsService.deleteFriend(username).subscribe(val => {
       console.log(val);
-      this.appCtrl.getRootNav().push(this.tabsPage);
     }, err => console.log(err));
   }
 

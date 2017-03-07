@@ -34,7 +34,7 @@ export class FriendsPage implements OnInit {
       this.init();
     }, err => console.log(err));
   }
-  
+
   onClickAcceptFriend(username): void {
     this.friendsService.acceptFriend(username).subscribe(val => {
       console.log(val);
