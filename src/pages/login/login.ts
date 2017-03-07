@@ -18,7 +18,6 @@ export class LoginPage {
   }
 
   loginWithErrorHandling(mailaddress, password) {
-    console.log(mailaddress + ' - ' + password);
     if (LoginPage.allFieldsFilledIn(mailaddress, password)) {
       this.auth.login(mailaddress, password).subscribe(data => {
         console.log('login success');
