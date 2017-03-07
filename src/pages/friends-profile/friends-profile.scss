@@ -8,20 +8,29 @@ page-friends-profile{
       border-radius: 50%;
     }
     .full-name{
-      font-size: 2em;
+      font-size: 2rem;
+    }
+    .username{
+      font-size: 1.5rem;
     }
     .user-info{
       margin-top: 5px;
     }
     .trophy{
-      font-size: 2em;
+      font-size: 2rem;
     }
     .trophy-won{
       color: gold;
-      font-size: 2em;
+      font-size: 2rem;
     }
     .user-data{
-      font-size: 2em;
+      font-size: 2rem;
+      margin-top:1rem;
+      color:#777777;
+      font-weight: normal;
+    }
+    ion-col{
+      font-weight: 500;
     }
   }
 
