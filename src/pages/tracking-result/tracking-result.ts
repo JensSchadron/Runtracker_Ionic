@@ -27,8 +27,8 @@ export class TrackingResultPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public coordinateService: CoordinateService) {
     this.trackingResult = this.navParams.get("tracking");
-    this.durationDisplay = this.coordinateService.getSecondsAsDigitalClock(this.trackingResult.totalDuration / 1000); // milli to seconds
-    this.distanceDisplay = +this.trackingResult.totalDistance.toFixed(3);
+    this.durationDisplay = this.coordinateService.getSecondsAsDigitalClock(this.trackingResult.totalDuration);
+    this.distanceDisplay = +(this.trackingResult.totalDistance / 1000).toFixed(3);
     this.avgPaceDisplay = this.coordinateService.getSecondsAsDigitalClock(this.trackingResult.avgPace);
     this.avgSpeedDisplay = +this.trackingResult.avgSpeed.toFixed(2);
     this.maxSpeedDisplay = +this.trackingResult.maxSpeed.toFixed(2);

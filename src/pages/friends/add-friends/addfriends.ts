@@ -1,7 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {AlertController} from 'ionic-angular';
-import { Platform } from 'ionic-angular';
-import { NavController }  from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {Events} from 'ionic-angular';
+import {Platform} from 'ionic-angular';
+import {NavController}  from 'ionic-angular';
 import {FriendsService} from '../../../services/friends/friends.service';
 import {User} from "../../../model/user";
 
@@ -13,7 +13,7 @@ import {User} from "../../../model/user";
     providers: [FriendsService]
   }
 )
-export class AddFriendsPage implements OnInit{
+export class AddFriendsPage implements OnInit {
   private potentialFriends: User[] = [];
   queryString: string = "";
 
@@ -29,15 +29,13 @@ export class AddFriendsPage implements OnInit{
   }
 
   onClickAddFriend(username): void {
-    this.FriendsService.addFriend(username).subscribe(val => console.log(val), err => console.log(err));
-    setTimeout(() => this.ngOnInit(), 2000);
+    this.FriendsService.addFriend(username).subscribe(val => {
+      console.log(val);
+      this.ngOnInit();
+    }, err => console.log(err));
   }
 
 
   constructor(private FriendsService: FriendsService, public NavCtrl: NavController) {
-
   }
-
 }
-
-

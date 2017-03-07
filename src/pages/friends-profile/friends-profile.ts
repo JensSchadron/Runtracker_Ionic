@@ -7,6 +7,10 @@ import {AuthService} from '../../services/auth/auth.service';
 import {FriendProfilePageService} from '../../services/friendsprofile/friend-profilepage.service'
 import {User} from "../../model/user";
 import {CoreInfo} from "../../model/coreinfo";
+import {FriendsService} from "../../services/friends/friends.service";
+import {FriendsPage} from "../friends/friends";
+import {App} from 'ionic-angular';
+import {TabsPage} from "../friends/tabs/tabs";
 
 
 /**
@@ -15,12 +19,13 @@ import {CoreInfo} from "../../model/coreinfo";
 @Component({
   selector: 'page-friends-profile',
   templateUrl: 'friends-profile.html',
-  providers: [FriendProfilePageService]
+  providers: [FriendProfilePageService,FriendsService]
 })
 export class FriendsProfilePage implements OnInit {
-  private userFromParam
+  private userFromParam;
   private user = new User("","","","");
   private coreInfo;
+  private tabsPage = TabsPage;
 
   ngOnInit(): void {
     this.userFromParam=this.navParams.data;
@@ -32,7 +37,15 @@ export class FriendsProfilePage implements OnInit {
 
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private userService: UserService, private friendProfilePageService: FriendProfilePageService, private auth: AuthService) {
+  onClickRemoveFriend(username): void {
+    this.friendsService.deleteFriend(username).subscribe(val => {
+      console.log(val);
+      this.appCtrl.getRootNav().push(this.tabsPage);
+    }, err => console.log(err));
+  }
+
+  constructor(public appCtrl: App,public navCtrl: NavController, public navParams: NavParams,
+              private friendProfilePageService: FriendProfilePageService, private friendsService: FriendsService) {
 
   }
 

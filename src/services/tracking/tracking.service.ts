@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {Http, Headers, Response, RequestOptions} from '@angular/http';
-import {Observable} from "rxjs/Observable";
-import {Tracking} from "../../model/tracking";
-import * as myGlobals from "../../assets/globals";
-import {AuthHttpImpl} from "../auth/auth-http-impl";
+import { Injectable }   from "@angular/core";
+import { Response }     from '@angular/http';
+import { Observable }   from "rxjs/Observable";
+import { Tracking }     from "../../model/tracking";
+import * as myGlobals   from "../../assets/globals";
+import { AuthHttpImpl } from "../auth/auth-http-impl";
 
 @Injectable()
 export class TrackingService {
@@ -12,14 +12,14 @@ export class TrackingService {
 
   }
 
-  public createTracking(tracking: Tracking): Observable<Tracking|any> {
-    console.log("Start persisting tracking...");
-    return this.authHttp.getAuthHttp().post(myGlobals.BACKEND_BASEURL + "/api/trackings/createTracking", JSON.stringify(tracking))
+  public saveTracking(tracking: Tracking): Observable<any> {
+    console.log("Saving tracking...");
+
+    return this.authHttp.getAuthHttp().post(myGlobals.BACKEND_BASEURL + "/api/trackings/createTracking", tracking)
       .map((res: Response) => {
-        alert("Tracking persisted!");
-        console.log("Tracking persisted!")
+        console.log("Create tracking status: " + res.status);
       })
-      .catch(err => this.handleErrorObservable(err));
+      .catch(error => this.handleErrorObservable(error));
   }
 
   private handleErrorObservable(error: Response | any): Observable<any> {

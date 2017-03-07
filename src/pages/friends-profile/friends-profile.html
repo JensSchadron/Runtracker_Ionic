@@ -17,7 +17,7 @@
         <ion-row>
           <ion-col text-center class="border-bottom padding-bottom">
             <ion-avatar>
-              <img class="avatar" src="../../assets/img/avatars/{{userFromParam.avatar}}.png">
+              <img class="avatar" [src]="'assets/img/avatars/' + userFromParam.avatar + '.png'">
             </ion-avatar>
           </ion-col>
         </ion-row>
@@ -54,39 +54,39 @@
     <ion-card>
       <ion-grid>
         <ion-row>
-          <ion-col  width-33.3 text-center>
+          <ion-col width-33.3 text-center>
             <div *ngIf="coreInfo?.ranTenKm==null">
-              <ion-icon class="trophy"  name="trophy"></ion-icon>
+              <ion-icon class="trophy" name="trophy"></ion-icon>
             </div>
             <div *ngIf="coreInfo?.ranTenKm==false">
-              <ion-icon class="trophy"  name="trophy"></ion-icon>
+              <ion-icon class="trophy" name="trophy"></ion-icon>
             </div>
             <div *ngIf="coreInfo?.ranTenKm==true">
-              <ion-icon class="trophy-won"  name="trophy"></ion-icon>
+              <ion-icon class="trophy-won" name="trophy"></ion-icon>
             </div>
             10 km
           </ion-col>
-          <ion-col  width-33.3 text-center>
+          <ion-col width-33.3 text-center>
             <div *ngIf="coreInfo?.ranTenKm==null">
-              <ion-icon class="trophy"  name="trophy"></ion-icon>
+              <ion-icon class="trophy" name="trophy"></ion-icon>
             </div>
             <div *ngIf="coreInfo?.ranTwentyKm==false">
-              <ion-icon class="trophy"  name="trophy"></ion-icon>
+              <ion-icon class="trophy" name="trophy"></ion-icon>
             </div>
             <div *ngIf="coreInfo?.ranTwentyKm==true">
-              <ion-icon class="trophy-won"  name="trophy"></ion-icon>
+              <ion-icon class="trophy-won" name="trophy"></ion-icon>
             </div>
             20 km
           </ion-col>
-          <ion-col  width-33.3 text-center>
+          <ion-col width-33.3 text-center>
             <div *ngIf="coreInfo?.ranTenKm==null">
-              <ion-icon class="trophy"  name="trophy"></ion-icon>
+              <ion-icon class="trophy" name="trophy"></ion-icon>
             </div>
             <div *ngIf="coreInfo?.ranMarathon==false">
-              <ion-icon class="trophy"  name="trophy"></ion-icon>
+              <ion-icon class="trophy" name="trophy"></ion-icon>
             </div>
             <div *ngIf="coreInfo?.ranMarathon==true">
-              <ion-icon class="trophy-won"  name="trophy"></ion-icon>
+              <ion-icon class="trophy-won" name="trophy"></ion-icon>
             </div>
             Marathon
           </ion-col>
@@ -98,44 +98,57 @@
     <ion-card>
       <ion-grid>
         <ion-row>
-          <ion-col  width-33.3 text-center>
+          <ion-col width-50 text-center>
             <div class="user-data">
               {{coreInfo?.nrOfCompetitionsWon}}
             </div>
             Competitions won
+          </ion-col>
+          <ion-col width-50 text-center>
             <div class="user-data">
               {{coreInfo?.nrOfCompetitionsDone}}
             </div>
             Competitions done
           </ion-col>
-          <ion-col  width-33.3 text-center>
+        </ion-row>
+        <ion-row>
+          <ion-col width-50 text-center>
             <div class="user-data">
-              {{coreInfo?.totalDistance}} km
+              {{coreInfo?.maxSpeed | number : '1.0-2'}} km/h
             </div>
-            Total distance
+            Maximum speed
+          </ion-col>
+          <ion-col width-50 text-center>
             <div class="user-data">
-              {{coreInfo?.avgDistance}} km
+              {{coreInfo?.avgSpeed | number : '1.0-2'}} km/h
             </div>
-            Average distance
+            Average speed
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col width-33 text-center>
             <div class="user-data">
-              {{coreInfo?.maxDistance}} km
+              {{coreInfo?.maxDistance | number : '1.0-2'}} km
             </div>
             Maximum distance
           </ion-col>
-          <ion-col  width-33.3 text-center>
+          <ion-col width-33 text-center>
             <div class="user-data">
-              {{coreInfo?.avgSpeed}}
+              {{coreInfo?.avgDistance | number : '1.0-2'}} km
             </div>
-            Average speed
-            <div class="user-data"> km/h
-              {{coreInfo?.maxSpeed}} km/h
+            Average distance
+          </ion-col>
+          <ion-col width-33 text-center>
+            <div class="user-data">
+              {{coreInfo?.totalDistance | number : '1.0-2'}} km
             </div>
-            Maximum speed
+            Total distance
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
   </div>
+  <button ion-button full (click)="onClickRemoveFriend(userFromParam.username)" color="danger">Delete friend</button>
 </ion-content>
 
 
