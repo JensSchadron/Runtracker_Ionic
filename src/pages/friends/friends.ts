@@ -34,14 +34,7 @@ export class FriendsPage implements OnInit {
       this.init();
     }, err => console.log(err));
   }
-
-  onClickRemoveFriend(username): void {
-    this.friendsService.deleteFriend(username).subscribe(val => {
-      console.log(val);
-      this.init();
-    }, err => console.log(err));
-  }
-
+  
   onClickAcceptFriend(username): void {
     this.friendsService.acceptFriend(username).subscribe(val => {
       console.log(val);
