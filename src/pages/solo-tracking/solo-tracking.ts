@@ -172,10 +172,10 @@ export class SolotrackingPage {
     tracking.competition   = null;
     tracking.coordinates   = this.coordinates;
     tracking.maxSpeed      = Math.max(...this.speedStamps);
-    tracking.totalDistance = this.distance;
-    tracking.totalDuration = this.timeInSeconds * 1000; // milliseconds
+    tracking.totalDistance = this.distance * 1000;
+    tracking.totalDuration = this.timeInSeconds;
 
-    //alert(JSON.stringify(tracking, null, 2));
+    alert(JSON.stringify(tracking, null, 2));
 
     return tracking;
   }
