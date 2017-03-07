@@ -14,7 +14,7 @@
     <div *ngFor="let friend of friends | SearchPipe:queryStringMyFriends" (click)="onFriendClick(friend)">
       <ion-item *ngIf="friend.online">
         <ion-avatar item-left>
-          <img src="assets/img/avatars/{{friend.avatar}}.png">
+          <img [src]="'assets/img/avatars/' + friend.avatar + '.png'">
         </ion-avatar>
         <h2>{{friend.firstname}} {{friend.lastname}}</h2>
         <p>{{friend.username}}</p>

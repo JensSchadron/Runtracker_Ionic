@@ -11,7 +11,7 @@
   </div>
   <div *ngIf="coreInfo!=null">
   <ion-avatar>
-    <img class="avatar" src="../../assets/img/avatars/{{user.avatar}}.png">
+    <img class="avatar" [src]="'assets/img/avatars/' + user.avatar + '.png'">
   </ion-avatar>
   <ion-card>
     <ion-card-title>Personal info</ion-card-title>
