@@ -1,23 +1,31 @@
-import {Component, Inject} from '@angular/core';
-import {AlertController} from 'ionic-angular';
-import {AuthService} from '../../services/auth/auth.service';
+import { Component } from '@angular/core';
+import { AlertController, LoadingController } from 'ionic-angular';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
-  templateUrl: 'login.html',
+  selector: 'page-login',
+  templateUrl: 'login.html'
 })
+
 export class LoginPage {
   loginOrSignUp: string = "login";
 
-  // We need to inject AuthService so that we can
-  // use it in the view
-  constructor( private auth: AuthService, public alertCtrl: AlertController) {
+  // We need to inject AuthService so that we can use it in the view
+  constructor(private auth: AuthService, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+
   }
 
   static allFieldsFilledIn(mailaddress, password): boolean {
     return !(mailaddress == '' || password == '');
   }
 
-  loginWithErrorHandling(mailaddress, password) {
+  public loginWithErrorHandling(mailaddress, password) {
+    let loading = this.loadingCtrl.create({
+      content: 'Logging in...'
+    });
+
+    loading.present();
+
     if (LoginPage.allFieldsFilledIn(mailaddress, password)) {
       this.auth.login(mailaddress, password).subscribe(data => {
         console.log('login success');
@@ -37,9 +45,17 @@ export class LoginPage {
 
       this.showAlert(alertTitle, alertMessage)
     }
+
+    loading.dismiss();
   }
 
-  signUpWithErrorHandling(mailaddress, password) {
+  public signUpWithErrorHandling(mailaddress, password) {
+    let loading = this.loadingCtrl.create({
+      content: 'Logging in...'
+    });
+
+    loading.present();
+
     if (LoginPage.allFieldsFilledIn(mailaddress, password)) {
       this.auth.signup(mailaddress, password).subscribe(data => {
           let alertTitle = 'Sign up success';
@@ -59,9 +75,11 @@ export class LoginPage {
         }
       );
     }
+
+    loading.dismiss();
   }
 
-  showAlert(alertTitle, alertMessage) {
+  private showAlert(alertTitle, alertMessage) {
     let alert = this.alertCtrl.create({
       title: alertTitle,
       subTitle: alertMessage,

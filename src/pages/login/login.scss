@@ -1,1 +1,69 @@
+.ios {
 
+  page-login {
+
+    ion-segment {
+      padding: 0 27px 20px 27px;
+    }
+
+  }
+
+}
+
+.segment-button {
+  background-color: yellow;
+}
+
+page-login {
+
+  ion-content {
+
+    ion-header {
+      color: white;
+      background-color: white;
+    }
+
+    .fixed-content {
+      background-color: #387ef5;
+    }
+
+    .item-md, .item-ios {
+      padding-left: 0;
+    }
+
+    div.item-inner {
+      padding-right: 0;
+    }
+
+    ion-item-divider {
+      background-color: white;
+      border-bottom: solid 1px darkgray;
+    }
+
+    ion-item-divider ion-label {
+      text-align: center;
+      color: #387ef5;
+    }
+
+    #authGoogle {
+      margin-top: 15px;
+    }
+
+    ion-label, .select-text {
+      padding-left: 15px;
+    }
+
+    ion-input, ion-select, ion-textarea {
+      border: 1px solid #387ef5;
+      border-radius: 10px;
+      background-color: #f2f2f2;
+      padding: 5px 10px;
+    }
+
+    #btn-login, #btn-signup {
+      margin-top: 15px;
+    }
+
+  }
+
+}

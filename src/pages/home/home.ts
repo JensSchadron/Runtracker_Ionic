@@ -22,6 +22,7 @@ import {TransportState} from "../../services/mqtt/transport.service";
   templateUrl: 'home.html',
   providers: [UserService]
 })
+
 export class HomePage implements OnInit{
   private user;
   private competitionsDone;

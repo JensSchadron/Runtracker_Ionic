@@ -2,68 +2,86 @@
   <ion-navbar>
     <ion-title>Login</ion-title>
   </ion-navbar>
-  <ion-segment [(ngModel)]="loginOrSignUp">
-    <ion-segment-button value="login">
-      Login
-    </ion-segment-button>
-    <ion-segment-button value="signUp">
-      Sign up
-    </ion-segment-button>
-  </ion-segment>
+
+  <div>
+    <ion-segment [(ngModel)]="loginOrSignUp">
+      <ion-segment-button value="login">
+        Login
+      </ion-segment-button>
+      <ion-segment-button value="signUp">
+        Sign up
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 </ion-header>
 
+
 <ion-content padding [ngSwitch]="loginOrSignUp">
-  <ion-card *ngSwitchCase="'login'">
-    <ion-card-header>
-      <ion-card-title>Login</ion-card-title>
-    </ion-card-header>
 
-    <ion-card-content>
-      <button id="authGoogle" ion-button icon-left block color="danger" (click)="auth.loginWithGoogle()">
-        <ion-icon name="logo-google"></ion-icon>
-        Login with Google
-      </button>
+  <div *ngSwitchCase="'login'">
 
-      <button id="authFacebook" ion-button icon-left block (click)="auth.loginWithFacebook()">
-        <ion-icon name="logo-facebook"></ion-icon>
-        Login with Facebook
-      </button>
+    <ion-card>
 
-      <ion-item>
-        <ion-label floating>Mailaddress</ion-label>
-        <ion-input id="maillogin" #maillogin type="text"></ion-input>
-      </ion-item>
+      <ion-item-divider color="light">Login with social media</ion-item-divider>
 
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input id="passlogin" #passlogin type="password"></ion-input>
-      </ion-item>
+      <ion-card-content>
 
-      <button id="btn-login" ion-button block (click)="loginWithErrorHandling(maillogin.value, passlogin.value)">
-        Login
-      </button>
-    </ion-card-content>
-  </ion-card>
+        <button id="authGoogle" ion-button icon-left block color="danger" (click)="auth.loginWithGoogle()">
+          <ion-icon name="logo-google"></ion-icon>
+          Login with Google
+        </button>
 
-  <ion-card *ngSwitchCase="'signUp'">
-    <ion-card-header>
-      <ion-card-title>Sign up</ion-card-title>
-    </ion-card-header>
+        <button id="authFacebook" ion-button icon-left block (click)="auth.loginWithFacebook()">
+          <ion-icon name="logo-facebook"></ion-icon>
+          Login with Facebook
+        </button>
 
-    <ion-card-content>
-      <ion-item>
-        <ion-label floating>Mailaddress</ion-label>
-        <ion-input id="mailsignup" #mailsignup type="text"></ion-input>
-      </ion-item>
+      </ion-card-content>
 
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input id="passsignup" #passsingup type="password"></ion-input>
-      </ion-item>
+    </ion-card>
 
-      <button id="btn-signup" ion-button block (click)="signUpWithErrorHandling(mailsignup.value, passsingup.value)">
-        Sign up
-      </button>
-    </ion-card-content>
-  </ion-card>
+    <ion-card>
+      <ion-item-divider color="light">Login with email</ion-item-divider>
+      <ion-card-content>
+        <ion-item>
+          <ion-label color="primary" floating>Mailaddress</ion-label>
+          <ion-input id="maillogin" #maillogin type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" floating>Password</ion-label>
+          <ion-input id="passlogin" #passlogin type="password"></ion-input>
+        </ion-item>
+
+        <button id="btn-login" ion-button block (click)="loginWithErrorHandling(maillogin.value, passlogin.value)">
+          Login
+        </button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngSwitchCase="'signUp'">
+
+    <ion-card>
+      <ion-item-divider color="light">Sign up with email</ion-item-divider>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Mailaddress</ion-label>
+          <ion-input id="mailsignup" #mailsignup type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input id="passsignup" #passsingup type="password"></ion-input>
+        </ion-item>
+
+        <button id="btn-signup" ion-button block (click)="signUpWithErrorHandling(mailsignup.value, passsingup.value)">
+          Sign up
+        </button>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
 </ion-content>
