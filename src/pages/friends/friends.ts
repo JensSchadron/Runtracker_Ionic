@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {App} from 'ionic-angular';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {App, Events} from 'ionic-angular';
 import {NavController}  from 'ionic-angular';
 import {FriendsService} from '../../services/friends/friends.service';
 import {User} from "../../model/user";
 
 import {FriendsProfilePage} from '../friends-profile/friends-profile'
-
 
 @Component({
     selector: 'page-friends',
@@ -13,7 +12,7 @@ import {FriendsProfilePage} from '../friends-profile/friends-profile'
     providers: [FriendsService]
   }
 )
-export class FriendsPage implements OnInit {
+export class FriendsPage implements OnInit, OnDestroy {
   public pageTitle: string = "Friends";
 
   private potentialFriends: User[] = [];
@@ -27,6 +26,13 @@ export class FriendsPage implements OnInit {
 
 
   ngOnInit(): void {
+    this.events.subscribe('friendrequest:update', () => {
+      this.init();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.events.unsubscribe('friendrequest:update');
   }
 
   onClickAddFriend(username): void {
@@ -78,7 +84,7 @@ export class FriendsPage implements OnInit {
     );
   }
 
-  constructor(private friendsService: FriendsService, public navCtrl: NavController, public appCtrl: App) {
+  constructor(private friendsService: FriendsService, public navCtrl: NavController, public events:Events, public appCtrl: App) {
     this.init();
   }
 }

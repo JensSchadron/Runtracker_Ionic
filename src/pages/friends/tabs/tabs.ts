@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 
-import {FriendsPage} from '../../friends/friends';
+import {FriendsPage} from '../friends';
 import {FriendsRequestsPage} from '../requests/friendrequests';
 import {FriendsService} from '../../../services/friends/friends.service';
 import {User} from "../../../model/user";
@@ -10,7 +10,7 @@ import {NavController, Tabs, Events} from "ionic-angular";
   templateUrl: 'tabs.html',
   providers: [FriendsService]
 })
-export class TabsPage implements OnInit {
+export class TabsPage implements OnInit, OnDestroy {
   @ViewChild('tabs') tabRef: Tabs;
 
   // this tells the tabs component which Pages
@@ -22,9 +22,12 @@ export class TabsPage implements OnInit {
 
   ngOnInit(): void {
     this.events.subscribe('friendrequest:update', () => {
-      console.log('event received :3');
       this.updateFriendRequests();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.events.unsubscribe('friendrequest:update');
   }
 
   constructor(private FriendsService: FriendsService, public NavCtrl: NavController, public events: Events) {
