@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NavController, NavParams, Events} from "ionic-angular";
+import {NavController, NavParams, Events, AlertController} from "ionic-angular";
 
 
 import {FriendProfilePageService} from '../../services/friendsprofile/friend-profilepage.service'
@@ -32,17 +32,38 @@ export class FriendsProfilePage implements OnInit {
   }
 
   onClickRemoveFriend(username): void {
-    //TODO toevoegen confirmation prompt
-    this.friendsService.deleteFriend(username).subscribe(val => {
-      console.log(val);
-      this.events.publish('friendrequest:update');
-    }, err => console.log(err));
-    this.navCtrl.pop();
+    this.confirmDelete(username);
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
-              private friendProfilePageService: FriendProfilePageService, private friendsService: FriendsService) {
+              private friendProfilePageService: FriendProfilePageService, private friendsService: FriendsService, private alertCtrl:AlertController) {
 
+  }
+
+  private confirmDelete(username) {
+    let alert = this.alertCtrl.create({
+      title: 'Delete friend',
+      message: 'Are you sure you want to delete ' + username + '?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.friendsService.deleteFriend(username).subscribe(val => {
+              this.events.publish('friendrequest:update');
+            }, err => console.log(err));
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }
