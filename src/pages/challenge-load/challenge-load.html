@@ -5,8 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-content padding>
-  <ion-card *ngFor="let challenger of competition?.usersRun"
-            >
+  <ion-card *ngFor="let challenger of competition?.usersRun">
     <ion-card-content>
       <ion-item>
         <ion-avatar item-left>
@@ -19,7 +18,8 @@
           {{challenger.username}}
         </h3>
       </ion-item>
-      <div class="readyIndicator" [ngClass]="{'ready': (challenger.userId === currUser.userId ? userReady : challengerReady)}"> </div>
+      <div class="readyIndicator"
+           [ngClass]="{'ready': (challenger.userId === currUser?.userId ? userReady : challengerReady)}"></div>
     </ion-card-content>
   </ion-card>
 </ion-content>
@@ -28,7 +28,8 @@
   <ion-grid>
     <ion-row>
       <ion-col width-50>
-        <button ion-button [disabled]="(competition?.usersRun === null || competition?.usersRun.length !== 2)" block color="light" outline
+        <button ion-button [disabled]="(competition?.usersRun === null || competition?.usersRun.length !== 2)" block
+                color="light" outline
                 (click)="onReadyToggle()">Ready?
         </button>
       </ion-col>
