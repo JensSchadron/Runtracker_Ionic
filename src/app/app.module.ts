@@ -11,7 +11,7 @@ import { SoloLocationPage }         from "../pages/solo-location/solo-location";
 import { CountdownPage }            from "../pages/countdown/countdown";
 import { SolotrackingPage }         from "../pages/solo-tracking/solo-tracking";
 import { RankingPage }              from "../pages/ranking/ranking";
-import { FriendsPage}               from "../pages/friends/friends";
+import { FriendsPage}               from "../pages/friends/friends-overview/friends";
 import { FriendsRequestsPage}       from "../pages/friends/requests/friendrequests";
 import { AddFriendsPage }           from "../pages/friends/add-friends/addfriends";
 import { TabsPage }                 from "../pages/friends/tabs/tabs";

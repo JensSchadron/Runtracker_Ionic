@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 
-import {FriendsPage} from '../friends';
+import {FriendsPage} from '../friends-overview/friends';
 import {FriendsRequestsPage} from '../requests/friendrequests';
 import {FriendsService} from '../../../services/friends/friends.service';
 import {User} from "../../../model/user";

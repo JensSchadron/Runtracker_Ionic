@@ -1,10 +1,10 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {App, Events} from 'ionic-angular';
 import {NavController}  from 'ionic-angular';
-import {FriendsService} from '../../services/friends/friends.service';
-import {User} from "../../model/user";
 
-import {FriendsProfilePage} from '../friends-profile/friends-profile'
+import {FriendsProfilePage} from '../../friends-profile/friends-profile'
+import {FriendsService} from "../../../services/friends/friends.service";
+import {User} from "../../../model/user";
 
 @Component({
     selector: 'page-friends',

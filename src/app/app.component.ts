@@ -9,7 +9,7 @@ import { FriendsProfilePage }              from '../pages/friends-profile/friend
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 import { RankingPage }              from "../pages/ranking/ranking";
 
-import { FriendsPage }              from "../pages/friends/friends";
+import { FriendsPage }              from "../pages/friends/friends-overview/friends";
 import { TabsPage }                 from "../pages/friends/tabs/tabs";
 
 
