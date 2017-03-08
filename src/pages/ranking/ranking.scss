@@ -1,38 +1,48 @@
-page-ranking{
-  .ranking-header{
-    font-weight:bold;
+page-ranking {
+  .spinner {
+    margin: auto;
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 85px;
+    text-align: center;
+  }
+  .ranking-header {
+    font-weight: bold;
     text-align: left;
   }
   #orderby-select {
-    margin-top: 4rem;
-    margin-bottom: 7rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
     color: grey;
   }
-  .gold{
+  .gold {
     color: #fae157;
     margin-bottom: 2rem;
   }
-  .btn-passive{
-    background-color:white;
-    color:cornflowerblue;
+  .btn-passive {
+    background-color: white;
+    color: cornflowerblue;
     border-radius: 0.5rem;
   }
-  .btn-active{
-    background-color:#e9e9e9;
+  .btn-active {
+    background-color: #e9e9e9;
     border-radius: 0.5rem;
-    color:cornflowerblue;
+    color: cornflowerblue;
   }
-  ion-select{
-    margin:auto;
+  ion-select {
+    margin: auto;
   }
-  #button-world{
+  #button-world {
     margin-left: 10%;
   }
-  #button-friends{
+  #button-friends {
     margin-right: 10%;
   }
-  h1{
-    text-align:center;
+  h1 {
+    text-align: center;
   }
 }
 

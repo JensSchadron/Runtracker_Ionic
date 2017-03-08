@@ -8,14 +8,17 @@
 
 <ion-content class="home-background-page">
 
-
   <h1>Ranking
     <ion-icon name="md-trophy" class="gold"></ion-icon>
   </h1>
 
   <ion-row>
-      <button id="button-world" (click)="getUsers(orderOption)" ion-button full icon-right>World<ion-icon name="md-globe"></ion-icon></button>
-      <button id="button-friends" (click)="getFriends(orderOption)" ion-button full icon-right>Friends<ion-icon name="ios-people"></ion-icon></button>
+    <button id="button-world" (click)="getUsers(orderOption)" ion-button full icon-right>World
+      <ion-icon name="md-globe"></ion-icon>
+    </button>
+    <button id="button-friends" (click)="getFriends(orderOption)" ion-button full icon-right>Friends
+      <ion-icon name="ios-people"></ion-icon>
+    </button>
   </ion-row>
 
   <ion-item id="orderby-select">
@@ -44,8 +47,11 @@
     <ion-col *ngIf="orderOption==8">Total distance</ion-col>
   </ion-row>
 
-  <ion-row class="ranking-rows text-center" *ngFor="let user of users; let i = index">
+  <div class="spinner" *ngIf="users==null">
+    <ion-spinner></ion-spinner>
+  </div>
 
+  <ion-row class="ranking-rows text-center" *ngFor="let user of users; let i = index">
     <!--first-child isn't possible in ionic-->
     <ion-row *ngIf="i==0">
       <ion-row>
@@ -61,7 +67,8 @@
           user.nrOfCompetitionsDone)*100) | number : '1.0-2' }} %</strong>
         </ion-col>
         <ion-col *ngIf="orderOption==7 && user.nrOfCompetitionsDone == 0"><strong>0 %</strong></ion-col>
-        <ion-col *ngIf="orderOption==8"><strong>{{(user.totalDistance / 1000) | number : '1.0-2'}} km</strong></ion-col>
+        <ion-col *ngIf="orderOption==8"><strong>{{(user.totalDistance / 1000) | number : '1.0-2'}} km</strong>
+        </ion-col>
       </ion-row>
     </ion-row>
     <ion-row *ngIf="i!=0">
@@ -80,7 +87,6 @@
       <ion-col *ngIf="orderOption==8">{{(user.totalDistance / 1000) | number : '1.0-2'}} km</ion-col>
     </ion-row>
   </ion-row>
-
 </ion-content>
 
 
