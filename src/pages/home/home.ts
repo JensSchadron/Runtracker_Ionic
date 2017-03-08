@@ -14,9 +14,7 @@ import {AuthHttpImpl} from "../../services/auth/auth-http-impl";
 import {BACKEND_BASEURL} from "../../assets/globals";
 import {Response} from "@angular/http";
 import {ChallengeLoadPage} from "../challenge-load/challenge-load";
-import {MQTTPacketType} from "../../services/mqtt/packet/mqtt.packet";
-import {InviteResponsePacket} from "../../services/mqtt/packet/inviteresponse.packet";
-import {InvitePacket} from "../../services/mqtt/packet/invite.packet";
+import {MQTTPacketType, InvitePacket, InviteResponsePacket} from "../../services/mqtt/packet/mqtt.packet";
 import {TransportState} from "../../services/mqtt/transport.service";
 
 @Component({

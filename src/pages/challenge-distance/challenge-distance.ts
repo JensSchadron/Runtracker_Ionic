@@ -10,8 +10,8 @@ import {MQTTService} from "../../services/mqtt/mqtt.service";
 import {User} from "../../model/user";
 import {UserService} from "../../services/auth/user.service";
 import {Observable} from "rxjs";
-import {InvitePacket} from "../../services/mqtt/packet/invite.packet";
 import {ConfigService} from "../../services/mqtt/config/config.service";
+import {InvitePacket} from "../../services/mqtt/packet/mqtt.packet";
 
 /*
  Generated class for the ChallengeDistance page.

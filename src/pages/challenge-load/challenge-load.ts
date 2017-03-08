@@ -12,9 +12,11 @@ import {User} from "../../model/user";
 import {Competition} from "../../model/competition";
 import {Observable} from "rxjs";
 import {Packet} from 'mqtt';
-import {MQTTPacketType, MQTTPacket} from "../../services/mqtt/packet/mqtt.packet";
-import {InviteResponsePacket} from "../../services/mqtt/packet/inviteresponse.packet";
-import {ReadyPacket} from "../../services/mqtt/packet/ready.packet";
+import {
+  MQTTPacketType, MQTTPacket, InviteResponsePacket, ReadyPacket,
+  CountdownPacket
+} from "../../services/mqtt/packet/mqtt.packet";
+import {CountdownPage} from "../countdown/countdown";
 
 /*
  Generated class for the ChallengeLoad page.
@@ -28,7 +30,7 @@ import {ReadyPacket} from "../../services/mqtt/packet/ready.packet";
 })
 export class ChallengeLoadPage implements OnInit {
   private compId: number;
-  private challengers: User[];
+  private competition: Competition;
 
   private messages: Observable<Packet>;
 
@@ -43,7 +45,7 @@ export class ChallengeLoadPage implements OnInit {
       // .catch(err => console.log(err))
       .subscribe((comp: Competition) => {
         console.log(comp);
-        this.challengers = comp.usersRun;
+        this.competition = comp;
       });
   }
 
@@ -68,11 +70,13 @@ export class ChallengeLoadPage implements OnInit {
       if (inviteResponsePacket.accepted) {
         this.ngOnInit();
       } else {
-        this.authHttp.getAuthHttp().delete(BACKEND_BASEURL + "/api/competitions/delete/" + inviteResponsePacket.compId)
-        //todo catch statement
-          .subscribe(() => {
-            console.log("Trying to delete competition, fails miserably if no permission to do so.")
-          });
+        if (this.competition.userCreated.userId === this.currUser.userId) {
+          this.authHttp.getAuthHttp().delete(BACKEND_BASEURL + "/api/competitions/delete/" + inviteResponsePacket.compId)
+          //todo catch statement
+            .subscribe(() => {
+              console.log("Trying to delete competition, fails miserably if no permission to do so.")
+            });
+        }
         this.navCtrl.popToRoot();
       }
     } else if (mqttPacket.type === MQTTPacketType.READY) {
@@ -83,6 +87,12 @@ export class ChallengeLoadPage implements OnInit {
       } else {
         this.challengerReady = readyPacket.ready;
       }
+      if (this.userReady && this.challengerReady && this.currUser.userId === this.competition.userCreated.userId) {
+        let countdownPacket: CountdownPacket = new CountdownPacket();
+        this.mqttService.publishInCompTopic(JSON.stringify(countdownPacket));
+      }
+    } else if (mqttPacket.type === MQTTPacketType.COUNTDOWN) {
+      this.navCtrl.push(CountdownPage);
     }
   };
 
