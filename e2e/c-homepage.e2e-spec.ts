@@ -1,6 +1,8 @@
 import {by, element, browser} from "protractor";
 describe('Home page - general', () => {
   beforeAll(() => {
+    browser.waitForAngularEnabled(false);
+
     let inputMail = element.all(by.css('#maillogin'));
     let inputPass = element.all(by.css('#passlogin'));
     let btnLogin = element(by.id('btn-login'));
@@ -23,6 +25,10 @@ describe('Home page - general', () => {
     expect(navBarTitle.getText()).toBe('Home');
     let btn = element(by.tagName('button'));
     expect(btn.isPresent()).toBeTruthy();
+  });
+
+  afterAll(() => {
+    browser.waitForAngularEnabled(true);
   });
 });
 
