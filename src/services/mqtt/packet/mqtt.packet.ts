@@ -1,4 +1,5 @@
 export enum MQTTPacketType {
+  COUNTDOWN,
   INVITE,
   INVITE_RESPONSE,
   READY
