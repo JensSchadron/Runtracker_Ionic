@@ -8,7 +8,7 @@ import {NavController, NavParams} from 'ionic-angular';
 export class CountdownPage {
 
   timerCount: any;
-  backgroundColor: any;
+  showButtons: boolean;
   pageToPush: any;
 
   showTitle: boolean = true;
@@ -17,7 +17,7 @@ export class CountdownPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.timerCount = navParams.get("timerDuration");
-    this.backgroundColor = navParams.get("bgColor");
+    this.showButtons = navParams.get("showButtons");
     this.pageToPush = navParams.get("pageToPush");
 
     // Start the timer.
