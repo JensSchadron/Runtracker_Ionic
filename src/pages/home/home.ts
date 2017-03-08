@@ -1,4 +1,4 @@
-import {Component}      from '@angular/core';
+import {Component, OnInit, OnDestroy}      from '@angular/core';
 
 import {NavController, AlertController}  from 'ionic-angular';
 
@@ -9,7 +9,7 @@ import {TrackingchoicePage} from "../tracking-choice/tracking-choice";
 import {MQTTService} from "../../services/mqtt/mqtt.service";
 import {ConfigService} from "../../services/mqtt/config/config.service";
 import {Packet} from 'mqtt';
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {AuthHttpImpl} from "../../services/auth/auth-http-impl";
 import {BACKEND_BASEURL} from "../../assets/globals";
 import {Response} from "@angular/http";
@@ -22,13 +22,13 @@ import {TransportState} from "../../services/mqtt/transport.service";
   templateUrl: 'home.html',
   providers: [UserService]
 })
-export class HomePage {
+export class HomePage implements OnInit{
   private user;
   private competitionsDone;
   private greeting = 'Hello';
   trackingChoicePage: any = TrackingchoicePage;
 
-  public userMessages: Observable<Packet>;
+  public userMessages: Subscription;
 
   ngOnInit(): void {
     this.user = this.userService.getUser().subscribe((user: User) =>{
@@ -37,7 +37,18 @@ export class HomePage {
       this.setGreeting();
     });
 
-
+    if (this.mqttService.state.getValue() === TransportState.CLOSED){
+      this.configService.getConfig().then((config) => {
+        this.mqttService.configure(config);
+        this.mqttService.try_connect()
+          .then(() => {
+            this.on_connect()
+          })
+          .catch(() => {
+            this.on_error()
+          });
+      });
+    }
   }
 
   setGreeting() {
@@ -61,18 +72,6 @@ export class HomePage {
               public mqttService: MQTTService,
               private configService: ConfigService,
               public alertCtrl: AlertController) {
-    if (mqttService.state.getValue() === TransportState.CLOSED){
-      configService.getConfig().then((config) => {
-        mqttService.configure(config);
-        mqttService.try_connect()
-          .then(() => {
-            this.on_connect()
-          })
-          .catch(() => {
-            this.on_error()
-          });
-      });
-    }
   }
 
   /** Callback on_connect to queue */
@@ -80,10 +79,11 @@ export class HomePage {
 
     // Store local reference to Observable
     // for use with template ( | async )
-    this.userMessages = this.mqttService.userMessages;
-
     // Subscribe a function to be run on_next message
-    this.userMessages.subscribe(this.on_next);
+    // this.userMessages = this.mqttService.userMessages;
+    this.userMessages = this.mqttService.userMessages.subscribe(this.on_next);
+
+    // this.userMessages = this.userMessages.subscribe(this.on_next);
   };
 
   /** Consume a message from the _mqService */
@@ -92,6 +92,7 @@ export class HomePage {
     console.log(MQTTPacketType.INVITE);
     console.log(compInvite.type);
     if (compInvite.type === MQTTPacketType.INVITE) {
+      console.log("creating invite popup");
       let alert = this.alertCtrl.create({
         title: "New Challenge",
         message: compInvite.username + " challenges you to a new competition with a distance of " + compInvite.goal.name,
@@ -101,6 +102,7 @@ export class HomePage {
             handler: () => {
               this.configService.getConfigWithCompTopic(compInvite.compId).then((config) => {
                 this.mqttService.disconnect().then(() => {
+                  this.userMessages.unsubscribe();
                   this.mqttService.configure(config);
                   this.mqttService.try_connect()
                     .then(() => {
@@ -109,6 +111,7 @@ export class HomePage {
                       this.mqttService.publishInCompTopic(JSON.stringify(response));
                       this.configService.getConfig().then((config) => {
                         this.mqttService.disconnect().then(() => {
+                          this.userMessages.unsubscribe();
                           this.mqttService.configure(config);
                           this.mqttService.try_connect()
                             .then(() => {
@@ -140,12 +143,14 @@ export class HomePage {
                 .subscribe(() => {
                   this.configService.getConfigWithCompTopic(compInvite.compId).then((config) => {
                     this.mqttService.disconnect().then(() => {
+                      this.userMessages.unsubscribe();
                       this.mqttService.configure(config);
                       this.mqttService.try_connect()
                         .then(() => {
                           this.on_connect();
                           let response = new InviteResponsePacket(compInvite.compId, this.user.userId, true);
                           this.mqttService.publishInCompTopic(JSON.stringify(response));
+                          this.navCtrl.push(ChallengeLoadPage, {compId: compInvite.compId});
                         })
                         .catch(() => {
                           this.on_error();
@@ -156,7 +161,6 @@ export class HomePage {
                   }).catch(() => {
                     this.on_error();
                   });
-                  this.navCtrl.push(ChallengeLoadPage, {compId: compInvite.compId})
                 });
             }
           }

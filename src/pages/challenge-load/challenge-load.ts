@@ -10,7 +10,7 @@ import {UserService} from "../../services/auth/user.service";
 
 import {User} from "../../model/user";
 import {Competition} from "../../model/competition";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {Packet} from 'mqtt';
 import {
   MQTTPacketType, MQTTPacket, InviteResponsePacket, ReadyPacket,
@@ -30,9 +30,9 @@ import {CountdownPage} from "../countdown/countdown";
 })
 export class ChallengeLoadPage implements OnInit {
   private compId: number;
-  private competition: Competition;
+  private competition: Competition = null;
 
-  private messages: Observable<Packet>;
+  private messages: Subscription;
 
   private userReady: boolean = false;
   private challengerReady: boolean = false;
@@ -55,12 +55,15 @@ export class ChallengeLoadPage implements OnInit {
     });
     //TODO catch statement
     this.compId = navParams.get("compId");
-    this.messages = this.mqttService.compMessages;
-    this.messages.subscribe(this.on_next);
+    this.messages = this.mqttService.compMessages.subscribe(this.on_next);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChallengeLoadPage');
+  }
+
+  ionViewDidLeave() {
+    this.messages.unsubscribe();
   }
 
   private on_next = (message: Packet) => {
