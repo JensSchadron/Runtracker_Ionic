@@ -27,7 +27,7 @@ export class SoloLocationPage {
               public navCtrl: NavController,
               public navParams: NavParams) {
     this.countdownSoloPage = CountdownPage;
-    this.params = { timerDuration: 5, bgColor: "#387ef5", pageToPush: SolotrackingPage}
+    this.params = { timerDuration: 5, showButtons: false, pageToPush: SolotrackingPage}
   }
 
   ionViewDidLoad() {
