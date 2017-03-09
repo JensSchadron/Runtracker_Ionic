@@ -27,7 +27,8 @@ page-editprofile{
       text-align: right;
     }
     .btn-save{
-
+      margin: auto;
+      width: 80%;
     }
     .trophy{
       font-size: 2em;
@@ -44,6 +45,9 @@ page-editprofile{
     }
     ion-col{
       font-weight: 500;
+    }
+    #core-info{
+      margin-bottom: 3rem;
     }
   }
 
