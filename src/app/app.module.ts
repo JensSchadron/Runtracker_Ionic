@@ -16,13 +16,7 @@ import { FriendsRequestsPage}       from "../pages/friends/requests/friendreques
 import { AddFriendsPage }           from "../pages/friends/add-friends/addfriends";
 import { TabsPage }                 from "../pages/friends/tabs/tabs";
 
-
 import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
-import { TrackinggoalPage }         from "../pages/trackinggoal/trackinggoal";
-import { TrackingNotRealtimePage }  from "../pages/tracking-not-realtime/tracking-not-realtime";
-
-import { CountdownModal }           from "../pages/countdown-modal/countdown-modal";
-import { SolotrackingModal }        from "../pages/solotracking-modal/solotracking-modal";
 import { TrackingResultPage }       from "../pages/tracking-result/tracking-result";
 
 import { GeocodingService }         from '../services/location/geocoding.service'

@@ -1,9 +1,11 @@
 import {Goal} from "../../../model/goal";
+import {Coordinate} from "../../../model/coordinate";
 export enum MQTTPacketType {
   COUNTDOWN,
   INVITE,
   INVITE_RESPONSE,
-  READY
+  READY,
+  TRACKING
 }
 
 export interface MQTTPacket {
@@ -49,10 +51,24 @@ export class ReadyPacket implements MQTTPacket{
   }
 }
 
-//TODO edit packet
 export class CountdownPacket implements MQTTPacket{
   type: MQTTPacketType = MQTTPacketType.COUNTDOWN;
 
   constructor() {
+  }
+}
+
+export class TrackingPacket implements MQTTPacket{
+  type: MQTTPacketType = MQTTPacketType.TRACKING;
+  compId: number;
+  userId: number;
+  coordinate: Coordinate;
+  totalDistance: number;
+
+  constructor(compId: number, userId: number, coordinate: Coordinate, totalDistance: number) {
+    this.compId = compId;
+    this.userId = userId;
+    this.coordinate = coordinate;
+    this.totalDistance = totalDistance;
   }
 }
