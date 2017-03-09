@@ -22,7 +22,7 @@ export class CountdownPage {
     this.timerCount = navParams.get("timerDuration");
     this.showButtons = navParams.get("showButtons");
     this.pageToPush = navParams.get("pageToPush");
-    this.navParamsChallenge = navParams.get("navParams");
+    this.navParamsChallenge = navParams.get("navParamsChallenge");
 
     // Start the timer.
     this.timerTick(this.timerCount);
@@ -68,7 +68,7 @@ export class CountdownPage {
 
   private pushNextPage() {
     this.counting = false;
-    if (this.pageToPush === ChallengeTrackingPage) {
+    if (this.navParamsChallenge !== null) {
       this.navCtrl.setRoot(this.pageToPush, this.navParamsChallenge);
     } else {
       this.navCtrl.setRoot(this.pageToPush);
