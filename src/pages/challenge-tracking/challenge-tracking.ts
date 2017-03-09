@@ -18,6 +18,7 @@ import {User} from "../../model/user";
   selector: 'page-challenge-tracking',
   templateUrl: 'challenge-tracking.html'
 })
+
 export class ChallengeTrackingPage {
   private goalDistance: number;
   private totalDistance: number;

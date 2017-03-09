@@ -98,7 +98,8 @@ export class ChallengeLoadPage implements OnInit {
         this.mqttService.publishInCompTopic(JSON.stringify(countdownPacket));
       }
     } else if (mqttPacket.type === MQTTPacketType.COUNTDOWN) {
-      this.navCtrl.push(CountdownPage, {timerDuration: 15, showButtons: false, pageToPush: ChallengeTrackingPage, goalDistance: this.goalDistance});
+      let navParamsChallenge: any = { goalDistance: this.goalDistance, users: this.competition.usersRun };
+      this.navCtrl.push(CountdownPage, {timerDuration: 15, showButtons: false, pageToPush: ChallengeTrackingPage, navParamsChallenge: navParamsChallenge});
     }
   };
 

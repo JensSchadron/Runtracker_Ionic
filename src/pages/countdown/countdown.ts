@@ -12,17 +12,17 @@ export class CountdownPage {
   private timerCount: any;
   private showButtons: boolean;
   private pageToPush: any;
-  private goalDistance: number;
+  private navParamsChallenge: any;
 
   private showTitle: boolean = true;
-  private displayTime: any = "00:00:05";
+  private displayTime: any;
   private counting: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private coordinateService: CoordinateService) {
     this.timerCount = navParams.get("timerDuration");
     this.showButtons = navParams.get("showButtons");
     this.pageToPush = navParams.get("pageToPush");
-    this.goalDistance = navParams.get("goalDistance");
+    this.navParamsChallenge = navParams.get("navParams");
 
     // Start the timer.
     this.timerTick(this.timerCount);
@@ -69,7 +69,7 @@ export class CountdownPage {
   private pushNextPage() {
     this.counting = false;
     if (this.pageToPush === ChallengeTrackingPage) {
-      this.navCtrl.setRoot(this.pageToPush, {goalDistance: this.goalDistance});
+      this.navCtrl.setRoot(this.pageToPush, this.navParamsChallenge);
     } else {
       this.navCtrl.setRoot(this.pageToPush);
     }
