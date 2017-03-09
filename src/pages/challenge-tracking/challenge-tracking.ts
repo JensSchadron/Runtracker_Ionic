@@ -22,6 +22,7 @@ import {Competition} from "../../model/competition";
 export class ChallengeTrackingPage {
   public goalDistance: number;
   public currUserTotalDistance: number;
+  public currUserTotalDistanceVoorBerekening: number;
   public challengerTotalDistance: number;
 
   private coordinates: Coordinate[] = [];
@@ -57,7 +58,7 @@ export class ChallengeTrackingPage {
     this.locationSubscription = this.locationService.receiveLocation().subscribe((position) => {
       // Calculate distance
       let distanceTravelled = this.calculateDistance(position.coords.latitude, position.coords.longitude);
-      let totDistance = (this.currUserTotalDistance + distanceTravelled);
+      this.currUserTotalDistanceVoorBerekening += distanceTravelled;
 
       let currCoordinate = new Coordinate(position.coords.latitude, position.coords.longitude, this.currentSpeed);
 
@@ -66,7 +67,7 @@ export class ChallengeTrackingPage {
           this.competition.competitionId,
           this.currUserId,
           currCoordinate,
-          totDistance);
+          this.currUserTotalDistanceVoorBerekening);
       this.mqttService.publishInCompTopic(JSON.stringify(trackingPacket));
 
       this.coordinates.push(currCoordinate);
