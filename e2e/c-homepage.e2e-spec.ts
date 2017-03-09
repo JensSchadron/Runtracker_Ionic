@@ -14,21 +14,34 @@ describe('Home page - general', () => {
     expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("Team102017");
 
     btnLogin.click().then(() => {
-      browser.driver.sleep(2000);
+      browser.driver.sleep(6000);
     });
   });
 
   //Other parts already tested in loginpage.e2e
-  it('should have a correct navbar title & button new isTracking', () => {
+  it('should have a correct navbar title', () => {
     let navBarTitle = element.all(by.css('ion-title')).get(1);
     expect(navBarTitle.isPresent()).toBeTruthy();
     expect(navBarTitle.getText()).toBe('Home');
+  });
+
+  it('should have \'new tracking\' button', () => {
     let btn = element(by.tagName('button'));
     expect(btn.isPresent()).toBeTruthy();
   });
 
   afterAll(() => {
     browser.waitForAngularEnabled(true);
+
+    let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
+    btnMenuNavDrawer.click().then(() => {
+      browser.driver.sleep(2000);
+      let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
+      btnLogout.click().then(() => {
+        console.log("Log out button clicked.");
+        browser.driver.sleep(6000);
+      });
+    });
   });
 });
 
