@@ -25,7 +25,7 @@ describe('EditProfile-page', () => {
       let btnEditProf= element(by.className('list')).all(by.tagName('button')).get(3);
       btnEditProf.click().then(() =>{
         console.log("Profile button clicked.");
-        browser.driver.sleep(10000);
+        browser.driver.sleep(15000);
       });
     });
 
@@ -36,14 +36,14 @@ describe('EditProfile-page', () => {
 
     let saveChanges = element(by.id("save-changes"));
     let avatar= element(by.id("avatar"));
-    let title = element(by.tagName("ion-title"));
+    let title = element(by.id("title"));
     let coreInfo= element(by.id("core-info"));
 
     expect(saveChanges.isPresent()).toBeTruthy();
     expect(avatar.isPresent()).toBeTruthy();
     expect(coreInfo.isPresent()).toBeTruthy();
     expect(title.isPresent()).toBeTruthy();
-    //expect(title.getText()).toBe('Edit profile');
+    expect(title.getText()).toBe('Edit profile');
 
   });
 

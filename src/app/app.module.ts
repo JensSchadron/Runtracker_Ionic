@@ -38,6 +38,7 @@ import { ChallengeLoadPage }        from "../pages/challenge-load/challenge-load
 import { ChallengeTrackingPage }    from "../pages/challenge-tracking/challenge-tracking";
 
 import {SearchPipe} from "../pages/friends/searchpipe";
+import {CoreInfoPart} from "../pages/shared/core-info";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {SearchPipe} from "../pages/friends/searchpipe";
     ChallengeLoadPage,
     ChallengeTrackingPage,
     RankingPage,
-    SearchPipe
+    SearchPipe,
+    CoreInfoPart
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -87,7 +89,8 @@ import {SearchPipe} from "../pages/friends/searchpipe";
     ChallengeDistancePage,
     ChallengeLoadPage,
     ChallengeTrackingPage,
-    RankingPage
+    RankingPage,
+    CoreInfoPart
   ],
   providers: [
     AuthService,

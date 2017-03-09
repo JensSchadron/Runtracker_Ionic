@@ -13,146 +13,49 @@
   <div class="spinner" *ngIf="coreInfo==null">
     <ion-spinner></ion-spinner>
   </div>
-<div *ngIf="coreInfo!=null">
-  <div class="aligner-top">
-    <ion-card>
-      <ion-grid>
-        <ion-row>
-          <ion-col text-center class="border-bottom padding-bottom">
-            <ion-avatar>
-              <img class="avatar" [src]="'assets/img/avatars/' + userFromParam.avatar + '.png'">
-            </ion-avatar>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col text-center class="border-bottom padding-top">
-            <div class="full-name">
-              {{userFromParam.firstname}} {{userFromParam.lastname}}
-            </div>
-            <div class="user-info">
-              {{userFromParam.username}}
-            </div>
-            <div class="user-info">
-              {{userFromParam.city}}
-            </div>
-            <div class="user-info">
-              {{userFromParam.birthday}}
-            </div>
-            <div class="user-info" *ngIf="userFromParam.gender=='MALE'">
-              <ion-icon name="male"></ion-icon>
-            </div>
-            <div class="user-info" *ngIf="userFromParam.gender=='FEMALE'">
-              <ion-icon name="female"></ion-icon>
-            </div>
-            <div class="user-info" *ngIf="userFromParam.gender=='UNDEFINED'">
-              <ion-icon name="transgender"></ion-icon>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-  </div>
-  <div>
-    <ion-card>
-      <ion-grid>
-        <ion-row>
-          <ion-col width-33.3 text-center>
-            <div *ngIf="coreInfo?.ranTenKm==null">
-              <ion-icon class="trophy" name="trophy"></ion-icon>
-            </div>
-            <div *ngIf="coreInfo?.ranTenKm==false">
-              <ion-icon class="trophy" name="trophy"></ion-icon>
-            </div>
-            <div *ngIf="coreInfo?.ranTenKm==true">
-              <ion-icon class="trophy-won" name="trophy"></ion-icon>
-            </div>
-            10 km
-          </ion-col>
-          <ion-col width-33.3 text-center>
-            <div *ngIf="coreInfo?.ranTenKm==null">
-              <ion-icon class="trophy" name="trophy"></ion-icon>
-            </div>
-            <div *ngIf="coreInfo?.ranTwentyKm==false">
-              <ion-icon class="trophy" name="trophy"></ion-icon>
-            </div>
-            <div *ngIf="coreInfo?.ranTwentyKm==true">
-              <ion-icon class="trophy-won" name="trophy"></ion-icon>
-            </div>
-            20 km
-          </ion-col>
-          <ion-col width-33.3 text-center>
-            <div *ngIf="coreInfo?.ranTenKm==null">
-              <ion-icon class="trophy" name="trophy"></ion-icon>
-            </div>
-            <div *ngIf="coreInfo?.ranMarathon==false">
-              <ion-icon class="trophy" name="trophy"></ion-icon>
-            </div>
-            <div *ngIf="coreInfo?.ranMarathon==true">
-              <ion-icon class="trophy-won" name="trophy"></ion-icon>
-            </div>
-            Marathon
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-  </div>
   <div *ngIf="coreInfo!=null">
-    <ion-card>
-      <ion-grid>
-        <ion-row>
-          <ion-col width-50 text-center>
-            <div class="user-data">
-              {{coreInfo?.nrOfCompetitionsWon}}
-            </div>
-            Competitions won
-          </ion-col>
-          <ion-col width-50 text-center>
-            <div class="user-data">
-              {{coreInfo?.nrOfCompetitionsDone}}
-            </div>
-            Competitions done
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col width-50 text-center>
-            <div class="user-data">
-              {{coreInfo?.maxSpeed | number : '1.0-2'}} km/h
-            </div>
-            Maximum speed
-          </ion-col>
-          <ion-col width-50 text-center>
-            <div class="user-data">
-              {{coreInfo?.avgSpeed | number : '1.0-2'}} km/h
-            </div>
-            Average speed
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col width-33 text-center>
-            <div class="user-data">
-              {{coreInfo?.maxDistance | number : '1.0-2'}} km
-            </div>
-            Maximum distance
-          </ion-col>
-          <ion-col width-33 text-center>
-            <div class="user-data">
-              {{coreInfo?.avgDistance | number : '1.0-2'}} km
-            </div>
-            Average distance
-          </ion-col>
-          <ion-col width-33 text-center>
-            <div class="user-data">
-              {{coreInfo?.totalDistance | number : '1.0-2'}} km
-            </div>
-            Total distance
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
+    <div class="aligner-top">
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col text-center class="border-bottom padding-bottom">
+              <ion-avatar>
+                <img class="avatar" [src]="'assets/img/avatars/' + userFromParam.avatar + '.png'">
+              </ion-avatar>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col text-center class="border-bottom padding-top">
+              <div class="full-name">
+                {{userFromParam.firstname}} {{userFromParam.lastname}}
+              </div>
+              <div class="user-info">
+                {{userFromParam.username}}
+              </div>
+              <div class="user-info">
+                {{userFromParam.city}}
+              </div>
+              <div class="user-info">
+                {{userFromParam.birthday}}
+              </div>
+              <div class="user-info" *ngIf="userFromParam.gender=='MALE'">
+                <ion-icon name="male"></ion-icon>
+              </div>
+              <div class="user-info" *ngIf="userFromParam.gender=='FEMALE'">
+                <ion-icon name="female"></ion-icon>
+              </div>
+              <div class="user-info" *ngIf="userFromParam.gender=='UNDEFINED'">
+                <ion-icon name="transgender"></ion-icon>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </div>
+    <core-info [coreInfo]="coreInfo"></core-info>
+    <button ion-button full (click)="onClickRemoveFriend(userFromParam.username)" color="danger">Delete friend</button>
   </div>
-  <button ion-button full (click)="onClickRemoveFriend(userFromParam.username)" color="danger">Delete friend</button>
-</div>
 </ion-content>
 
 
