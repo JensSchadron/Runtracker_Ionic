@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
+import {CoordinateService} from "../../services/location/coordinate.service";
+import {ChallengeTrackingPage} from "../challenge-tracking/challenge-tracking";
 
 @Component({
   selector: 'page-countdown',
@@ -7,18 +9,20 @@ import {NavController, NavParams} from 'ionic-angular';
 })
 export class CountdownPage {
 
-  timerCount: any;
-  showButtons: boolean;
-  pageToPush: any;
+  private timerCount: any;
+  private showButtons: boolean;
+  private pageToPush: any;
+  private navParamsChallenge: any;
 
-  showTitle: boolean = true;
-  displayTime: any = "00:00:05";
-  counting: boolean = true;
+  private showTitle: boolean = true;
+  private displayTime: any;
+  private counting: boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private coordinateService: CoordinateService) {
     this.timerCount = navParams.get("timerDuration");
     this.showButtons = navParams.get("showButtons");
     this.pageToPush = navParams.get("pageToPush");
+    this.navParamsChallenge = navParams.get("navParams");
 
     // Start the timer.
     this.timerTick(this.timerCount);
@@ -34,7 +38,7 @@ export class CountdownPage {
         this.timerCount--;
 
         if (this.timerCount > 2) {
-          this.displayTime = this.getSecondsAsDigitalClock(this.timerCount);
+          this.displayTime = this.coordinateService.getSecondsAsDigitalClock(this.timerCount);
           this.timerTick(this.timerCount);
         } else if (this.timerCount == 2) {
           this.showTitle = false;
@@ -54,17 +58,6 @@ export class CountdownPage {
     }
   }
 
-  getSecondsAsDigitalClock(inputSeconds: number) {
-    let sec_num = parseInt(inputSeconds.toString(), 10); // don't forget the second param
-    let hours = Math.floor(sec_num / 3600);
-    let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    let seconds = sec_num - (hours * 3600) - (minutes * 60);
-    let hoursString = (hours < 10) ? "0" + hours : hours.toString();
-    let minutesString = (minutes < 10) ? "0" + minutes : minutes.toString();
-    let secondsString = (seconds < 10) ? "0" + seconds : seconds.toString();
-    return hoursString + ':' + minutesString + ':' + secondsString;
-  }
-
   addTenSeconds() {
     this.timerCount += 10;
   }
@@ -75,7 +68,11 @@ export class CountdownPage {
 
   private pushNextPage() {
     this.counting = false;
-    this.navCtrl.setRoot(this.pageToPush);
+    if (this.pageToPush === ChallengeTrackingPage) {
+      this.navCtrl.setRoot(this.pageToPush, this.navParamsChallenge);
+    } else {
+      this.navCtrl.setRoot(this.pageToPush);
+    }
   }
 
 }

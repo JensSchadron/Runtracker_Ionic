@@ -62,7 +62,8 @@ export class ChallengeDistancePage {
                 this.mqttService.publishInFriendTopic(this.challengedFriend.userId, JSON.stringify(mqttPayload));
 
                 this.navCtrl.push(this.loadingPage, {
-                  compId: comp.competitionId
+                  compId: comp.competitionId,
+                  goalDistance: comp.goal.distance
                 });
               });
           });
