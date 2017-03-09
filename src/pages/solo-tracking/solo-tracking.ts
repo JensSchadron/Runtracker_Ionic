@@ -1,4 +1,4 @@
-import {Component, NgZone}    from '@angular/core';
+import {Component}    from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Coordinate}   from "../../model/coordinate";
 import {Observable, Subscription}   from "rxjs";
@@ -37,7 +37,7 @@ export class SolotrackingPage {
 
   locationSubscription: Subscription;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private zone: NgZone, private coordinateService: CoordinateService, private locationService: LocationService, public trackingService: TrackingService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private coordinateService: CoordinateService, private locationService: LocationService, public trackingService: TrackingService) {
 
   }
 
