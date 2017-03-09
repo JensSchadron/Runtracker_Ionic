@@ -106,7 +106,7 @@ export class HomePage implements OnInit{
                     .then(() => {
                       this.on_connect();
                       let response = new InviteResponsePacket(compInvite.compId, this.user.userId, false);
-                      this.mqttService.publishInCompTopic(JSON.stringify(response));
+                      this.mqttService.publishInCompTopic(JSON.stringify(response), 2);
                       this.configService.getConfig().then((config) => {
                         this.mqttService.disconnect().then(() => {
                           this.userMessages.unsubscribe();
@@ -147,7 +147,7 @@ export class HomePage implements OnInit{
                         .then(() => {
                           this.on_connect();
                           let response = new InviteResponsePacket(compInvite.compId, this.user.userId, true);
-                          this.mqttService.publishInCompTopic(JSON.stringify(response));
+                          this.mqttService.publishInCompTopic(JSON.stringify(response), 2);
                           this.navCtrl.push(ChallengeLoadPage, {compId: compInvite.compId});
                         })
                         .catch(() => {

@@ -95,7 +95,7 @@ export class ChallengeLoadPage implements OnInit {
       }
       if (this.userReady && this.challengerReady && this.currUser.userId === this.competition.userCreated.userId) {
         let countdownPacket: CountdownPacket = new CountdownPacket();
-        this.mqttService.publishInCompTopic(JSON.stringify(countdownPacket));
+        this.mqttService.publishInCompTopic(JSON.stringify(countdownPacket), 2);
       }
     } else if (mqttPacket.type === MQTTPacketType.COUNTDOWN) {
       let navParamsChallenge: any = { goalDistance: this.goalDistance, competition: this.competition, currUserId: this.currUser.userId };
@@ -105,11 +105,11 @@ export class ChallengeLoadPage implements OnInit {
 
   public onReadyToggle(): void {
     let readyPacket = new ReadyPacket(this.compId, this.currUser.userId, (this.userReady = !this.userReady));
-    this.mqttService.publishInCompTopic(JSON.stringify(readyPacket));
+    this.mqttService.publishInCompTopic(JSON.stringify(readyPacket), 2);
   }
 
   public onCancelClick(): void {
     let cancelResponse = new InviteResponsePacket(this.compId, this.currUser.userId, false);
-    this.mqttService.publishInCompTopic(JSON.stringify(cancelResponse));
+    this.mqttService.publishInCompTopic(JSON.stringify(cancelResponse), 2);
   }
 }

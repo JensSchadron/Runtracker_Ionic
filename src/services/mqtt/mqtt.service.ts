@@ -158,17 +158,17 @@ export class MQTTService implements TransportService {
   private publishOptions: any = {qos: 2, retain: false};
 
   /** Send a message to the competition topic */
-  public publishInCompTopic(message: string): void {
-    this.client.publish(this.config.competitionTopic, message, this.publishOptions);
+  public publishInCompTopic(message: string, qos: number): void {
+    this.client.publish(this.config.competitionTopic, message, {qos: qos, retain: false});
   }
 
   public publishInFriendTopic(userId: number, message: string): void {
-    this.client.publish("uid-" + userId, message, this.publishOptions);
+    this.client.publish("uid-" + userId, message, {qos: 2, retain: false});
   }
 
   /** Send a message to all topics, or just those in the array */
   public publishInOwnTopic(message: string): void {
-    this.client.publish(this.config.userTopic, message, this.publishOptions);
+    this.client.publish(this.config.userTopic, message, {qos: 2, retain: false});
   }
 
   /** Subscribe to server message queues */
