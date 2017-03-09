@@ -39,7 +39,7 @@ export class ChallengeLoadPage implements OnInit {
   private userReady: boolean = false;
   private challengerReady: boolean = false;
 
-  private currUser: User;
+  private currUser: User; //TODO refactoren naar currUserId
 
   ngOnInit() {
     this.authHttp.getAuthHttp().get(BACKEND_BASEURL + "/api/competitions/" + this.compId)
@@ -98,7 +98,7 @@ export class ChallengeLoadPage implements OnInit {
         this.mqttService.publishInCompTopic(JSON.stringify(countdownPacket));
       }
     } else if (mqttPacket.type === MQTTPacketType.COUNTDOWN) {
-      let navParamsChallenge: any = { goalDistance: this.goalDistance, users: this.competition.usersRun };
+      let navParamsChallenge: any = { goalDistance: this.goalDistance, competition: this.competition, currUserId: this.currUser.userId };
       this.navCtrl.push(CountdownPage, {timerDuration: 15, showButtons: false, pageToPush: ChallengeTrackingPage, navParamsChallenge: navParamsChallenge});
     }
   };
