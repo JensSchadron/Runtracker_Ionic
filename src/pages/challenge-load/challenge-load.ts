@@ -17,6 +17,7 @@ import {
   CountdownPacket
 } from "../../services/mqtt/packet/mqtt.packet";
 import {CountdownPage} from "../countdown/countdown";
+import {ChallengeTrackingPage} from "../challenge-tracking/challenge-tracking";
 
 /*
  Generated class for the ChallengeLoad page.
@@ -95,7 +96,7 @@ export class ChallengeLoadPage implements OnInit {
         this.mqttService.publishInCompTopic(JSON.stringify(countdownPacket));
       }
     } else if (mqttPacket.type === MQTTPacketType.COUNTDOWN) {
-      this.navCtrl.push(CountdownPage);
+      this.navCtrl.push(CountdownPage, {timerDuration: 15, showButtons: false, pageToPush: ChallengeTrackingPage});
     }
   };
 

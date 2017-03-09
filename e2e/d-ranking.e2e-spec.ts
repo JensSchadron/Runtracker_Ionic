@@ -4,10 +4,12 @@
 import {by, element, browser} from "protractor";
 describe('Ranking-page', () => {
   beforeAll(() => {
+    browser.waitForAngularEnabled(false);
+
     let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
     btnMenuNavDrawer.click().then(() => {
       browser.driver.sleep(2000);
-      let btnRanking = element(by.className('list')).all(by.tagName('button')).get(3);
+      let btnRanking = element(by.className('list')).all(by.tagName('button')).get(4);
       btnRanking.click().then(() =>{
         console.log("Ranking button clicked.");
         browser.driver.sleep(2000);
@@ -35,12 +37,14 @@ describe('Ranking-page', () => {
   });
 
   afterAll(() => {
-    let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
+    browser.waitForAngularEnabled(true);
+
+    /*let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
     btnMenuNavDrawer.click().then(() => {
       browser.driver.sleep(2000);
       let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
       btnLogout.click().then(() => console.log("Log out button clicked."));
-    });
+    });*/
   });
 
 });

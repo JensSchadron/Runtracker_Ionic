@@ -31,24 +31,30 @@ describe('Login page - general', () => {
   });
 
   it('test segmentBar buttons', () => {
-    let segmentBarLoginButton = element.all(by.tagName('ion-segment-button')).get(0);
-    let segmentBarSingUpButton = element.all(by.tagName('ion-segment-button')).get(1);
+    let segmentBarLoginButton = element.all(by.tagName('ion-segment-button')).first();
+    let segmentBarSingUpButton = element.all(by.tagName('ion-segment-button')).last();
 
     segmentBarSingUpButton.click().then(() => {
       browser.driver.sleep(2000);
-      let cardViewTitle = element(by.tagName('ion-card-title'));
-      expect(cardViewTitle.getText()).toBe('Sign up');
+      expect(element.all(by.tagName('ion-card')).count()).toBe(1);
+      /*let cardViewTitle = element.all(by.tagName('ion-card')).count();
+      expect(cardViewTitle.getText()).toBe('Sign up');*/
     });
 
     segmentBarLoginButton.click().then(() => {
       browser.driver.sleep(2000);
-      let cardViewTitle = element(by.tagName('ion-card-title'));
-      expect(cardViewTitle.getText()).toBe('Login');
+      expect(element.all(by.tagName('ion-card')).count()).toBe(2);
+      /*let cardViewTitle = element(by.tagName('ion-card-title'));
+      expect(cardViewTitle.getText()).toBe('Login');*/
     });
   });
 });
 
 describe('Login page - login form', () => {
+  beforeAll(() => {
+    browser.waitForAngularEnabled(false);
+  });
+
   beforeEach(() => {
     browser.get('');
   });
@@ -184,6 +190,8 @@ describe('Login page - login form', () => {
 
     btnLogin.click().then(() => {
       browser.driver.sleep(2000);
+      expect(element.all(by.css('ion-navbar')).first().isPresent()).toBeTruthy();
+
       expect(element.all(by.css('ion-title')).get(1).getText()).toBe("Home");
 
       let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
@@ -192,10 +200,14 @@ describe('Login page - login form', () => {
 
         let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
         btnLogout.click().then(() => {
-          browser.driver.sleep(6000);
+          browser.driver.sleep(2000);
         });
       });
     });
+  });
+
+  afterAll(() => {
+    browser.waitForAngularEnabled(true);
   });
 });
 
