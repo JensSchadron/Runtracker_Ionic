@@ -1,10 +1,7 @@
 import {Component, OnInit, OnDestroy}      from '@angular/core';
-
 import {NavController, AlertController}  from 'ionic-angular';
-
 import {UserService} from '../../services/auth/user.service';
 import {User} from "../../model/user";
-
 import {TrackingchoicePage} from "../tracking-choice/tracking-choice";
 import {MQTTService} from "../../services/mqtt/mqtt.service";
 import {ConfigService} from "../../services/mqtt/config/config.service";

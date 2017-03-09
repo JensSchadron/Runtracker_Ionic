@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -9,71 +9,83 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding scroll="false" class="home-background-page">
-  <ion-card class="card-greeting">
-    <div class="card-title-greeting" >
-      {{greeting}}, {{user?.firstname}}
-    </div>
-  </ion-card>
-      <ion-card class="largecard">
-        <img [src]="'assets/img/home/totalDistance.jpg'">
-        <div class="card-title" >
-          Distance
-        </div>
-        <div class="card-subtitle-middle">
-          Total
-        </div>
-        <div class="card-subtitle-left">
-          Maximum
-        </div>
-        <div class="card-subtitle-right">
-          Average
-        </div>
-        <div class="card-content">
-          {{(user?.totalDistance/1000) | number : '1.0-2' }} km
-        </div>
-        <div class="card-content-left">
-          {{(user?.maxDistance/1000) | number : '1.0-2' }} km
-        </div>
-        <div class="card-content-right">
-          {{(user?.avgDistance/1000) | number : '1.0-2' }} km
-        </div>
-      </ion-card>
-  <ion-card class="largecard">
-    <img [src]="'assets/img/home/speed.jpg'">
-    <div class="card-title">
-      Speed
-    </div>
-    <div class="card-subtitle-left">
-      Maximum
-    </div>
-    <div class="card-subtitle-right">
-      Average
-    </div>
-    <div class="card-content-left">
-      {{user?.maxSpeed | number : '1.0-2' }} km/h
-    </div>
-    <div class="card-content-right">
-      {{user?.avgSpeed | number : '1.0-2' }} km/h
-    </div>
+<ion-content padding scroll="false">
+
+  <ion-card>
+    <ion-card-content>
+      <h1 id="greeting">{{greeting}}, {{user?.firstname}}</h1>
+    </ion-card-content>
   </ion-card>
 
-      <ion-card class="smallcard">
-        <img [src]="'assets/img/home/competition.jpg'">
-        <div class="card-title">
-          Competitions won
-        </div>
-        <div class="card-subtitle-middle">
-          {{user?.nrOfCompetitionsWon}}
-        </div>
-      </ion-card>
-  </ion-content>
+  <ion-card>
+    <div class="img-header">
+      <div class="img-title">
+        <h1>Distance</h1>
+      </div>
+      <img [src]="'assets/img/home/totalDistanceSmall.jpg'">
+    </div>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col width-33>{{(user?.totalDistance/1000) | number : '1.0-2' }} km</ion-col>
+          <ion-col width-33>{{(user?.maxDistance/1000) | number : '1.0-2' }} km</ion-col>
+          <ion-col width-33>{{(user?.avgDistance/1000) | number : '1.0-2' }} km</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col width-33 class="card-info-subtitle">Total</ion-col>
+          <ion-col width-33 class="card-info-subtitle">Maximum</ion-col>
+          <ion-col width-33 class="card-info-subtitle">Average</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <div class="img-header">
+      <div class="img-title">
+        <h1>Speed</h1>
+      </div>
+      <img [src]="'assets/img/home/speedSmall.jpg'">
+    </div>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col width-50>{{user?.maxSpeed | number : '1.0-2' }} km/h</ion-col>
+          <ion-col width-50>{{user?.avgSpeed | number : '1.0-2' }} km/h</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col width-50 class="card-info-subtitle">Maximum</ion-col>
+          <ion-col width-50 class="card-info-subtitle">Average</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <div class="img-header">
+      <div class="img-title">
+        <h1>Competitions</h1>
+      </div>
+      <img [src]="'assets/img/home/competitionSmall.jpg'">
+    </div>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>{{user?.nrOfCompetitionsWon}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="card-info-subtitle">won</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
 
 <ion-footer>
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block [navPush]="trackingChoicePage">New Tracking</button>
+        <button ion-button color="primary" block [navPush]="trackingChoicePage">New Tracking</button>
       </ion-col>
     </ion-row>
   </ion-grid>
