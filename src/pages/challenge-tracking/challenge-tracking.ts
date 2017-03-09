@@ -6,7 +6,6 @@ import {UserService} from "../../services/auth/user.service";
 import {TrackingService} from "../../services/tracking/tracking.service";
 import {LocationService} from "../../services/location/location.service";
 import {CoordinateService} from "../../services/location/coordinate.service";
-import {User} from "../../model/user";
 import {Subscription} from "rxjs";
 import {Coordinate} from "../../model/coordinate";
 import {Packet} from 'mqtt';
@@ -20,9 +19,12 @@ import {Competition} from "../../model/competition";
 })
 
 export class ChallengeTrackingPage {
+  public currUserPacketCount: number = 0;
+  public challengerPacketCount: number = 0;
+
   public goalDistance: number;
   public currUserTotalDistance: number;
-  public currUserTotalDistanceVoorBerekening: number;
+  public currUserTotalDistanceVoorBerekening: number = 0;
   public challengerTotalDistance: number;
 
   private coordinates: Coordinate[] = [];
@@ -43,8 +45,6 @@ export class ChallengeTrackingPage {
               public trackingService: TrackingService) {
     this.goalDistance = this.navParams.get('goalDistance');
     this.competition = this.navParams.get('competition');
-    console.log("competition");
-    console.log(this.competition);
     this.currUserId = this.navParams.get('currUserId');
     this.mqttService.compMessages.subscribe(this.on_next);
   }
@@ -56,11 +56,11 @@ export class ChallengeTrackingPage {
 
   private startTracking(): void {
     this.locationSubscription = this.locationService.receiveLocation().subscribe((position) => {
-      // Calculate distance
-      let distanceTravelled = this.calculateDistance(position.coords.latitude, position.coords.longitude);
-      this.currUserTotalDistanceVoorBerekening += distanceTravelled;
-
       let currCoordinate = new Coordinate(position.coords.latitude, position.coords.longitude, this.currentSpeed);
+
+      // Calculate distance
+      this.currUserTotalDistanceVoorBerekening += this.calculateDistance(position.coords.latitude, position.coords.longitude);
+      this.coordinates.push(currCoordinate);
 
       let trackingPacket: TrackingPacket =
         new TrackingPacket(
@@ -68,9 +68,7 @@ export class ChallengeTrackingPage {
           this.currUserId,
           currCoordinate,
           this.currUserTotalDistanceVoorBerekening);
-      this.mqttService.publishInCompTopic(JSON.stringify(trackingPacket));
-
-      this.coordinates.push(currCoordinate);
+      this.mqttService.publishInCompTopic(JSON.stringify(trackingPacket), 0);
     });
   }
 
@@ -85,7 +83,7 @@ export class ChallengeTrackingPage {
     return speed;
   }
 
-  private calculateDistance(latitude, longitude) {
+  private calculateDistance(latitude, longitude): number {
     let distance = 0;
 
     if (this.coordinates.length > 0) {
@@ -93,7 +91,7 @@ export class ChallengeTrackingPage {
       distance = this.coordinateService.calculateDistanceBetweenCoordinates(latitude, longitude, prevCoord.lat, prevCoord.lon);
     }
 
-    console.log("Total distance in km added: " + distance);
+    console.warn("Total distance in km added: " + distance);
     return distance;
   }
 
@@ -102,8 +100,10 @@ export class ChallengeTrackingPage {
     if (mqttPacket.type === MQTTPacketType.TRACKING) {
       let trackingPacket: TrackingPacket = JSON.parse(message.toString());
       if (trackingPacket.userId === this.currUserId) {
+        this.currUserPacketCount++;
         this.currUserTotalDistance = trackingPacket.totalDistance;
       } else {
+        this.challengerPacketCount++;
         this.challengerTotalDistance = trackingPacket.totalDistance;
       }
     }

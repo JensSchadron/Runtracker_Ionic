@@ -1,4 +1,9 @@
 <ion-content padding>
+  currUserPacketcount: {{currUserPacketCount}}<br/>
+  currUserDistance: {{currUserTotalDistance}}<br/>
+  challengPacketCount: {{challengerPacketCount}}<br/>
+  challengDistance: {{challengerTotalDistance}}
+
   <ion-card *ngFor="let challenger of competition?.usersRun">
     <ion-card-content>
       <ion-item>
@@ -14,7 +19,7 @@
         {{(challenger.userId === currUserId ? currUserTotalDistance : challengerTotalDistance)}}
       </ion-item>
       <!--<div class="readyIndicator"-->
-           <!--[ngClass]="{'ready': (challenger.userId === currUserId ? userReady : challengerReady)}"></div>-->
+      <!--[ngClass]="{'ready': (challenger.userId === currUserId ? userReady : challengerReady)}"></div>-->
     </ion-card-content>
   </ion-card>
 </ion-content>
