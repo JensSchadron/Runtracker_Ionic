@@ -6,13 +6,29 @@ describe('Ranking-page', () => {
   beforeAll(() => {
     browser.waitForAngularEnabled(false);
 
+    let inputMail = element.all(by.css('#maillogin'));
+    let inputPass = element.all(by.css('#passlogin'));
+    let btnLogin = element(by.id('btn-login'));
+    browser.get('');
+    inputMail.all(by.tagName('input')).first().sendKeys("runtrackminds2017@gmail.com");
+    inputPass.all(by.tagName('input')).first().sendKeys("Team102017");
+
+    expect(inputMail.all(by.tagName('input')).first().getAttribute('value')).toEqual("runtrackminds2017@gmail.com");
+    expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("Team102017");
+
+    btnLogin.click().then(() => {
+      browser.driver.sleep(6000);
+    });
+  });
+
+  beforeEach(() => {
     let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
     btnMenuNavDrawer.click().then(() => {
       browser.driver.sleep(2000);
       let btnRanking = element(by.className('list')).all(by.tagName('button')).get(4);
-      btnRanking.click().then(() =>{
+      btnRanking.click().then(() => {
         console.log("Ranking button clicked.");
-        browser.driver.sleep(2000);
+        browser.driver.sleep(4000);
       });
     });
   });
@@ -39,12 +55,15 @@ describe('Ranking-page', () => {
   afterAll(() => {
     browser.waitForAngularEnabled(true);
 
-    /*let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
+    let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
     btnMenuNavDrawer.click().then(() => {
       browser.driver.sleep(2000);
       let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
-      btnLogout.click().then(() => console.log("Log out button clicked."));
-    });*/
+      btnLogout.click().then(() => {
+        console.log("Log out button clicked.");
+        browser.driver.sleep(6000);
+      });
+    });
   });
 
 });

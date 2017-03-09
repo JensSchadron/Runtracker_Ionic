@@ -189,7 +189,7 @@ describe('Login page - login form', () => {
     expect(inputPass.all(by.tagName('input')).first().getAttribute('value')).toEqual("Team102017");
 
     btnLogin.click().then(() => {
-      browser.driver.sleep(2000);
+      browser.driver.sleep(6000);
       expect(element.all(by.css('ion-navbar')).first().isPresent()).toBeTruthy();
 
       expect(element.all(by.css('ion-title')).get(1).getText()).toBe("Home");
@@ -200,7 +200,7 @@ describe('Login page - login form', () => {
 
         let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
         btnLogout.click().then(() => {
-          browser.driver.sleep(2000);
+          browser.driver.sleep(6000);
         });
       });
     });
