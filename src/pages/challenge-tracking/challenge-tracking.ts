@@ -42,6 +42,8 @@ export class ChallengeTrackingPage {
               public trackingService: TrackingService) {
     this.goalDistance = this.navParams.get('goalDistance');
     this.competition = this.navParams.get('competition');
+    console.log("competition");
+    console.log(this.competition);
     this.currUserId = this.navParams.get('currUserId');
     this.mqttService.compMessages.subscribe(this.on_next);
   }

@@ -11,7 +11,7 @@
         <h3>
           {{challenger.username}}
         </h3>
-        {{(challenger.userId === currUserId ? userReady : challengerReady)}}
+        {{(challenger.userId === currUserId ? currUserTotalDistance : challengerTotalDistance)}}
       </ion-item>
       <!--<div class="readyIndicator"-->
            <!--[ngClass]="{'ready': (challenger.userId === currUserId ? userReady : challengerReady)}"></div>-->
