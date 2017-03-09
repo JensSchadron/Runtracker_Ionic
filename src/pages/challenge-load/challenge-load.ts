@@ -32,6 +32,7 @@ import {ChallengeTrackingPage} from "../challenge-tracking/challenge-tracking";
 export class ChallengeLoadPage implements OnInit {
   private compId: number;
   private competition: Competition = null;
+  private goalDistance: number;
 
   private messages: Subscription;
 
@@ -57,6 +58,7 @@ export class ChallengeLoadPage implements OnInit {
     //TODO catch statement
     this.compId = navParams.get("compId");
     this.messages = this.mqttService.compMessages.subscribe(this.on_next);
+    this.goalDistance = navParams.get("goalDistance")
   }
 
   ionViewDidLoad() {
@@ -96,7 +98,7 @@ export class ChallengeLoadPage implements OnInit {
         this.mqttService.publishInCompTopic(JSON.stringify(countdownPacket));
       }
     } else if (mqttPacket.type === MQTTPacketType.COUNTDOWN) {
-      this.navCtrl.push(CountdownPage, {timerDuration: 15, showButtons: false, pageToPush: ChallengeTrackingPage});
+      this.navCtrl.push(CountdownPage, {timerDuration: 15, showButtons: false, pageToPush: ChallengeTrackingPage, goalDistance: this.goalDistance});
     }
   };
 
