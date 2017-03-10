@@ -25,9 +25,9 @@ export class ChallengeTrackingPage {
   public challengerPacketCount: number = 0;
 
   public goalDistance: number;
-  public currUserTotalDistance: number;
+  public currUserTotalDistance: number = 0;
   public currUserTotalDistanceVoorBerekening: number = 0;
-  public challengerTotalDistance: number;
+  public challengerTotalDistance: number = 0;
 
   private coordinates: Coordinate[] = [];
   private locationSubscription: Subscription;
@@ -135,10 +135,10 @@ export class ChallengeTrackingPage {
         this.challengerTotalDistance = trackingPacket.totalDistance;
       }
       if (this.currUserId === this.competition.userCreated.userId) {
-        if (this.currUserTotalDistance * 1000 >= this.goalDistance) {
+        if (this.currUserTotalDistance * 1000 >= this.competition.goal.distance) {
           let winPacket: WinPacket = new WinPacket(this.competition.competitionId, this.currUserId);
           this.mqttService.publishInCompTopic(JSON.stringify(winPacket), 2);
-        } else if (this.challengerTotalDistance * 1000 >= this.goalDistance) {
+        } else if (this.challengerTotalDistance * 1000 >= this.competition.goal.distance) {
           let challenger = this.competition.usersRun.find((user) => user.userId !== this.currUserId);
           if (challenger !== null) { // zou altijd true moeten zijn
             let winPacket: WinPacket = new WinPacket(this.competition.competitionId, challenger.userId);
