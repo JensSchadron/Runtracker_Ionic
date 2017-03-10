@@ -175,7 +175,7 @@ export class SolotrackingPage {
     tracking.totalDistance = this.distance * 1000;
     tracking.totalDuration = this.timeInSeconds;
 
-    alert(JSON.stringify(tracking, null, 2));
+    //alert(JSON.stringify(tracking, null, 2));
 
     return tracking;
   }

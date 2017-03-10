@@ -51,7 +51,7 @@ export class TrackingResultPage {
       strokeWeight: 2
     });
 
-    let startPosition = new google.maps.LatLng(runningCoordinates[0].lat, runningCoordinates[0].lng);
+    let startPosition = new google.maps.LatLng(runningCoordinates[Math.round(runningCoordinates.length/2)].lat, runningCoordinates[Math.round(runningCoordinates.length/2)].lng);
 
     let mapOptions = {
       center: startPosition,
