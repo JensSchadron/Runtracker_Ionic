@@ -32,11 +32,13 @@
           <img [src]="'assets/img/avatars/' + challenger.avatar + '.png'">
         </ion-avatar>
         <h2 class="runner-name" text-wrap>{{challenger.firstname}} {{challenger.lastname}}</h2>
-        <div class="status-winning"><p class="status">winning</p></div>
+
+        <div *ngIf="(challenger.userId === currUserId ? currUserTotalDistance > challengerTotalDistance : currUserTotalDistance < challengerTotalDistance)" class="status-winning"><p class="status">winning</p></div>
+        <div *ngIf="(challenger.userId === currUserId ? currUserTotalDistance < challengerTotalDistance : currUserTotalDistance > challengerTotalDistance)" class="status-losing"><p class="status">losing</p></div>
       </ion-item>
     </ion-card-content>
     <ion-item-divider color="light">
-      <span color="primary" class="distance">{{(challenger.userId === currUserId ? currUserTotalDistance : challengerTotalDistance)}}</span>
+      <span color="primary" class="distance">{{(challenger.userId === currUserId ? currUserTotalDistance : challengerTotalDistance).toFixed(3)}}</span>
       <span class="divider">/</span>
       <span class="goal">{{goalDistance}}</span></ion-item-divider>
   </ion-card>
