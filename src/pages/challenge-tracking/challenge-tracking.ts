@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {AuthHttpImpl} from "../../services/auth/auth-http-impl";
 import {MQTTService} from "../../services/mqtt/mqtt.service";
-import {UserService} from "../../services/auth/user.service";
 import {TrackingService} from "../../services/tracking/tracking.service";
 import {LocationService} from "../../services/location/location.service";
 import {CoordinateService} from "../../services/location/coordinate.service";
@@ -38,11 +37,12 @@ export class ChallengeTrackingPage {
   public competition: Competition;
   public currUserId: number;
 
+  private submittedTrackings: boolean = false;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public authHttp: AuthHttpImpl,
               public mqttService: MQTTService,
-              private userService: UserService,
               private coordinateService: CoordinateService,
               private locationService: LocationService,
               public trackingService: TrackingService) {
@@ -145,7 +145,8 @@ export class ChallengeTrackingPage {
           }
         }
       }
-    } else if (mqttPacket.type === MQTTPacketType.WIN) {
+    } else if (mqttPacket.type === MQTTPacketType.WIN && !this.submittedTrackings) {
+      this.submittedTrackings = true;
       let winPacket: WinPacket = JSON.parse(message.toString());
       this.stopTracking();
       if (this.currUserId === winPacket.userIdWinner) {
