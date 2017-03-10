@@ -10,8 +10,11 @@ import {Subscription} from "rxjs";
 import {Coordinate} from "../../model/coordinate";
 import {Packet} from 'mqtt';
 
-import {MQTTPacket, MQTTPacketType, TrackingPacket} from "../../services/mqtt/packet/mqtt.packet";
+import {MQTTPacket, MQTTPacketType, TrackingPacket, WinPacket} from "../../services/mqtt/packet/mqtt.packet";
 import {Competition} from "../../model/competition";
+import {TrackingResultPage} from "../tracking-result/tracking-result";
+import {Tracking} from "../../model/tracking";
+import {BACKEND_BASEURL} from "../../assets/globals";
 
 @Component({
   selector: 'page-challenge-tracking',
@@ -72,6 +75,18 @@ export class ChallengeTrackingPage {
     });
   }
 
+  stopTracking(): void {
+    this.locationSubscription.unsubscribe();
+    let newTracking = this.createTracking();
+    this.trackingService.saveTracking(newTracking).subscribe(() => {
+    });
+
+    let params = {tracking: newTracking};
+    this.navCtrl.setRoot(TrackingResultPage, params);
+
+    console.log("Stopped Tracking!");
+  }
+
   private calculateSpeed(distance, currentTime): number {
     let speed = 0;
 
@@ -95,6 +110,19 @@ export class ChallengeTrackingPage {
     return distance;
   }
 
+  private createTracking(): Tracking {
+    let tracking = new Tracking();
+    tracking.avgSpeed = 0; //TODO fix avgSPeed
+    tracking.avgPace = 0; //TODO fix avgPace
+    tracking.competition = null;
+    tracking.coordinates = this.coordinates;
+    tracking.maxSpeed = 0; //TODO fix maxSpeed
+    tracking.totalDistance = this.currUserTotalDistance * 1000;
+    tracking.totalDuration = this.currUserPacketCount; //TODO fix totalDuration
+
+    return tracking;
+  }
+
   private on_next = (message: Packet) => {
     let mqttPacket: MQTTPacket = JSON.parse(message.toString());
     if (mqttPacket.type === MQTTPacketType.TRACKING) {
@@ -106,7 +134,28 @@ export class ChallengeTrackingPage {
         this.challengerPacketCount++;
         this.challengerTotalDistance = trackingPacket.totalDistance;
       }
+      if (this.currUserId === this.competition.userCreated.userId) {
+        if (this.currUserTotalDistance * 1000 >= this.goalDistance) {
+          let winPacket: WinPacket = new WinPacket(this.competition.competitionId, this.currUserId);
+          this.mqttService.publishInCompTopic(JSON.stringify(winPacket), 2);
+        } else if (this.challengerTotalDistance * 1000 >= this.goalDistance) {
+          let challenger = this.competition.usersRun.find((user) => user.userId !== this.currUserId);
+          if (challenger !== null) { // zou altijd true moeten zijn
+            let winPacket: WinPacket = new WinPacket(this.competition.competitionId, challenger.userId);
+          }
+        }
+      }
+    } else if (mqttPacket.type === MQTTPacketType.WIN) {
+      let winPacket: WinPacket = JSON.parse(message.toString());
+      this.stopTracking();
+      if (this.currUserId === winPacket.userIdWinner) {
+        this.authHttp.getAuthHttp()
+          .post(BACKEND_BASEURL + "/api/competitions/wins/" + this.competition.competitionId, "")
+          .subscribe(() => console.log("\'User has won\' has been posted"));
+      }
+      this.authHttp.getAuthHttp()
+        .post(BACKEND_BASEURL + "/api/competitions/addTracking/" + this.competition.competitionId, this.createTracking())
+        .subscribe(() => console.log("Trackings have been posted"));
     }
   }
-
 }
