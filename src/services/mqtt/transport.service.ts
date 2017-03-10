@@ -45,7 +45,7 @@ export interface TransportService {
   subscribe(): void;
 
   /** Send a message to the competition topic */
-  publishInCompTopic(message: string): void;
+  publishInCompTopic(message: string, qos: number): void;
 
   /** Send a message to a friends topic */
   publishInFriendTopic(topic: number, message: string): void;
