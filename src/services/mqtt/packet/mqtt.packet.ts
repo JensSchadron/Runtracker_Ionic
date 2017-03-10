@@ -1,18 +1,19 @@
 import {Goal} from "../../../model/goal";
 import {Coordinate} from "../../../model/coordinate";
 export enum MQTTPacketType {
-  COUNTDOWN,
   INVITE,
   INVITE_RESPONSE,
   READY,
-  TRACKING
+  COUNTDOWN,
+  TRACKING,
+  WIN
 }
 
 export interface MQTTPacket {
   type: MQTTPacketType;
 }
 
-export class InvitePacket implements MQTTPacket{
+export class InvitePacket implements MQTTPacket {
   type: MQTTPacketType = MQTTPacketType.INVITE;
   compId: number;
   username: string;
@@ -25,7 +26,7 @@ export class InvitePacket implements MQTTPacket{
   }
 }
 
-export class InviteResponsePacket implements MQTTPacket{
+export class InviteResponsePacket implements MQTTPacket {
   type: MQTTPacketType = MQTTPacketType.INVITE_RESPONSE;
   compId: number;
   userId: number;
@@ -38,7 +39,7 @@ export class InviteResponsePacket implements MQTTPacket{
   }
 }
 
-export class ReadyPacket implements MQTTPacket{
+export class ReadyPacket implements MQTTPacket {
   type: MQTTPacketType = MQTTPacketType.READY;
   compId: number;
   userId: number;
@@ -51,14 +52,14 @@ export class ReadyPacket implements MQTTPacket{
   }
 }
 
-export class CountdownPacket implements MQTTPacket{
+export class CountdownPacket implements MQTTPacket {
   type: MQTTPacketType = MQTTPacketType.COUNTDOWN;
 
   constructor() {
   }
 }
 
-export class TrackingPacket implements MQTTPacket{
+export class TrackingPacket implements MQTTPacket {
   type: MQTTPacketType = MQTTPacketType.TRACKING;
   compId: number;
   userId: number;
@@ -70,5 +71,17 @@ export class TrackingPacket implements MQTTPacket{
     this.userId = userId;
     this.coordinate = coordinate;
     this.totalDistance = totalDistance;
+  }
+}
+
+export class WinPacket implements MQTTPacket {
+  type: MQTTPacketType = MQTTPacketType.WIN;
+  compId: number;
+  userIdWinner: number;
+
+
+  constructor(compId: number, userIdWinner: number) {
+    this.compId = compId;
+    this.userIdWinner = userIdWinner;
   }
 }
