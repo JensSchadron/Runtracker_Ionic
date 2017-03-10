@@ -1,3 +1,70 @@
 page-challenge-tracking {
 
+  .user-tracking {
+    border-radius: 20px;
+  }
+
+  .fixed-content {
+    background-color: #387ef5;
+  }
+
+  .item-ios,
+  .item-md {
+    padding-left: 0;
+  }
+
+  .item-ios ion-avatar ion-img, .item-ios ion-avatar img,
+  .item-md ion-avatar ion-img, .item-md ion-avatar img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .runner-name {
+    font-size: 1.1em;
+  }
+
+  .status-winning {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color: #ffe718;
+  }
+
+  .status-losing {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color: #387ef5;
+  }
+
+  .status {
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  ion-item-divider ion-label {
+    text-align: center;
+  }
+
+  .distance {
+    padding-right: 5px;
+    font-weight: 700;
+  }
+
+  .divider {
+    color: darkgray;
+    font-weight: 700;
+  }
+
+  .goal {
+    padding-left: 5px;
+    color: darkgray;
+    font-weight: 700;
+  }
+
 }
