@@ -31,12 +31,15 @@ export class ChallengeTrackingPage {
 
   private coordinates: Coordinate[] = [];
   private locationSubscription: Subscription;
+  private competitionSubscription: Subscription;
 
   private currentSpeed: number;
+  private speedStamps: number[] = [];
 
   public competition: Competition;
   public currUserId: number;
 
+  private sendWinPacket: boolean = false;
   private submittedTrackings: boolean = false;
 
   constructor(public navCtrl: NavController,
@@ -49,7 +52,7 @@ export class ChallengeTrackingPage {
     this.goalDistance = this.navParams.get('goalDistance');
     this.competition = this.navParams.get('competition');
     this.currUserId = this.navParams.get('currUserId');
-    this.mqttService.compMessages.subscribe(this.on_next);
+    this.competitionSubscription = this.mqttService.compMessages.subscribe(this.on_next);
   }
 
   ionViewDidLoad() {
@@ -59,10 +62,18 @@ export class ChallengeTrackingPage {
 
   private startTracking(): void {
     this.locationSubscription = this.locationService.receiveLocation().subscribe((position) => {
-      let currCoordinate = new Coordinate(position.coords.latitude, position.coords.longitude, this.currentSpeed);
 
       // Calculate distance
-      this.currUserTotalDistanceVoorBerekening += this.calculateDistance(position.coords.latitude, position.coords.longitude);
+      let distanceTravelled = this.calculateDistance(position.coords.latitude, position.coords.longitude);
+      this.currUserTotalDistanceVoorBerekening += distanceTravelled;
+
+      // Calculate speed
+      this.currentSpeed = this.calculateSpeed(distanceTravelled, Date.now().valueOf());
+      if (this.currentSpeed < 50)
+        this.speedStamps.push(this.currentSpeed);
+
+
+      let currCoordinate = new Coordinate(position.coords.latitude, position.coords.longitude, this.currentSpeed);
       this.coordinates.push(currCoordinate);
 
       let trackingPacket: TrackingPacket =
@@ -70,24 +81,17 @@ export class ChallengeTrackingPage {
           this.competition.competitionId,
           this.currUserId,
           currCoordinate,
-          this.currUserTotalDistanceVoorBerekening);
+          this.currUserTotalDistanceVoorBerekening * 1000 >= this.competition.goal.distance ? this.competition.goal.distance : this.currUserTotalDistanceVoorBerekening);
       this.mqttService.publishInCompTopic(JSON.stringify(trackingPacket), 0);
     });
-  }
+  };
 
   stopTracking(): void {
     this.locationSubscription.unsubscribe();
-    let newTracking = this.createTracking();
-    this.trackingService.saveTracking(newTracking).subscribe(() => {
-    });
-
-    let params = {tracking: newTracking};
-    this.navCtrl.setRoot(TrackingResultPage, params);
-
     console.log("Stopped Tracking!");
   }
 
-  private calculateSpeed(distance, currentTime): number {
+  private  calculateSpeed(distance, currentTime): number {
     let speed = 0;
 
     if (this.coordinates.length > 0) {
@@ -110,15 +114,31 @@ export class ChallengeTrackingPage {
     return distance;
   }
 
+  private calculateAvgSpeed(): number {
+    return this.coordinateService.calculateAvgSpeed(this.speedStamps);
+  }
+
+  private calculateAvgPace(avgSpeed: number): number {
+    return this.coordinateService.calculateAvgPace(avgSpeed);
+  }
+
   private createTracking(): Tracking {
     let tracking = new Tracking();
-    tracking.avgSpeed = 0; //TODO fix avgSPeed
-    tracking.avgPace = 0; //TODO fix avgPace
+
+    let avgSpeed = this.calculateAvgSpeed();
+    let avgPace = this.calculateAvgPace(avgSpeed);
+
+    let maxSpeed = this.speedStamps.sort()[this.speedStamps.length - 1];
+
+    let durationInSeconds = Math.round((this.coordinates[this.coordinates.length - 1].time - this.coordinates[0].time) / 1000);
+
+    tracking.avgSpeed = avgSpeed;
+    tracking.avgPace = avgPace;
     tracking.competition = null;
     tracking.coordinates = this.coordinates;
-    tracking.maxSpeed = 0; //TODO fix maxSpeed
+    tracking.maxSpeed = maxSpeed;
     tracking.totalDistance = this.currUserTotalDistance * 1000;
-    tracking.totalDuration = this.currUserPacketCount; //TODO fix totalDuration
+    tracking.totalDuration = durationInSeconds;
 
     return tracking;
   }
@@ -134,29 +154,43 @@ export class ChallengeTrackingPage {
         this.challengerPacketCount++;
         this.challengerTotalDistance = trackingPacket.totalDistance;
       }
-      if (this.currUserId === this.competition.userCreated.userId) {
+      if (this.currUserId === this.competition.userCreated.userId && !this.sendWinPacket) {
         if (this.currUserTotalDistance * 1000 >= this.competition.goal.distance) {
+          this.sendWinPacket = true;
+
           let winPacket: WinPacket = new WinPacket(this.competition.competitionId, this.currUserId);
           this.mqttService.publishInCompTopic(JSON.stringify(winPacket), 2);
         } else if (this.challengerTotalDistance * 1000 >= this.competition.goal.distance) {
-          let challenger = this.competition.usersRun.find((user) => user.userId !== this.currUserId);
-          if (challenger !== null) { // zou altijd true moeten zijn
-            let winPacket: WinPacket = new WinPacket(this.competition.competitionId, challenger.userId);
-          }
+          this.sendWinPacket = true;
+
+          let challenger = this.competition.usersRun.find((user) => {
+            return user.userId !== this.currUserId
+          });
+
+          let winPacket: WinPacket = new WinPacket(this.competition.competitionId, challenger.userId);
+          this.mqttService.publishInCompTopic(JSON.stringify(winPacket), 2);
         }
       }
     } else if (mqttPacket.type === MQTTPacketType.WIN && !this.submittedTrackings) {
       this.submittedTrackings = true;
-      let winPacket: WinPacket = JSON.parse(message.toString());
+
+      this.competitionSubscription.unsubscribe();
       this.stopTracking();
+
+      let winPacket: WinPacket = JSON.parse(message.toString());
       if (this.currUserId === winPacket.userIdWinner) {
         this.authHttp.getAuthHttp()
           .post(BACKEND_BASEURL + "/api/competitions/wins/" + this.competition.competitionId, "")
           .subscribe(() => console.log("\'User has won\' has been posted"));
       }
+
+      let newTracking = this.createTracking();
       this.authHttp.getAuthHttp()
-        .post(BACKEND_BASEURL + "/api/competitions/addTracking/" + this.competition.competitionId, this.createTracking())
+        .post(BACKEND_BASEURL + "/api/competitions/addTracking/" + this.competition.competitionId, newTracking)
         .subscribe(() => console.log("Trackings have been posted"));
+
+      let params = {tracking: newTracking};
+      this.navCtrl.setRoot(TrackingResultPage, params);
     }
   }
 }
