@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, LoadingController} from 'ionic-angular';
 import {AuthHttpImpl} from "../../services/auth/auth-http-impl";
 import {ChallengeLoadPage} from "../challenge-load/challenge-load";
 import {Goal} from "../../model/goal";
@@ -31,7 +31,7 @@ export class ChallengeDistancePage {
 
   private competition: Competition = new Competition();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authHttp: AuthHttpImpl, public mqttService: MQTTService, private configService: ConfigService, private userService: UserService) {
+  constructor(public loadingCtrl:LoadingController, public navCtrl: NavController, public navParams: NavParams, public authHttp: AuthHttpImpl, public mqttService: MQTTService, private configService: ConfigService, private userService: UserService) {
     this.challengedFriend = this.navParams.get("friend");
     this.authHttp.getAuthHttp().get(BACKEND_BASEURL + "/api/goals/getGoals")
       .map((res: Response) => res.json())
@@ -46,6 +46,11 @@ export class ChallengeDistancePage {
   }
 
   onGoalSelected(goal) {
+    let loader = this.loadingCtrl.create({
+      content: "Please wait..."
+    });
+    loader.present();
+    
     this.competition.goal = goal;
     this.competition.name = "Another competition in the database.";
 
@@ -61,6 +66,7 @@ export class ChallengeDistancePage {
                 let mqttPayload = new InvitePacket(comp.competitionId, comp.userCreated.firstname + " " + comp.userCreated.lastname, comp.goal);
                 this.mqttService.publishInFriendTopic(this.challengedFriend.userId, JSON.stringify(mqttPayload));
 
+                loader.dismiss();
                 this.navCtrl.push(this.loadingPage, {
                   compId: comp.competitionId,
                   goalDistance: comp.goal.distance
@@ -70,6 +76,8 @@ export class ChallengeDistancePage {
         });
       });
   }
+
+
 
   private handleError(error: Response | any): Observable<any> {
     let errMsg: string;

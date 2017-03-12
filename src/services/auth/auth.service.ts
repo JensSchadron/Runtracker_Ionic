@@ -1,14 +1,15 @@
-import { AuthHttp, JwtHelper, tokenNotExpired } from 'angular2-jwt';
-import { Injectable }                           from '@angular/core';
-import { Observable }                           from 'rxjs/Rx';
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
+import {Injectable}                           from '@angular/core';
+import {Observable}                           from 'rxjs/Rx';
 
-import { Auth0Vars }                            from '../../auth0-variables';
-import   Auth0                                  from 'auth0-js';
-import { App }                                  from "ionic-angular";
-import { HomePage }                             from "../../pages/home/home";
-import { LoginPage }                            from "../../pages/login/login";
-import { Profileinfo }                          from "../../model/profileinfo";
-import { UserService }                          from "./user.service";
+import {Auth0Vars}                            from '../../auth0-variables';
+import   Auth0                                from 'auth0-js';
+import {App}                                  from "ionic-angular";
+import {HomePage}                             from "../../pages/home/home";
+import {LoginPage}                            from "../../pages/login/login";
+import {Profileinfo}                          from "../../model/profileinfo";
+import {UserService}                          from "./user.service";
+import any = jasmine.any;
 
 declare let auth0: any;
 
@@ -71,8 +72,8 @@ export class AuthService {
               this.userService.setOnline().subscribe(() => {
                 console.log("User is now online.");
               });
+              obs.complete();
               this.app.getActiveNav().setRoot(HomePage);
-              return obs.complete();
             });
           }).catch((rejected) => console.log(rejected));
         }

@@ -13,7 +13,7 @@
 
   <ion-card>
     <ion-card-content>
-      <h1 id="greeting">{{greeting}}, {{user?.firstname}}</h1>
+      <h1 id="greeting">{{greeting}}<span *ngIf="user.firstname">, {{user?.firstname}}</span></h1>
     </ion-card-content>
   </ion-card>
 

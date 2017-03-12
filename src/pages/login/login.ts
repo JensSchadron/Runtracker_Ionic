@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { AlertController, LoadingController } from 'ionic-angular';
-import { AuthService } from '../../services/auth/auth.service';
+import {Component, NgZone} from '@angular/core';
+import {AlertController, LoadingController} from 'ionic-angular';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'page-login',
@@ -9,10 +9,13 @@ import { AuthService } from '../../services/auth/auth.service';
 
 export class LoginPage {
   loginOrSignUp: string = "login";
+  private loading;
 
   // We need to inject AuthService so that we can use it in the view
-  constructor(private auth: AuthService, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
-
+  constructor(private auth: AuthService, private zone: NgZone, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+    this.loading = this.loadingCtrl.create({
+      content: 'Logging in...'
+    });
   }
 
   static allFieldsFilledIn(mailaddress, password): boolean {
@@ -20,63 +23,70 @@ export class LoginPage {
   }
 
   public loginWithErrorHandling(mailaddress, password) {
-    let loading = this.loadingCtrl.create({
-      content: 'Logging in...'
-    });
-
-    loading.present();
+    this.loading.present();
 
     if (LoginPage.allFieldsFilledIn(mailaddress, password)) {
-      this.auth.login(mailaddress, password).subscribe(data => {
-        console.log('login success');
-      }, err => {
-        let alertTitle = 'Login error';
-        let alertMessage = 'An error has occurred while logging in.';
+      this.auth.login(mailaddress, password).subscribe(null,
+        (err) => {
+          let alertTitle = 'Login error';
+          let alertMessage = 'An error has occurred while logging in.';
 
-        console.log(alertTitle);
+          console.log(alertTitle);
 
-        this.showAlert(alertTitle, alertMessage)
-      });
+          this.zone.run(() => {
+            this.loading.dismiss()
+          });
+
+          this.showAlert(alertTitle, alertMessage)
+        },
+        () => {
+          console.log('login success');
+          this.zone.run(() => {
+            this.loading.dismiss();
+          });
+        });
     } else {
       let alertTitle = 'Login error';
       let alertMessage = 'An error has occurred while logging in.';
 
       console.log(alertTitle);
 
+      this.loading.dismiss();
+
       this.showAlert(alertTitle, alertMessage)
     }
 
-    loading.dismiss();
   }
 
   public signUpWithErrorHandling(mailaddress, password) {
-    let loading = this.loadingCtrl.create({
-      content: 'Logging in...'
-    });
-
-    loading.present();
+    this.loading.present();
 
     if (LoginPage.allFieldsFilledIn(mailaddress, password)) {
-      this.auth.signup(mailaddress, password).subscribe(data => {
-          let alertTitle = 'Sign up success';
-          let alertMessage = 'A verification email will be sent.';
-
-          console.log(alertTitle);
-
-          this.showAlert(alertTitle, alertMessage)
-
-        }, err => {
+      this.auth.signup(mailaddress, password).subscribe(null,
+        (err) => {
           let alertTitle = 'Sign up error';
           let alertMessage = 'An error has occurred while signing up.';
 
           console.log(alertTitle);
 
+          this.loading.dismiss();
+
+          this.showAlert(alertTitle, alertMessage)
+        },
+        () => {
+          let alertTitle = 'Sign up success';
+          let alertMessage = 'A verification email will be sent.';
+
+          console.log(alertTitle);
+
+          this.zone.run(() => {
+            this.loading.dismiss();
+          });
+
           this.showAlert(alertTitle, alertMessage)
         }
       );
     }
-
-    loading.dismiss();
   }
 
   private showAlert(alertTitle, alertMessage) {
