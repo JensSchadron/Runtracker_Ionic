@@ -6,6 +6,8 @@ import { HomePage }                 from '../pages/home/home';
 import { LoginPage }                from "../pages/login/login";
 import { FriendsProfilePage }       from "../pages/friends-profile/friends-profile";
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
+import { AvatarModalPage }          from "../pages/editprofile/editprofile";
+
 
 import { SoloLocationPage }         from "../pages/solo-location/solo-location";
 import { CountdownPage }            from "../pages/countdown/countdown";
@@ -47,6 +49,7 @@ import {CoreInfoPart} from "../pages/shared/core-info";
     LoginPage,
     FriendsProfilePage,
     EditprofilePage,
+    AvatarModalPage,
     FriendsPage,
     FriendsRequestsPage,
     AddFriendsPage,
@@ -75,6 +78,7 @@ import {CoreInfoPart} from "../pages/shared/core-info";
     LoginPage,
     FriendsProfilePage,
     EditprofilePage,
+    AvatarModalPage,
     FriendsPage,
     FriendsRequestsPage,
     AddFriendsPage,
