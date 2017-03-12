@@ -37,7 +37,7 @@ export class RankingPage implements OnInit{
     this.friends = true;
     this.rankingService.getFriends(option).subscribe(
       (users) => {
-        this.users = users;
+        this.users = users.slice(0,10);
       },
       error => {
         console.log(error as string);
@@ -51,7 +51,7 @@ export class RankingPage implements OnInit{
     this.friends = false;
     this.rankingService.getUsers(option).subscribe(
       (users) => {
-        this.users = users;
+        this.users = users.slice(0,10);
       },
       error => {
         console.log(error as string);
