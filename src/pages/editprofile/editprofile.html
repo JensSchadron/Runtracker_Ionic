@@ -13,6 +13,9 @@
     <ion-avatar id="avatar">
       <img class="avatar" [src]="'assets/img/avatars/' + user.avatar + '.png'">
     </ion-avatar>
+    <div id="change-avatar">
+    <button ion-button outline (click)="openModal()">Change avatar</button>
+    </div>
     <ion-card>
       <ion-card-title>Personal info</ion-card-title>
       <ion-list>

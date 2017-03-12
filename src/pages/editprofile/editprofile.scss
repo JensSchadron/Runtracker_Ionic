@@ -16,6 +16,10 @@ page-editprofile{
       height:50%;
       border-radius: 50%;
     }
+    #change-avatar{
+      position: relative;
+      text-align: center;
+    }
 
     ion-card-title {
       padding-left: 4.8%;
@@ -26,7 +30,42 @@ page-editprofile{
     input{
       text-align: right;
     }
+    .btn-save{
+      margin: auto;
+      width: 80%;
+    }
+    .trophy{
+      font-size: 2em;
+    }
+    .trophy-won{
+      color: gold;
+      font-size: 2em;
+    }
+    .user-data{
+      font-size: 2rem;
+      margin-top:1rem;
+      color:#777777;
+      font-weight: normal;
+    }
+    ion-col{
+      font-weight: 500;
+    }
+    #core-info{
+      margin-bottom: 3rem;
+    }
+    #user-data-card{
+      margin-bottom: 15%;
+    }
 
   }
 
+}
+modal-avatar{
+  ion-card-title{
+    text-align: center;
+    padding-left: 4.8%;
+    padding-top: 4.8%;
+    padding-bottom: 4.8%;
+    font-weight: bold;
+  }
 }
