@@ -1,14 +1,26 @@
 page-challenge-load {
   div {
-    .readyIndicator {
-      width: 50px;
-      height: 50px;
-      background-color: #f53d3d;
-    }
 
     .ready {
       background-color: #2ec95c !important;
     }
+
+    .state-waiting {
+      text-align: center;
+      color: darkgray;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.8em;
+    }
+
+    .state-ready {
+      text-align: center;
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.8em;
+    }
+
   }
 
   ion-content {

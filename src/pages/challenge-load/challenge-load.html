@@ -18,9 +18,11 @@
           {{challenger.username}}
         </h3>
       </ion-item>
-      <div class="readyIndicator"
-           [ngClass]="{'ready': (challenger.userId === currUser?.userId ? userReady : challengerReady)}"></div>
     </ion-card-content>
+    <ion-item-divider color="light" [ngClass]="{'ready': (challenger.userId === currUser?.userId ? userReady : challengerReady)}">
+      <p *ngIf="!(challenger.userId === currUser?.userId ? userReady : challengerReady)" class="state-waiting">Waiting</p>
+      <p *ngIf="(challenger.userId === currUser?.userId ? userReady : challengerReady)" class="state-ready">Ready</p>
+    </ion-item-divider>
   </ion-card>
 </ion-content>
 
