@@ -24,7 +24,7 @@ export class TrackingResultPage {
   avgPaceDisplay: string;
   avgSpeedDisplay: number;
   maxSpeedDisplay: number;
-  coordinates: Coordinate[];
+  coordinates: Coordinate[] = [];
 
   wasCompetition: boolean;
   hasWon: boolean;
