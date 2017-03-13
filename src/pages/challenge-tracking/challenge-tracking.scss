@@ -39,6 +39,14 @@ page-challenge-tracking {
     background-color: #387ef5;
   }
 
+  .status-tie {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color: lightgray;
+  }
+
   .status {
     color: white;
     text-transform: uppercase;
@@ -65,6 +73,10 @@ page-challenge-tracking {
     padding-left: 5px;
     color: darkgray;
     font-weight: 700;
+  }
+
+  ion-footer {
+    background-color: #387ef5;
   }
 
 }

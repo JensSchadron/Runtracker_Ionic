@@ -9,7 +9,10 @@ import {Subscription} from "rxjs";
 import {Coordinate} from "../../model/coordinate";
 import {Packet} from 'mqtt';
 
-import {MQTTPacket, MQTTPacketType, TrackingPacket, WinPacket} from "../../services/mqtt/packet/mqtt.packet";
+import {
+  MQTTPacket, MQTTPacketType, TrackingPacket, WinPacket,
+  SurrenderPacket
+} from "../../services/mqtt/packet/mqtt.packet";
 import {Competition} from "../../model/competition";
 import {TrackingResultPage} from "../tracking-result/tracking-result";
 import {Tracking} from "../../model/tracking";
@@ -81,7 +84,7 @@ export class ChallengeTrackingPage {
           this.competition.competitionId,
           this.currUserId,
           currCoordinate,
-          this.currUserTotalDistanceVoorBerekening * 1000 >= this.competition.goal.distance ? this.competition.goal.distance : this.currUserTotalDistanceVoorBerekening);
+          this.currUserTotalDistanceVoorBerekening >= this.competition.goal.distance / 1000 ? this.competition.goal.distance : this.currUserTotalDistanceVoorBerekening);
       this.mqttService.publishInCompTopic(JSON.stringify(trackingPacket), 0);
     });
   };
@@ -91,7 +94,7 @@ export class ChallengeTrackingPage {
     console.log("Stopped Tracking!");
   }
 
-  private  calculateSpeed(distance, currentTime): number {
+  private calculateSpeed(distance, currentTime): number {
     let speed = 0;
 
     if (this.coordinates.length > 0) {
@@ -125,12 +128,12 @@ export class ChallengeTrackingPage {
   private createTracking(): Tracking {
     let tracking = new Tracking();
 
-    let avgSpeed = this.calculateAvgSpeed();
+    let avgSpeed = (this.speedStamps.length == 0) ? 0 : this.calculateAvgSpeed();
     let avgPace = this.calculateAvgPace(avgSpeed);
 
-    let maxSpeed = this.speedStamps.sort()[this.speedStamps.length - 1];
+    let maxSpeed = (this.speedStamps.length == 0) ? 0 : this.speedStamps.sort()[this.speedStamps.length - 1];
 
-    let durationInSeconds = Math.round((this.coordinates[this.coordinates.length - 1].time - this.coordinates[0].time) / 1000);
+    let durationInSeconds = (this.coordinates.length === 0) ? 0 : Math.round((this.coordinates[this.coordinates.length - 1].time - this.coordinates[0].time) / 1000);
 
     tracking.avgSpeed = avgSpeed;
     tracking.avgPace = avgPace;
@@ -191,6 +194,36 @@ export class ChallengeTrackingPage {
 
       let params = {tracking: newTracking};
       this.navCtrl.setRoot(TrackingResultPage, params);
+    } else if (mqttPacket.type === MQTTPacketType.SURRENDER && !this.submittedTrackings) {
+      this.submittedTrackings = true;
+
+      this.competitionSubscription.unsubscribe();
+      this.stopTracking();
+
+      let surrenderPacket: SurrenderPacket = JSON.parse(message.toString());
+      if (surrenderPacket.userIdSurrendered !== this.currUserId) {
+        this.authHttp.getAuthHttp()
+          .post(BACKEND_BASEURL + "/api/competitions/wins/" + this.competition.competitionId, "")
+          .subscribe(() => console.log("\'User has won\' has been posted"));
+      }
+
+      let newTracking = this.createTracking();
+      this.authHttp.getAuthHttp()
+        .post(BACKEND_BASEURL + "/api/competitions/addTracking/" + this.competition.competitionId, newTracking)
+        .subscribe(() => console.log("Trackings have been posted"));
+
+      let params = {tracking: newTracking, hasWon: this.currUserId !== surrenderPacket.userIdSurrendered };
+      this.navCtrl.setRoot(TrackingResultPage, params);
     }
   }
+
+  private surrender(): void {
+    let surrenderPacket: SurrenderPacket =
+      new SurrenderPacket(
+        this.competition.competitionId,
+        this.currUserId);
+
+    this.mqttService.publishInCompTopic(JSON.stringify(surrenderPacket), 2);
+  }
+
 }

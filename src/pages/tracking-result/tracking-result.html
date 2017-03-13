@@ -5,6 +5,13 @@
       <ion-card-content>
         <ion-grid>
 
+          <ion-row *ngIf="(hasWon !== null)">
+            <ion-col>
+              <p *ngIf="hasWon">You won!</p>
+              <p *ngIf="!hasWon">You lost!</p>
+            </ion-col>
+          </ion-row>
+
           <ion-row>
             <ion-col text-center class="border-bottom padding-bottom">
               <span id="time">{{durationDisplay}}</span>
@@ -34,7 +41,7 @@
             </ion-col>
           </ion-row>
 
-          <div #resultmap id="resultmap">
+          <div *ngIf="(coordinates != null || coordinates.length > 0)" #resultmap id="resultmap">
             <ion-spinner></ion-spinner>
           </div>
 

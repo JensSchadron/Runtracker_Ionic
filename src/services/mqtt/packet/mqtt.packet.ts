@@ -6,7 +6,8 @@ export enum MQTTPacketType {
   READY,
   COUNTDOWN,
   TRACKING,
-  WIN
+  WIN,
+  SURRENDER
 }
 
 export interface MQTTPacket {
@@ -79,9 +80,19 @@ export class WinPacket implements MQTTPacket {
   compId: number;
   userIdWinner: number;
 
-
   constructor(compId: number, userIdWinner: number) {
     this.compId = compId;
     this.userIdWinner = userIdWinner;
+  }
+}
+
+export class SurrenderPacket implements MQTTPacket {
+  type: MQTTPacketType = MQTTPacketType.SURRENDER;
+  compId: number;
+  userIdSurrendered: number;
+
+  constructor(compId: number, userIdSurrendered: number) {
+    this.compId = compId;
+    this.userIdSurrendered = userIdSurrendered;
   }
 }

@@ -4,6 +4,7 @@ import {HomePage} from "../home/home";
 import {Tracking} from "../../model/tracking";
 import {CoordinateService} from "../../services/location/coordinate.service";
 import {Coordinate} from "../../model/coordinate";
+import {User} from "../../model/user";
 
 declare var google;
 
@@ -25,6 +26,8 @@ export class TrackingResultPage {
   maxSpeedDisplay: number;
   coordinates: Coordinate[];
 
+  hasWon: Boolean;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public coordinateService: CoordinateService) {
     this.trackingResult = this.navParams.get("tracking");
     this.durationDisplay = this.coordinateService.getSecondsAsDigitalClock(this.trackingResult.totalDuration);
@@ -33,6 +36,7 @@ export class TrackingResultPage {
     this.avgSpeedDisplay = +this.trackingResult.avgSpeed.toFixed(2);
     this.maxSpeedDisplay = +this.trackingResult.maxSpeed.toFixed(2);
     this.coordinates = this.trackingResult.coordinates;
+    this.hasWon = this.navParams.get("hasWon");
   }
 
   ionViewDidLoad() {
