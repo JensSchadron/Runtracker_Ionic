@@ -26,7 +26,8 @@ export class TrackingResultPage {
   maxSpeedDisplay: number;
   coordinates: Coordinate[];
 
-  hasWon: Boolean;
+  wasCompetition: boolean;
+  hasWon: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public coordinateService: CoordinateService) {
     this.trackingResult = this.navParams.get("tracking");
@@ -36,6 +37,7 @@ export class TrackingResultPage {
     this.avgSpeedDisplay = +this.trackingResult.avgSpeed.toFixed(2);
     this.maxSpeedDisplay = +this.trackingResult.maxSpeed.toFixed(2);
     this.coordinates = this.trackingResult.coordinates;
+    this.wasCompetition = this.navParams.get("wasCompetition");
     this.hasWon = this.navParams.get("hasWon");
   }
 
@@ -197,9 +199,6 @@ export class TrackingResultPage {
       this.coordinates.forEach((c) => {
         runningCoordinates.push({lat: c.lat, lng: c.lon})
       });
-    } else {
-      runningCoordinates.push({lat: 51, lng: 48});
-      runningCoordinates.push({lat: 50, lng: 49});
     }
 
     return runningCoordinates;

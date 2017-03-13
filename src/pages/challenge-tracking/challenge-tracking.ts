@@ -192,7 +192,7 @@ export class ChallengeTrackingPage {
         .post(BACKEND_BASEURL + "/api/competitions/addTracking/" + this.competition.competitionId, newTracking)
         .subscribe(() => console.log("Trackings have been posted"));
 
-      let params = {tracking: newTracking};
+      let params = {tracking: newTracking, wasCompetition: true, hasWon: this.currUserId === winPacket.userIdWinner };
       this.navCtrl.setRoot(TrackingResultPage, params);
     } else if (mqttPacket.type === MQTTPacketType.SURRENDER && !this.submittedTrackings) {
       this.submittedTrackings = true;
@@ -212,7 +212,7 @@ export class ChallengeTrackingPage {
         .post(BACKEND_BASEURL + "/api/competitions/addTracking/" + this.competition.competitionId, newTracking)
         .subscribe(() => console.log("Trackings have been posted"));
 
-      let params = {tracking: newTracking, hasWon: this.currUserId !== surrenderPacket.userIdSurrendered };
+      let params = {tracking: newTracking, wasCompetition: true, hasWon: this.currUserId !== surrenderPacket.userIdSurrendered };
       this.navCtrl.setRoot(TrackingResultPage, params);
     }
   }

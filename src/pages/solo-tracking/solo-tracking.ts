@@ -159,13 +159,19 @@ export class SolotrackingPage {
     let newTracking = this.createTracking();
     this.trackingService.saveTracking(newTracking).subscribe(() => { });
 
-    let params = { tracking: newTracking };
+    let params = { tracking: newTracking, wasCompetition: false };
     this.navCtrl.setRoot(TrackingResultPage, params);
 
     console.log("Stopped Tracking!");
   }
 
   private createTracking(): Tracking {
+    if (this.speedStamps.length === 0) {
+      this.speedStamps.push(0);
+      this.avgSpeed = 0;
+      this.avgPace = 0;
+    }
+
     let tracking           = new Tracking();
     tracking.avgSpeed      = this.avgSpeed;
     tracking.avgPace       = this.avgPace;
