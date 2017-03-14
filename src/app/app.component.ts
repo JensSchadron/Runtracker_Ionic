@@ -15,7 +15,7 @@ import { TabsPage }                 from "../pages/friends/tabs/tabs";
 
 import { AuthService }              from '../services/auth/auth.service';
 import { UserService }              from "../services/auth/user.service";
-import {LocationService} from "../services/location/location.service";
+import { LocationService }          from "../services/location/location.service";
 
 
 

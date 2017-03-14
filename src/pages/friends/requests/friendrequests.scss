@@ -1,5 +1,7 @@
 page-friendrequests{
+
  .list-avatar-page-requests{
+
    .spinner{
      margin: auto;
      position: absolute;
@@ -7,21 +9,31 @@ page-friendrequests{
      height: 85px;
      text-align: center;
    }
-   .accept{
+
+   .accept {
+     display: inline-block;
      color: limegreen;
-     font-size: 1.5em;
-     margin-right:3%;
+     font-size: 2.5em;
+     margin-right: 20px;
    }
-   .decline{
+
+   .decline {
+     display: inline-block;
      color: red;
-     font-size: 1.5em;
+     font-size: 2.5em;
      margin-right:3%;
    }
+
    .no-data{
      text-align: center;
      margin-right: 5%;
      margin-left:5%;
      margin-top: 10%;
    }
+
+   .test {
+     display: inline-block;
+   }
+
  }
 }
