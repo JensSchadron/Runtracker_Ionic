@@ -31,15 +31,16 @@ describe('Home page - general', () => {
   });
 
   afterAll(() => {
-    browser.waitForAngularEnabled(true);
-
     let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
     btnMenuNavDrawer.click().then(() => {
       browser.driver.sleep(2000);
-      let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
+
+      let btnLogout = element(by.tagName('ion-menu')).all(by.tagName('button')).last();
       btnLogout.click().then(() => {
-        console.log("Log out button clicked.");
+        console.log("logout clicked");
         browser.driver.sleep(6000);
+
+        browser.waitForAngularEnabled(true);
       });
     });
   });
