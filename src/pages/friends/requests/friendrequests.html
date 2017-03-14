@@ -38,22 +38,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block (click)="onAddFriendsBtnClick()">Add New Friend</button>
+        <button ion-button block (click)="onAddFriendsBtnClick()" id="button-addfriends">Add New Friend</button>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-footer>
-<!--<ion-content>
-  <ion-searchbar [(ngModel)]="queryStringMyFriends"></ion-searchbar>
-  <div class="no-data" *ngIf="potentialFriends==null || potentialFriends.length==0">
-    <h5>No friends found. You can do friendship requests by clicking the <strong> "Search friends" </strong>
-      tab or come back later.</h5>
-  </div>
-  <ul id="friends-list">
-    <li *ngFor="let friend of potentialFriends; let i = index">
-      <p> {{friend.username}}</p>
-    </li>
-  </ul>
-</ion-content>-->
 
 

@@ -1,14 +1,14 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>
+    <ion-title id="tab-title">
       {{this.tabRef?.getSelected()?.tabTitle}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-tabs #tabs>
-  <ion-tab [root]="friendsPage" tabTitle="Friends" tabIcon="people" tab></ion-tab>
-  <ion-tab [show]="requests === null || requests?.length === 0" [root]="friendRequestsPage" tabTitle="Requests" tabIcon="person-add"></ion-tab>
-  <ion-tab [show]="requests !== null && requests?.length !== 0" [root]="friendRequestsPage" tabTitle="Requests" tabIcon="person-add"
+  <ion-tab [root]="friendsPage" tabTitle="Friends" tabIcon="people" tab class="tab-friend"></ion-tab>
+  <ion-tab [show]="requests === null || requests?.length === 0" [root]="friendRequestsPage" tabTitle="Requests" tabIcon="person-add" class="tab-request"></ion-tab>
+  <ion-tab [show]="requests !== null && requests?.length !== 0" [root]="friendRequestsPage" tabTitle="Requests" tabIcon="person-add" class="tab-request"
            tabBadge="{{requests?.length}}" tabBadgeStyle="danger"></ion-tab>
 </ion-tabs>

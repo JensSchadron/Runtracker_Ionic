@@ -10,7 +10,7 @@
   </div>
   <div *ngIf="friendsLoaded">
   <ion-list>
-    <ion-list-header>Online</ion-list-header>
+    <ion-list-header id="online-friends">Online</ion-list-header>
     <div *ngFor="let friend of friends | SearchPipe:queryStringMyFriends" (click)="onFriendClick(friend)">
       <ion-item *ngIf="friend.online">
         <ion-avatar item-left>
@@ -28,7 +28,7 @@
 
 
   <ion-list>
-    <ion-list-header>Offline</ion-list-header>
+    <ion-list-header id="offline-friends">Offline</ion-list-header>
     <div *ngFor="let friend of friends | SearchPipe:queryStringMyFriends">
       <ion-item *ngIf="!friend.online" (click)="onFriendClick(friend)">
         <ion-avatar item-left>
@@ -45,17 +45,6 @@
   </div>
 
 </ion-content>
-<!--<ion-content>
-  <ion-searchbar [(ngModel)]="queryStringMyFriends"></ion-searchbar>
-  <div class="no-data" *ngIf="potentialFriends==null || potentialFriends.length==0">
-    <h5>No friends found. You can do friendship requests by clicking the <strong> "Search friends" </strong>
-      tab or come back later.</h5>
-  </div>
-  <ul id="friends-list">
-    <li *ngFor="let friend of potentialFriends; let i = index">
-      <p> {{friend.username}}</p>
-    </li>
-  </ul>
-</ion-content>-->
+
 
 

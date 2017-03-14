@@ -1,4 +1,3 @@
-
 import {by, element, browser} from "protractor";
 describe('EditProfile-page', () => {
   beforeAll(() => {

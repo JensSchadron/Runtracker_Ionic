@@ -27,7 +27,7 @@ describe('Friends-page', () => {
       browser.driver.sleep(2000);
       let btnFriends= element(by.className('list')).all(by.tagName('button')).get(2);
       btnFriends.click().then(() =>{
-        console.log("Profile button clicked.");
+        console.log("Friends button clicked.");
         browser.driver.sleep(15000);
       });
     });
@@ -47,7 +47,44 @@ describe('Friends-page', () => {
 
   });
 
+  it('should have friend lists', () => {
 
+    browser.driver.sleep(6000);
+    let searchBar = element(by.tagName('ion-searchbar'));
+    let listOnlineFriends = element(by.id('online-friends'));
+    let listOfflineFriends = element(by.id('offline-friends'));
+    expect(searchBar.isPresent()).toBeTruthy();
+    expect(listOnlineFriends.isPresent()).toBeTruthy();
+    expect(listOnlineFriends.getText()).toBe('Online');
+    expect(listOfflineFriends.isPresent()).toBeTruthy();
+    expect(listOfflineFriends.getText()).toBe('Offline');
+  });
+
+  /*
+  it('should have add friends button', () => {
+
+    let tabRequest= element.all(by.className("tab-requests")).get(0);
+    tabRequest.click().then(()=>{
+        console.log('Request button clicked');
+        browser.sleep(2000);
+      }
+    );
+    let btnAddNewFriends = element(by.id('button-addfriends'));
+    expect(btnAddNewFriends.isPresent()).toBeTruthy();
+    btnAddNewFriends.click().then(()=>{
+        console.log('Add new friends button clicked');
+        browser.sleep(2000);
+      }
+    );
+    let searchBar = element(by.tagName('ion-searchbar'));
+    let listsAddNewFriends = element(by.id('add-new-friends'));
+    expect(searchBar.isPresent()).toBeTruthy();
+    expect(listsAddNewFriends.isPresent()).toBeTruthy();
+    expect(listsAddNewFriends.getText()).toBe('Add New Friends');
+
+  });
+
+*/
 afterAll(() => {
     browser.waitForAngularEnabled(true);
 

@@ -19,7 +19,7 @@
   </div>
   <ion-searchbar [(ngModel)]="queryString"></ion-searchbar>
   <ion-list>
-    <ion-list-header>Add New Friends</ion-list-header>
+    <ion-list-header id="add-new-friends">Add New Friends</ion-list-header>
     <div *ngFor="let friend of potentialFriends | SearchPipe:queryString">
       <ion-item>
         <ion-avatar item-left>
