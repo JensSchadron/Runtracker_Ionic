@@ -33,23 +33,16 @@ describe('Ranking-page', () => {
     });
   });
 
-  it('should have a correct title', () => {
-    let title = element(by.tagName('h1'));
-    expect(title.isPresent()).toBeTruthy();
-    expect(title.getText()).toContain('Ranking');
-  });
 
-  it('should have buttons, input & header ', () => {
+  it('should have all elements on page', () => {
     let btnWorld = element(by.id('button-world'));
     let btnFriends = element(by.id('button-friends'));
     let selectSort = element(by.id('orderby-select'));
-    let header = element(by.tagName('h1'));
-    let colHeader = element(by.className('ranking-header'));
+    let title = element(by.tagName('h1'));
+    expect(title.isPresent()).toBeTruthy();
     expect(btnWorld.isPresent()).toBeTruthy();
     expect(btnFriends.isPresent()).toBeTruthy();
     expect(selectSort.isPresent()).toBeTruthy();
-    expect(header.isPresent()).toBeTruthy();
-    expect(header.isPresent()).toBeTruthy();
   });
 
   afterAll(() => {
