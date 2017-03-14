@@ -125,13 +125,37 @@ export class ChallengeTrackingPage {
     return this.coordinateService.calculateAvgPace(avgSpeed);
   }
 
+  private calculateMaxSpeed(): number {
+    if (this.speedStamps !== null && this.speedStamps.length > 0) {
+      let sum = 0;     // stores sum of elements
+      let sumsq = 0; // stores sum of squares
+      for (let i = 0; i < this.speedStamps.length; ++i) {
+        sum += this.speedStamps[i];
+        sumsq += this.speedStamps[i] * this.speedStamps[i];
+      }
+      let mean = sum / this.speedStamps.length;
+      let varience = sumsq / this.speedStamps.length - mean * mean;
+      let sd = Math.sqrt(varience);
+      let data3 = []; // uses for data which is 3 standard deviations from the mean
+      for (let i = 0; i < this.speedStamps.length; ++i) {
+        if (this.speedStamps[i] > mean - 3 * sd && this.speedStamps[i] < mean + 3 * sd)
+          data3.push(this.speedStamps[i]);
+      }
+      return data3.sort()[data3.length - 1];
+    } else {
+      return 0;
+    }
+
+
+  }
+
   private createTracking(): Tracking {
     let tracking = new Tracking();
 
     let avgSpeed = (this.speedStamps.length == 0) ? 0 : this.calculateAvgSpeed();
     let avgPace = this.calculateAvgPace(avgSpeed);
 
-    let maxSpeed = (this.speedStamps.length == 0) ? 0 : this.speedStamps.sort()[this.speedStamps.length - 1];
+    let maxSpeed = this.calculateMaxSpeed();
 
     let durationInSeconds = (this.coordinates.length === 0) ? 0 : Math.round((this.coordinates[this.coordinates.length - 1].time - this.coordinates[0].time) / 1000);
 
@@ -192,7 +216,7 @@ export class ChallengeTrackingPage {
         .post(BACKEND_BASEURL + "/api/competitions/addTracking/" + this.competition.competitionId, newTracking)
         .subscribe(() => console.log("Trackings have been posted"));
 
-      let params = {tracking: newTracking, wasCompetition: true, hasWon: this.currUserId === winPacket.userIdWinner };
+      let params = {tracking: newTracking, wasCompetition: true, hasWon: this.currUserId === winPacket.userIdWinner};
       this.navCtrl.setRoot(TrackingResultPage, params);
     } else if (mqttPacket.type === MQTTPacketType.SURRENDER && !this.submittedTrackings) {
       this.submittedTrackings = true;
@@ -212,7 +236,11 @@ export class ChallengeTrackingPage {
         .post(BACKEND_BASEURL + "/api/competitions/addTracking/" + this.competition.competitionId, newTracking)
         .subscribe(() => console.log("Trackings have been posted"));
 
-      let params = {tracking: newTracking, wasCompetition: true, hasWon: this.currUserId !== surrenderPacket.userIdSurrendered };
+      let params = {
+        tracking: newTracking,
+        wasCompetition: true,
+        hasWon: this.currUserId !== surrenderPacket.userIdSurrendered
+      };
       this.navCtrl.setRoot(TrackingResultPage, params);
     }
   }

@@ -77,7 +77,7 @@ export class EditprofilePage {
         alert.present()
       }
       else {
-        this.errorMsg = "Username not available. Please choose another username."
+        this.errorMsg = "Username not available. Please choose another username.";
         let alert = this.alerCtrl.create({
           title: 'Username already taken!',
           message: 'Choose another username',
