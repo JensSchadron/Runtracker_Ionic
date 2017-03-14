@@ -27,7 +27,6 @@ describe('Friends-page', () => {
       browser.driver.sleep(2000);
       let btnFriends = element(by.className('list')).all(by.tagName('button')).get(2);
       btnFriends.click().then(() => {
-        console.log("Friends button clicked.");
         browser.driver.sleep(4000);
       });
     });

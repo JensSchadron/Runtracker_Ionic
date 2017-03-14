@@ -27,7 +27,6 @@ describe('Ranking-page', () => {
       browser.driver.sleep(2000);
       let btnRanking = element(by.className('list')).all(by.tagName('button')).get(4);
       btnRanking.click().then(() => {
-        console.log("Ranking button clicked.");
         browser.driver.sleep(4000);
       });
     });

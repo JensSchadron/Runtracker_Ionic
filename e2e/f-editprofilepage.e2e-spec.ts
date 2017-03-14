@@ -23,7 +23,6 @@ describe('EditProfile-page', () => {
       browser.driver.sleep(2000);
       let btnEditProf = element(by.className('list')).all(by.tagName('button')).get(3);
       btnEditProf.click().then(() => {
-        console.log("Profile button clicked.");
         browser.driver.sleep(4000);
       });
     });
