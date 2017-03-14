@@ -21,10 +21,9 @@ describe('EditProfile-page', () => {
     let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
     btnMenuNavDrawer.click().then(() => {
       browser.driver.sleep(2000);
-      let btnEditProf= element(by.className('list')).all(by.tagName('button')).get(3);
-      btnEditProf.click().then(() =>{
-        console.log("Profile button clicked.");
-        browser.driver.sleep(15000);
+      let btnEditProf = element(by.className('list')).all(by.tagName('button')).get(3);
+      btnEditProf.click().then(() => {
+        browser.driver.sleep(4000);
       });
     });
 
@@ -34,9 +33,9 @@ describe('EditProfile-page', () => {
   it('should have ion-avatar,core-info, title & save changes button', () => {
 
     let saveChanges = element(by.id("save-changes"));
-    let avatar= element(by.id("avatar"));
+    let avatar = element(by.id("avatar"));
     let title = element(by.id("title"));
-    let coreInfo= element(by.id("core-info"));
+    let coreInfo = element(by.id("core-info"));
 
     expect(saveChanges.isPresent()).toBeTruthy();
     expect(avatar.isPresent()).toBeTruthy();
@@ -46,14 +45,24 @@ describe('EditProfile-page', () => {
 
   });
 
-  afterAll(() => {
-    browser.waitForAngularEnabled(true);
+  afterEach(() => {
+    let btnBack = element(by.css('page-editprofile')).element(by.css('ion-navbar')).all(by.css('button')).first();
+    btnBack.click().then(() => {
+      browser.driver.sleep(1000);
+    });
+  });
 
+  afterAll(() => {
     let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
     btnMenuNavDrawer.click().then(() => {
       browser.driver.sleep(2000);
-      let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
-      btnLogout.click().then(() => console.log("Log out button clicked."));
+
+      let btnLogout = element(by.tagName('ion-menu')).all(by.tagName('button')).get(5);
+      btnLogout.click().then(() => {
+        browser.driver.sleep(6000);
+
+        browser.waitForAngularEnabled(true);
+      });
     });
   });
 

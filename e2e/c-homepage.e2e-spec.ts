@@ -37,7 +37,6 @@ describe('Home page - general', () => {
 
       let btnLogout = element(by.tagName('ion-menu')).all(by.tagName('button')).last();
       btnLogout.click().then(() => {
-        console.log("logout clicked");
         browser.driver.sleep(6000);
 
         browser.waitForAngularEnabled(true);
@@ -45,4 +44,3 @@ describe('Home page - general', () => {
     });
   });
 });
-

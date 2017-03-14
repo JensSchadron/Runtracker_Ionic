@@ -25,19 +25,18 @@ describe('Friends-page', () => {
     let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
     btnMenuNavDrawer.click().then(() => {
       browser.driver.sleep(2000);
-      let btnFriends= element(by.className('list')).all(by.tagName('button')).get(2);
-      btnFriends.click().then(() =>{
-        console.log("Friends button clicked.");
-        browser.driver.sleep(15000);
+      let btnFriends = element(by.className('list')).all(by.tagName('button')).get(2);
+      btnFriends.click().then(() => {
+        browser.driver.sleep(4000);
       });
     });
   });
 
   it('should have tabbar, tabs, header & title ', () => {
 
-    let tabBar = element(by.tagName("ion-tabs"))
-    let tabFriend= element(by.className("tab-friend"));
-    let tabRequest= element(by.className("tab-request"));
+    let tabBar = element(by.tagName("ion-tabs"));
+    let tabFriend = element(by.className("tab-friend"));
+    let tabRequest = element(by.className("tab-request"));
     let title = element(by.id('tab-title'));
     expect(tabBar.isPresent()).toBeTruthy();
     expect(tabFriend.isPresent()).toBeTruthy();
@@ -61,40 +60,48 @@ describe('Friends-page', () => {
   });
 
   /*
-  it('should have add friends button', () => {
+   it('should have add friends button', () => {
 
-    let tabRequest= element.all(by.className("tab-requests")).get(0);
-    tabRequest.click().then(()=>{
-        console.log('Request button clicked');
-        browser.sleep(2000);
-      }
-    );
-    let btnAddNewFriends = element(by.id('button-addfriends'));
-    expect(btnAddNewFriends.isPresent()).toBeTruthy();
-    btnAddNewFriends.click().then(()=>{
-        console.log('Add new friends button clicked');
-        browser.sleep(2000);
-      }
-    );
-    let searchBar = element(by.tagName('ion-searchbar'));
-    let listsAddNewFriends = element(by.id('add-new-friends'));
-    expect(searchBar.isPresent()).toBeTruthy();
-    expect(listsAddNewFriends.isPresent()).toBeTruthy();
-    expect(listsAddNewFriends.getText()).toBe('Add New Friends');
+   let tabRequest= element.all(by.className("tab-requests")).get(0);
+   tabRequest.click().then(()=>{
+   console.log('Request button clicked');
+   browser.sleep(2000);
+   }
+   );
+   let btnAddNewFriends = element(by.id('button-addfriends'));
+   expect(btnAddNewFriends.isPresent()).toBeTruthy();
+   btnAddNewFriends.click().then(()=>{
+   console.log('Add new friends button clicked');
+   browser.sleep(2000);
+   }
+   );
+   let searchBar = element(by.tagName('ion-searchbar'));
+   let listsAddNewFriends = element(by.id('add-new-friends'));
+   expect(searchBar.isPresent()).toBeTruthy();
+   expect(listsAddNewFriends.isPresent()).toBeTruthy();
+   expect(listsAddNewFriends.getText()).toBe('Add New Friends');
 
+   });
+
+   */
+
+  afterEach(() => {
+    let btnBack = element(by.css('ng-component')).element(by.css('ng-component')).element(by.css('ion-navbar')).all(by.css('button')).first();
+    btnBack.click().then(() => {
+      browser.driver.sleep(1000);
+    });
   });
 
-*/
-afterAll(() => {
-    browser.waitForAngularEnabled(true);
-
+  afterAll(() => {
     let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
     btnMenuNavDrawer.click().then(() => {
       browser.driver.sleep(2000);
-      let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
+
+      let btnLogout = element(by.tagName('ion-menu')).all(by.tagName('button')).get(5);
       btnLogout.click().then(() => {
-        console.log("Log out button clicked.");
         browser.driver.sleep(6000);
+
+        browser.waitForAngularEnabled(true);
       });
     });
   });
