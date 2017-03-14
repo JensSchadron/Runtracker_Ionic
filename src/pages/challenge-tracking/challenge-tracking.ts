@@ -145,8 +145,6 @@ export class ChallengeTrackingPage {
     } else {
       return 0;
     }
-
-
   }
 
   private createTracking(): Tracking {
