@@ -2,7 +2,7 @@
   <ion-card>
     <ion-grid>
       <ion-row>
-        <ion-col width-33.3 text-center>
+        <ion-col width-33 text-center>
           <div *ngIf="coreInfo?.ranTenKm==null">
             <ion-icon class="trophy" name="trophy"></ion-icon>
           </div>
@@ -14,7 +14,7 @@
           </div>
           10 km
         </ion-col>
-        <ion-col width-33.3 text-center>
+        <ion-col width-33 text-center>
           <div *ngIf="coreInfo?.ranTenKm==null">
             <ion-icon class="trophy" name="trophy"></ion-icon>
           </div>
@@ -26,7 +26,7 @@
           </div>
           20 km
         </ion-col>
-        <ion-col width-33.3 text-center>
+        <ion-col width-33 text-center>
           <div *ngIf="coreInfo?.ranTenKm==null">
             <ion-icon class="trophy" name="trophy"></ion-icon>
           </div>
@@ -46,13 +46,13 @@
   <ion-card>
     <ion-grid>
       <ion-row>
-        <ion-col width-50 text-center>
+        <ion-col width-50 text-center class="border-bottom border-right padding-bottom">
           <div class="user-data">
             {{coreInfo?.nrOfCompetitionsWon}}
           </div>
           Competitions won
         </ion-col>
-        <ion-col width-50 text-center>
+        <ion-col width-50 text-center class="border-bottom padding-bottom">
           <div class="user-data">
             {{coreInfo?.nrOfCompetitionsDone}}
           </div>
@@ -60,13 +60,13 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col width-50 text-center>
+        <ion-col width-50 text-center class="border-bottom border-right padding-bottom">
           <div class="user-data">
             {{coreInfo?.maxSpeed | number : '1.0-2'}} km/h
           </div>
           Maximum speed
         </ion-col>
-        <ion-col width-50 text-center>
+        <ion-col width-50 text-center class="border-bottom padding-bottom">
           <div class="user-data">
             {{coreInfo?.avgSpeed | number : '1.0-2'}} km/h
           </div>
@@ -74,19 +74,19 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col width-33 text-center>
+        <ion-col width-33 text-center class="border-right padding-bottom">
           <div class="user-data">
             {{coreInfo?.maxDistance | number : '1.0-2'}} km
           </div>
           Maximum distance
         </ion-col>
-        <ion-col width-33 text-center>
+        <ion-col width-33 text-center class="border-right padding-bottom">
           <div class="user-data">
             {{coreInfo?.avgDistance | number : '1.0-2'}} km
           </div>
           Average distance
         </ion-col>
-        <ion-col width-33 text-center>
+        <ion-col width-33 text-center class="border-right padding-bottom">
           <div class="user-data">
             {{coreInfo?.totalDistance | number : '1.0-2'}} km
           </div>

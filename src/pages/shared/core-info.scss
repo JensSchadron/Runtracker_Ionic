@@ -1,20 +1,46 @@
 core-info {
+
   .trophy{
     font-size: 2em;
   }
+
   .trophy-won{
     color: gold;
     font-size: 2em;
   }
+
   .user-data{
     font-size: 2rem;
     margin-top:1rem;
     color:#777777;
     font-weight: normal;
+    text-transform: none;
   }
+
   ion-col{
-    font-weight: 500;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: lightgray;
+    font-size: 0.8em;
+    letter-spacing: 1px;
   }
+
+  .border-bottom {
+    border-bottom: 1px solid lightgray;
+  }
+
+  .border-right {
+    border-right: 1px solid lightgray;
+  }
+
+  .padding-top {
+    padding-top: 20px;
+  }
+
+  .padding-bottom {
+    padding-bottom: 15px;
+  }
+
 }
 
 
