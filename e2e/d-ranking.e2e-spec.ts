@@ -45,16 +45,27 @@ describe('Ranking-page', () => {
     expect(selectSort.isPresent()).toBeTruthy();
   });
 
-  afterAll(() => {
-    browser.waitForAngularEnabled(true);
+  afterEach(() => {
+    console.log("trying to press the back btn");
+    let btnBack = element(by.css('page-ranking')).element(by.css('ion-navbar')).all(by.css('button')).first();
+    btnBack.click().then(() => {
+      browser.driver.sleep(1000);
+      console.log("pressed the back btn appareantly");
+    });
+  });
 
-    let btnMenuNavDrawer = element(by.tagName('ion-navbar')).all(by.css('button')).get(1);
+  afterAll(() => {
+    let btnMenuNavDrawer = element(by.css('ion-navbar')).all(by.css('button')).get(1);
+    let btnLogout = element(by.css('ion-menu')).all(by.css('button')).get(5);
+
     btnMenuNavDrawer.click().then(() => {
       browser.driver.sleep(2000);
-      let btnLogout = element(by.tagName('ion-menu')).element(by.tagName('ion-list')).all(by.tagName('button')).last();
+
       btnLogout.click().then(() => {
-        console.log("Log out button clicked.");
+        console.log("logout clicked");
         browser.driver.sleep(6000);
+
+        browser.waitForAngularEnabled(true);
       });
     });
   });
