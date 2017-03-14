@@ -46,11 +46,9 @@ describe('Ranking-page', () => {
   });
 
   afterEach(() => {
-    console.log("trying to press the back btn");
     let btnBack = element(by.css('page-ranking')).element(by.css('ion-navbar')).all(by.css('button')).first();
     btnBack.click().then(() => {
       browser.driver.sleep(1000);
-      console.log("pressed the back btn appareantly");
     });
   });
 
@@ -62,12 +60,10 @@ describe('Ranking-page', () => {
       browser.driver.sleep(2000);
 
       btnLogout.click().then(() => {
-        console.log("logout clicked");
         browser.driver.sleep(6000);
 
         browser.waitForAngularEnabled(true);
       });
     });
   });
-
 });

@@ -45,4 +45,3 @@ describe('Home page - general', () => {
     });
   });
 });
-
