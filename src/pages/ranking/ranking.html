@@ -28,7 +28,7 @@
       <ion-option value="4">Max speed</ion-option>
       <ion-option value="5">Nr. of competitions won</ion-option>
       <ion-option value="6">Nr of competitions done</ion-option>
-      <ion-option value="7">Won ratio</ion-option>
+      <ion-option value="7">Win ratio</ion-option>
       <ion-option value="8">Total distance</ion-option>
     </ion-select>
   </ion-item>
@@ -44,7 +44,7 @@
     <h1 class="category" *ngIf="orderOption==4">Max speed</h1>
     <h1 class="category" *ngIf="orderOption==5">Nr. of competitions won</h1>
     <h1 class="category" *ngIf="orderOption==6">Nr. of competitions done</h1>
-    <h1 class="category" *ngIf="orderOption==7">Won ratio</h1>
+    <h1 class="category" *ngIf="orderOption==7">Win ratio</h1>
     <h1 class="category" *ngIf="orderOption==8">Total distance</h1>
   </ion-row>
   </ion-card-title>
@@ -73,7 +73,7 @@
             <h2 *ngIf="orderOption==5"><strong>{{user.nrOfCompetitionsWon}}</strong></h2>
             <h2 *ngIf="orderOption==6"><strong>{{user.nrOfCompetitionsDone}}</strong></h2>
             <h2 *ngIf="orderOption==7 && user.nrOfCompetitionsDone != 0"><strong>{{((user.nrOfCompetitionsWon /
-              user.nrOfCompetitionsDone)*100) | number : '1.0-2' }} %</strong>
+              user.nrOfCompetitionsDone)*100) | number : '1.2-2' }} %</strong>
             </h2>
             <h2 *ngIf="orderOption==7 && user.nrOfCompetitionsDone == 0"><strong>0 %</strong></h2>
             <h2 *ngIf="orderOption==8"><strong>{{(user.totalDistance / 1000) | number : '1.2-2'}} km</strong>
