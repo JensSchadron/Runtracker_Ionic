@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Solo Run</ion-title>
+    <ion-title id="title">Solo Run</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -30,7 +30,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block [navPush]="countdownSoloPage" [navParams]="params">Start Tracking</button>
+        <button id="start-tracking" ion-button block [navPush]="countdownSoloPage" [navParams]="params">Start Tracking</button>
       </ion-col>
     </ion-row>
   </ion-grid>

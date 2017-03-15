@@ -1,21 +1,21 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Tracking Type</ion-title>
+    <ion-title id="title">Tracking Type</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content class="card-background-page">
 
-  <ion-card [navPush]="trackingNotRealtime">
-    <img [src]="'assets/img/SoloRun_small.jpg'"/>
-    <div class="card-title">Solo Run</div>
+  <ion-card  id="solo-card"  [navPush]="trackingNotRealtime">
+    <img id="solo-card-img" [src]="'assets/img/SoloRun_small.jpg'"/>
+    <div id="solo-card-title" class="card-title">Solo Run</div>
   </ion-card>
 
-  <ion-card [navPush]="trackingRealtime">
-    <img [src]="'assets/img/Challenge_small.jpg'"/>
-    <div class="card-title">One to one</div>
+  <ion-card id="one-to-one-card" [navPush]="trackingRealtime">
+    <img id="one-to-one-card-img" [src]="'assets/img/Challenge_small.jpg'"/>
+    <div id="one-to-one-card-title" class="card-title">One to one</div>
   </ion-card>
 
 </ion-content>

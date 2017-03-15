@@ -25,6 +25,18 @@ describe('Home page - general', () => {
     expect(navBarTitle.getText()).toBe('Home');
   });
 
+  it('should have greeting, distance, speed and competitions cards', () => {
+    let greetingCard = element(by.id('greeting-card'));
+    let distanceCard = element(by.id('distance-card'));
+    let speedCard = element(by.id('speed-card'));
+    let competitionsCard = element(by.id('competitions-card'));
+    expect(greetingCard.isPresent()).toBeTruthy();
+    expect(distanceCard.isPresent()).toBeTruthy();
+    expect(speedCard.isPresent()).toBeTruthy();
+    expect(competitionsCard.isPresent()).toBeTruthy();
+
+  });
+
   it('should have \'new tracking\' button', () => {
     let btn = element(by.tagName('button'));
     expect(btn.isPresent()).toBeTruthy();
