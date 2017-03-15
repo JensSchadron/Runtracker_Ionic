@@ -83,7 +83,7 @@ export class ChallengeTrackingPage {
           this.competition.competitionId,
           this.currUserId,
           currCoordinate,
-          this.currUserTotalDistanceVoorBerekening >= this.competition.goal.distance / 1000 ? this.competition.goal.distance : this.currUserTotalDistanceVoorBerekening);
+          this.currUserTotalDistanceVoorBerekening >= this.competition.goal.distance / 1000 ? this.competition.goal.distance / 1000 : this.currUserTotalDistanceVoorBerekening);
       this.mqttService.publishInCompTopic(JSON.stringify(trackingPacket), 0);
     });
   };
