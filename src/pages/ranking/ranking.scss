@@ -1,5 +1,4 @@
 page-ranking {
-
   .category{
     text-align: center;
     margin-left: auto;
@@ -28,10 +27,9 @@ page-ranking {
     margin-bottom: 3rem;
     color: grey;
   }
-
   .btn-passive {
     background-color: lightgray;
-    color: #387ef5;
+    color: grey;
     border-radius: 0.5rem;
   }
   .btn-active {
@@ -41,13 +39,22 @@ page-ranking {
   }
   ion-select {
     margin: auto;
+    max-width: 100%;
   }
   #button-world {
     margin-left: 10%;
   }
+
   #button-friends {
     margin-right: 10%;
   }
+  #button-world-text{
+    margin-left: 5%;
+  }
+  #button-friends-text{
+    margin-left: 5%;
+  }
+
   h1 {
     text-align: center;
   }

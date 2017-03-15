@@ -11,15 +11,17 @@
   <ion-row class="button-user-select">
     <button id="button-world" (click)="getUsers(orderOption)" ion-button full icon-right>
       <ion-icon name="md-globe"></ion-icon>
+      <div id="button-world-text">World</div>
     </button>
     <button id="button-friends" (click)="getFriends(orderOption)" ion-button full icon-right>
       <ion-icon name="ios-people"></ion-icon>
+      <div id="button-friends-text">Friends</div>
     </button>
   </ion-row>
 
   <ion-item id="orderby-select">
 
-    <ion-select (ngModelChange)="onChangeOrder($event)" [(ngModel)]="orderOption">
+  <ion-select (ngModelChange)="onChangeOrder($event)" [(ngModel)]="orderOption">
       <ion-option value="1">Average distance</ion-option>
       <ion-option value="2">Average speed</ion-option>
       <ion-option value="3">Max distance</ion-option>
@@ -34,18 +36,18 @@
 
   <ion-card id="ranking-card">
 
-    <ion-card-title>
-      <ion-row class="ranking-header">
-        <h1 class="category" *ngIf="orderOption==1">Average distance</h1>
-        <h1 class="category" *ngIf="orderOption==2">Average speed</h1>
-        <h1 class="category" *ngIf="orderOption==3">Max distance</h1>
-        <h1 class="category" *ngIf="orderOption==4">Max speed</h1>
-        <h1 class="category" *ngIf="orderOption==5">Nr. of competitions won</h1>
-        <h1 class="category" *ngIf="orderOption==6">Nr. of competitions done</h1>
-        <h1 class="category" *ngIf="orderOption==7">Won ratio</h1>
-        <h1 class="category" *ngIf="orderOption==8">Total distance</h1>
-      </ion-row>
-    </ion-card-title>
+  <ion-card-title>
+  <ion-row class="ranking-header">
+    <h1 class="category" *ngIf="orderOption==1">Average distance</h1>
+    <h1 class="category" *ngIf="orderOption==2">Average speed</h1>
+    <h1 class="category" *ngIf="orderOption==3">Max distance</h1>
+    <h1 class="category" *ngIf="orderOption==4">Max speed</h1>
+    <h1 class="category" *ngIf="orderOption==5">Nr. of competitions won</h1>
+    <h1 class="category" *ngIf="orderOption==6">Nr. of competitions done</h1>
+    <h1 class="category" *ngIf="orderOption==7">Won ratio</h1>
+    <h1 class="category" *ngIf="orderOption==8">Total distance</h1>
+  </ion-row>
+  </ion-card-title>
 
 
     <div class="spinner" *ngIf="users==null">
