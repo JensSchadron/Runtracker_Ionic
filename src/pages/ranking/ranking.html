@@ -60,7 +60,7 @@
       <h1>{{i+1}}</h1>
       </ion-note>
       <ion-avatar item-left>
-        <img src="/assets/img/avatars/{{user.avatar}}.png">
+        <img [src]="'/assets/img/avatars/{{user.avatar}}.png'">
       </ion-avatar>
       <h2>{{user.username}}</h2>
       <ion-note item-right>
