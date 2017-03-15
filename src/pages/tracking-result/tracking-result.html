@@ -7,8 +7,11 @@
 
           <ion-row *ngIf="(wasCompetition)">
             <ion-col>
-              <p *ngIf="hasWon">You won!</p>
-              <p *ngIf="!hasWon">You lost!</p>
+              <!--<p class="competition-result won" *ngIf="hasWon">You won!</p>
+              <p class="competition-result lost" *ngIf="!hasWon">You lost!</p>-->
+
+              <div class="competition-won" *ngIf="hasWon"><p class="result">You won!</p></div>
+              <div class="competition-lost" *ngIf="!hasWon"><p class="result">You lost!</p></div>
             </ion-col>
           </ion-row>
 
