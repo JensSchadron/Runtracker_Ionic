@@ -63,66 +63,22 @@
       </ion-avatar>
       <h2>{{user.username}}</h2>
       <ion-note item-right>
-        <h2 *ngIf="orderOption==1"><strong class=text>{{(user.avgDistance / 1000) | number : '1.0-2'}} km</strong></h2>
-        <h2 *ngIf="orderOption==2"><strong>{{user.avgSpeed | number : '1.0-2'}} km/h</strong></h2>
-        <h2 *ngIf="orderOption==3"><strong>{{(user.maxDistance / 1000) | number : '1.0-2'}} km</strong></h2>
-        <h2 *ngIf="orderOption==4"><strong>{{(user.maxSpeed) | number : '1.0-2'}} km/h</strong></h2>
+        <h2 *ngIf="orderOption==1"><strong class=text>{{(user.avgDistance / 1000) | number : '1.2-2'}} km</strong></h2>
+        <h2 *ngIf="orderOption==2"><strong>{{user.avgSpeed | number : '1.2-2'}} km/h</strong></h2>
+        <h2 *ngIf="orderOption==3"><strong>{{(user.maxDistance / 1000) | number : '1.2-2'}} km</strong></h2>
+        <h2 *ngIf="orderOption==4"><strong>{{(user.maxSpeed) | number : '1.2-2'}} km/h</strong></h2>
         <h2 *ngIf="orderOption==5"><strong>{{user.nrOfCompetitionsWon}}</strong></h2>
         <h2 *ngIf="orderOption==6"><strong>{{user.nrOfCompetitionsDone}}</strong></h2>
         <h2 *ngIf="orderOption==7 && user.nrOfCompetitionsDone != 0"><strong>{{((user.nrOfCompetitionsWon /
           user.nrOfCompetitionsDone)*100) | number : '1.0-2' }} %</strong>
         </h2>
         <h2 *ngIf="orderOption==7 && user.nrOfCompetitionsDone == 0"><strong>0 %</strong></h2>
-        <h2 *ngIf="orderOption==8"><strong>{{(user.totalDistance / 1000) | number : '1.0-2'}} km</strong>
+        <h2 *ngIf="orderOption==8"><strong>{{(user.totalDistance / 1000) | number : '1.2-2'}} km</strong>
         </h2>
       </ion-note>
     </ion-item>
     </div>
   </ion-list>
-
-
-    <!--<ion-row class="ranking-rows text-center" *ngFor="let user of users; let i = index">-->
-    <!--first-child isn't possible in ionic
-    <ion-row *ngIf="i==0">
-      <ion-row>
-        <ion-col width-10>
-          <ion-badge item-right>{{i+1}}</ion-badge>
-          </ion-col>
-        <ion-col width-50><strong>{{user.username}}</strong></ion-col>
-        <ion-col *ngIf="orderOption==1"><strong class=text>{{(user.avgDistance / 1000) | number : '1.0-2'}} km</strong></ion-col>
-        <ion-col *ngIf="orderOption==2"><strong>{{user.avgSpeed | number : '1.0-2'}} km/h</strong></ion-col>
-        <ion-col *ngIf="orderOption==3"><strong>{{(user.maxDistance / 1000) | number : '1.0-2'}} km</strong></ion-col>
-        <ion-col *ngIf="orderOption==4"><strong>{{(user.maxSpeed) | number : '1.0-2'}} km/h</strong></ion-col>
-        <ion-col *ngIf="orderOption==5"><strong>{{user.nrOfCompetitionsWon}}</strong></ion-col>
-        <ion-col *ngIf="orderOption==6"><strong>{{user.nrOfCompetitionsDone}}</strong></ion-col>
-        <ion-col *ngIf="orderOption==7 && user.nrOfCompetitionsDone != 0"><strong>{{((user.nrOfCompetitionsWon /
-          user.nrOfCompetitionsDone)*100) | number : '1.0-2' }} %</strong>
-        </ion-col>
-        <ion-col *ngIf="orderOption==7 && user.nrOfCompetitionsDone == 0"><strong>0 %</strong></ion-col>
-        <ion-col *ngIf="orderOption==8"><strong>{{(user.totalDistance / 1000) | number : '1.0-2'}} km</strong>
-        </ion-col>
-      </ion-row>
-    </ion-row>
-    <ion-row *ngIf="i!=0">
-      <ion-col width-10>
-        <ion-badge item-right>{{i+1}}</ion-badge>
-      </ion-col>
-      <ion-col width-50> {{user.username}}</ion-col>
-      <ion-col *ngIf="orderOption==1">{{(user.avgDistance / 1000) | number : '1.0-2'}} km</ion-col>
-      <ion-col *ngIf="orderOption==2">{{user.avgSpeed | number : '1.0-2'}} km/h</ion-col>
-      <ion-col *ngIf="orderOption==3">{{(user.maxDistance / 1000) | number : '1.0-2'}} km</ion-col>
-      <ion-col *ngIf="orderOption==4">{{user.maxSpeed | number : '1.0-2'}} km/h</ion-col>
-      <ion-col *ngIf="orderOption==5">{{user.nrOfCompetitionsWon}}</ion-col>
-      <ion-col *ngIf="orderOption==6">{{user.nrOfCompetitionsDone}}</ion-col>
-      <ion-col *ngIf="orderOption==7 && user.nrOfCompetitionsDone != 0">{{((user.nrOfCompetitionsWon /
-        user.nrOfCompetitionsDone)*100) | number : '1.0-2' }} %
-      </ion-col>
-      <ion-col *ngIf="orderOption==7 && user.nrOfCompetitionsDone == 0">0 %</ion-col>
-      <ion-col *ngIf="orderOption==8">{{(user.totalDistance / 1000) | number : '1.0-2'}} km</ion-col>
-    </ion-row>
-  </ion-row>
-
-</ion-list>-->
 </ion-card>
 </ion-content>
 
