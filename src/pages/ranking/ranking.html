@@ -19,7 +19,7 @@
 
   <ion-item id="orderby-select">
 
-  <ion-select (ngModelChange)="onChangeOrder($event)" [(ngModel)]="orderOption">
+    <ion-select (ngModelChange)="onChangeOrder($event)" [(ngModel)]="orderOption">
       <ion-option value="1">Average distance</ion-option>
       <ion-option value="2">Average speed</ion-option>
       <ion-option value="3">Max distance</ion-option>
@@ -34,53 +34,53 @@
 
   <ion-card id="ranking-card">
 
-  <ion-card-title>
-  <ion-row class="ranking-header">
-    <h1 class="category" *ngIf="orderOption==1">Average distance</h1>
-    <h1 class="category" *ngIf="orderOption==2">Average speed</h1>
-    <h1 class="category" *ngIf="orderOption==3">Max distance</h1>
-    <h1 class="category" *ngIf="orderOption==4">Max speed</h1>
-    <h1 class="category" *ngIf="orderOption==5">Nr. of competitions won</h1>
-    <h1 class="category" *ngIf="orderOption==6">Nr. of competitions done</h1>
-    <h1 class="category" *ngIf="orderOption==7">Won ratio</h1>
-    <h1 class="category" *ngIf="orderOption==8">Total distance</h1>
-  </ion-row>
-  </ion-card-title>
+    <ion-card-title>
+      <ion-row class="ranking-header">
+        <h1 class="category" *ngIf="orderOption==1">Average distance</h1>
+        <h1 class="category" *ngIf="orderOption==2">Average speed</h1>
+        <h1 class="category" *ngIf="orderOption==3">Max distance</h1>
+        <h1 class="category" *ngIf="orderOption==4">Max speed</h1>
+        <h1 class="category" *ngIf="orderOption==5">Nr. of competitions won</h1>
+        <h1 class="category" *ngIf="orderOption==6">Nr. of competitions done</h1>
+        <h1 class="category" *ngIf="orderOption==7">Won ratio</h1>
+        <h1 class="category" *ngIf="orderOption==8">Total distance</h1>
+      </ion-row>
+    </ion-card-title>
 
 
-
-  <div class="spinner" *ngIf="users==null">
-    <ion-spinner></ion-spinner>
-  </div>
-  <ion-list id="ranking-list">
-
-    <div *ngFor="let user of users; let i = index">
-    <ion-item>
-      <ion-note id="rank" item-left>
-      <h1>{{i+1}}</h1>
-      </ion-note>
-      <ion-avatar item-left>
-        <img [src]="'/assets/img/avatars/'+user.avatar+'.png'">
-      </ion-avatar>
-      <h2>{{user.username}}</h2>
-      <ion-note item-right>
-        <h2 *ngIf="orderOption==1"><strong class=text>{{(user.avgDistance / 1000) | number : '1.2-2'}} km</strong></h2>
-        <h2 *ngIf="orderOption==2"><strong>{{user.avgSpeed | number : '1.2-2'}} km/h</strong></h2>
-        <h2 *ngIf="orderOption==3"><strong>{{(user.maxDistance / 1000) | number : '1.2-2'}} km</strong></h2>
-        <h2 *ngIf="orderOption==4"><strong>{{(user.maxSpeed) | number : '1.2-2'}} km/h</strong></h2>
-        <h2 *ngIf="orderOption==5"><strong>{{user.nrOfCompetitionsWon}}</strong></h2>
-        <h2 *ngIf="orderOption==6"><strong>{{user.nrOfCompetitionsDone}}</strong></h2>
-        <h2 *ngIf="orderOption==7 && user.nrOfCompetitionsDone != 0"><strong>{{((user.nrOfCompetitionsWon /
-          user.nrOfCompetitionsDone)*100) | number : '1.0-2' }} %</strong>
-        </h2>
-        <h2 *ngIf="orderOption==7 && user.nrOfCompetitionsDone == 0"><strong>0 %</strong></h2>
-        <h2 *ngIf="orderOption==8"><strong>{{(user.totalDistance / 1000) | number : '1.2-2'}} km</strong>
-        </h2>
-      </ion-note>
-    </ion-item>
+    <div class="spinner" *ngIf="users==null">
+      <ion-spinner></ion-spinner>
     </div>
-  </ion-list>
-</ion-card>
+    <ion-list id="ranking-list">
+
+      <div *ngFor="let user of users; let i = index">
+        <ion-item>
+          <ion-note id="rank" item-left>
+            <h1>{{i+1}}</h1>
+          </ion-note>
+          <ion-avatar item-left>
+            <img [src]="'/assets/img/avatars/'+user.avatar+'.png'">
+          </ion-avatar>
+          <h2>{{user.username}}</h2>
+          <ion-note item-right>
+            <h2 *ngIf="orderOption==1"><strong class=text>{{(user.avgDistance / 1000) | number : '1.2-2'}} km</strong>
+            </h2>
+            <h2 *ngIf="orderOption==2"><strong>{{user.avgSpeed | number : '1.2-2'}} km/h</strong></h2>
+            <h2 *ngIf="orderOption==3"><strong>{{(user.maxDistance / 1000) | number : '1.2-2'}} km</strong></h2>
+            <h2 *ngIf="orderOption==4"><strong>{{(user.maxSpeed) | number : '1.2-2'}} km/h</strong></h2>
+            <h2 *ngIf="orderOption==5"><strong>{{user.nrOfCompetitionsWon}}</strong></h2>
+            <h2 *ngIf="orderOption==6"><strong>{{user.nrOfCompetitionsDone}}</strong></h2>
+            <h2 *ngIf="orderOption==7 && user.nrOfCompetitionsDone != 0"><strong>{{((user.nrOfCompetitionsWon /
+              user.nrOfCompetitionsDone)*100) | number : '1.0-2' }} %</strong>
+            </h2>
+            <h2 *ngIf="orderOption==7 && user.nrOfCompetitionsDone == 0"><strong>0 %</strong></h2>
+            <h2 *ngIf="orderOption==8"><strong>{{(user.totalDistance / 1000) | number : '1.2-2'}} km</strong>
+            </h2>
+          </ion-note>
+        </ion-item>
+      </div>
+    </ion-list>
+  </ion-card>
 </ion-content>
 
 
