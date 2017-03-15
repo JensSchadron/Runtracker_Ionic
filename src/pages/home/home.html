@@ -11,13 +11,13 @@
 
 <ion-content padding scroll="false">
 
-  <ion-card>
+  <ion-card id="greeting-card">
     <ion-card-content>
       <h1 id="greeting">{{greeting}}<span *ngIf="user.firstname">, {{user?.firstname}}</span></h1>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card id="distance-card">
     <div class="img-header">
       <div class="img-title">
         <h1>Distance</h1>
@@ -40,7 +40,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card id="speed-card">
     <div class="img-header">
       <div class="img-title">
         <h1>Speed</h1>
@@ -61,7 +61,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card id="competitions-card">
     <div class="img-header">
       <div class="img-title">
         <h1>Competitions</h1>
