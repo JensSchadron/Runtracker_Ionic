@@ -100,6 +100,11 @@ export class FriendsRequestsPage implements OnInit {
     toast.present();
   }
 
+  doRefresh(refresher) {
+    this.init();
+    refresher.complete();
+  }
+
   confirmDelete(username) {
     let alert = this.alertCtrl.create({
       title: 'Delete friend',

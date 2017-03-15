@@ -35,6 +35,11 @@ export class AddFriendsPage implements OnInit {
     }, err => console.log(err));
   }
 
+  doRefresh(refresher) {
+    this.ngOnInit();
+    refresher.complete();
+  }
+
 
   constructor(private FriendsService: FriendsService) {
   }

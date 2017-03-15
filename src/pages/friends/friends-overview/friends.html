@@ -4,6 +4,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="list-avatar-page">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+      <ion-spinner></ion-spinner>
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-searchbar [(ngModel)]="queryStringMyFriends"></ion-searchbar>
   <div class="spinner" *ngIf="!friendsLoaded">
     <ion-spinner></ion-spinner>

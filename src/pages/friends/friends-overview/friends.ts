@@ -83,6 +83,10 @@ export class FriendsPage implements OnInit, OnDestroy {
       }
     );
   }
+  doRefresh(refresher) {
+    this.init();
+    refresher.complete();
+  }
 
   constructor(private friendsService: FriendsService, public navCtrl: NavController, public events:Events, public appCtrl: App) {
     this.init();

@@ -4,6 +4,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="list-avatar-page-requests">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+      <ion-spinner></ion-spinner>
+    </ion-refresher-content>
+  </ion-refresher>
   <div class="spinner" *ngIf="!requestsLoaded">
     <ion-spinner></ion-spinner>
   </div>
