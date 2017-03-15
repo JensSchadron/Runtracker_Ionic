@@ -48,4 +48,26 @@ export class CoordinateService {
     }
   }
 
+  public calculateMaxSpeed(speedStamps): number {
+    if (speedStamps !== null && speedStamps.length > 0) {
+      let sum = 0;     // stores sum of elements
+      let sumsq = 0; // stores sum of squares
+      for (let i = 0; i < speedStamps.length; ++i) {
+        sum += speedStamps[i];
+        sumsq += speedStamps[i] * speedStamps[i];
+      }
+      let mean = sum / speedStamps.length;
+      let varience = sumsq / speedStamps.length - mean * mean;
+      let sd = Math.sqrt(varience);
+      let data3 = []; // uses for data which is 3 standard deviations from the mean
+      for (let i = 0; i < speedStamps.length; ++i) {
+        if (speedStamps[i] > mean - 3 * sd && speedStamps[i] < mean + 3 * sd)
+          data3.push(speedStamps[i]);
+      }
+      return data3.sort()[data3.length - 1];
+    } else {
+      return 0;
+    }
+  }
+
 }

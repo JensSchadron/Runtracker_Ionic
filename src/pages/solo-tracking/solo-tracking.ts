@@ -142,25 +142,7 @@ export class SolotrackingPage {
   }
 
   private calculateMaxSpeed(): number {
-    if (this.speedStamps !== null && this.speedStamps.length > 0) {
-      let sum = 0;     // stores sum of elements
-      let sumsq = 0; // stores sum of squares
-      for (let i = 0; i < this.speedStamps.length; ++i) {
-        sum += this.speedStamps[i];
-        sumsq += this.speedStamps[i] * this.speedStamps[i];
-      }
-      let mean = sum / this.speedStamps.length;
-      let varience = sumsq / this.speedStamps.length - mean * mean;
-      let sd = Math.sqrt(varience);
-      let data3 = []; // uses for data which is 3 standard deviations from the mean
-      for (let i = 0; i < this.speedStamps.length; ++i) {
-        if (this.speedStamps[i] > mean - 3 * sd && this.speedStamps[i] < mean + 3 * sd)
-          data3.push(this.speedStamps[i]);
-      }
-      return data3.sort()[data3.length - 1];
-    } else {
-      return 0;
-    }
+    return this.coordinateService.calculateMaxSpeed(this.speedStamps);
   }
 
   setDistanceDisplay(distance) {
@@ -194,12 +176,19 @@ export class SolotrackingPage {
       this.avgPace = 0;
     }
 
+    let maxSpeed = this.calculateMaxSpeed();
+    this.coordinates.forEach(c => {
+      if (c.speed > maxSpeed) {
+        c.speed = maxSpeed;
+      }
+    });
+
     let tracking           = new Tracking();
     tracking.avgSpeed      = this.avgSpeed;
     tracking.avgPace       = this.avgPace;
     tracking.competition   = null;
     tracking.coordinates   = this.coordinates;
-    tracking.maxSpeed      = this.calculateMaxSpeed();
+    tracking.maxSpeed      = maxSpeed;
     tracking.totalDistance = this.distance * 1000;
     tracking.totalDuration = this.timeInSeconds;
 

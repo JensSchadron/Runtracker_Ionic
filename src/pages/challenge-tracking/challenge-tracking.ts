@@ -126,25 +126,7 @@ export class ChallengeTrackingPage {
   }
 
   private calculateMaxSpeed(): number {
-    if (this.speedStamps !== null && this.speedStamps.length > 0) {
-      let sum = 0;     // stores sum of elements
-      let sumsq = 0; // stores sum of squares
-      for (let i = 0; i < this.speedStamps.length; ++i) {
-        sum += this.speedStamps[i];
-        sumsq += this.speedStamps[i] * this.speedStamps[i];
-      }
-      let mean = sum / this.speedStamps.length;
-      let varience = sumsq / this.speedStamps.length - mean * mean;
-      let sd = Math.sqrt(varience);
-      let data3 = []; // uses for data which is 3 standard deviations from the mean
-      for (let i = 0; i < this.speedStamps.length; ++i) {
-        if (this.speedStamps[i] > mean - 3 * sd && this.speedStamps[i] < mean + 3 * sd)
-          data3.push(this.speedStamps[i]);
-      }
-      return data3.sort()[data3.length - 1];
-    } else {
-      return 0;
-    }
+    return this.coordinateService.calculateMaxSpeed(this.speedStamps);
   }
 
   private createTracking(): Tracking {
@@ -154,6 +136,11 @@ export class ChallengeTrackingPage {
     let avgPace = this.calculateAvgPace(avgSpeed);
 
     let maxSpeed = this.calculateMaxSpeed();
+    this.coordinates.forEach(c => {
+      if (c.speed > maxSpeed) {
+        c.speed = maxSpeed;
+      }
+    });
 
     let durationInSeconds = (this.coordinates.length === 0) ? 0 : Math.round((this.coordinates[this.coordinates.length - 1].time - this.coordinates[0].time) / 1000);
 
