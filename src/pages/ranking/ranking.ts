@@ -62,10 +62,14 @@ export class RankingPage implements OnInit{
   static setButtonActive(button):void{
     button.classList.remove('btn-passive');
     button.classList.add('btn-active');
+
+
   };
 
   static setButtonPassive(button):void{
     button.classList.remove('btn-active');
     button.classList.add('btn-passive');
+
+
   };
 }
