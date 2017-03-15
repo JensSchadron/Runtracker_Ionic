@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observer }   from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 
-declare var google;
+declare let google;
 
 @Injectable()
 export class GeocodingService {

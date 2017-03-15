@@ -5,7 +5,7 @@ import {Tracking} from "../../model/tracking";
 import {CoordinateService} from "../../services/location/coordinate.service";
 import {Coordinate} from "../../model/coordinate";
 
-declare var google;
+declare let google;
 
 @Component({
   selector: 'page-tracking-result',

@@ -50,8 +50,7 @@ export class ChallengeTrackingPage {
               public authHttp: AuthHttpImpl,
               public mqttService: MQTTService,
               private coordinateService: CoordinateService,
-              private locationService: LocationService,
-              public trackingService: TrackingService) {
+              private locationService: LocationService) {
     this.goalDistance = this.navParams.get('goalDistance');
     this.competition = this.navParams.get('competition');
     this.currUserId = this.navParams.get('currUserId');

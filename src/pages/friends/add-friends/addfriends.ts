@@ -36,6 +36,6 @@ export class AddFriendsPage implements OnInit {
   }
 
 
-  constructor(private FriendsService: FriendsService, public NavCtrl: NavController) {
+  constructor(private FriendsService: FriendsService) {
   }
 }

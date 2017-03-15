@@ -5,7 +5,7 @@ import {GeocodingService} from "../../services/location/geocoding.service";
 import {CountdownPage} from "../countdown/countdown";
 import {SolotrackingPage} from "../solo-tracking/solo-tracking";
 
-declare var google;
+declare let google;
 
 @Component({
   selector: 'page-tracking-not-realtime',
