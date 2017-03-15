@@ -1,5 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {AlertController} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
 import {RankingService} from "../../services/ranking/ranking.service";
 import {User} from "../../model/user";
 

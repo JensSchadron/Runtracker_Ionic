@@ -5,11 +5,9 @@ import { StatusBar, Splashscreen }  from 'ionic-native';
 import { HomePage }                 from '../pages/home/home';
 import { LoginPage }                from "../pages/login/login";
 import { TrackingchoicePage }       from "../pages/tracking-choice/tracking-choice";
-import { FriendsProfilePage }              from '../pages/friends-profile/friends-profile'
 import { EditprofilePage }          from "../pages/editprofile/editprofile";
 import { RankingPage }              from "../pages/ranking/ranking";
 
-import { FriendsPage }              from "../pages/friends/friends-overview/friends";
 import { TabsPage }                 from "../pages/friends/tabs/tabs";
 
 

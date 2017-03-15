@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {RankingService} from "../../services/ranking/ranking.service";
 import {CoreInfo} from "../../model/coreinfo";
 
 @Component({

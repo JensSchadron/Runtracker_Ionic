@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Events, ToastController} from 'ionic-angular';
-import {Platform} from 'ionic-angular';
 import {NavController}  from 'ionic-angular';
 import {FriendsService} from '../../../services/friends/friends.service';
 import {User} from "../../../model/user";
@@ -36,7 +34,7 @@ export class AddFriendsPage implements OnInit {
       this.ngOnInit();
     }, err => console.log(err));
   }
-  
+
 
   constructor(private FriendsService: FriendsService, public NavCtrl: NavController) {
   }

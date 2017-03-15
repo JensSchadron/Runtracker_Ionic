@@ -1,4 +1,4 @@
-import {Http,Headers,Response} from '@angular/http';
+import {Headers, Response} from '@angular/http';
 import {User} from "../../model/user";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from '@angular/core';
@@ -10,19 +10,19 @@ export class RankingService {
   private jwt = localStorage.getItem('id_token');
   private authHeader = new Headers();
 
-  constructor(private authHttp:AuthHttpImpl){
-    if(this.jwt) {
+  constructor(private authHttp: AuthHttpImpl) {
+    if (this.jwt) {
       this.authHeader.append('token', this.jwt);
     }
   }
 
-  getFriends(sortoption): Observable<User[]>{
+  getFriends(sortoption): Observable<User[]> {
     return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + '/api/users/getAllFriendsSorted/' + sortoption)
       .map((res: Response) => res.json())
       .catch(this.handleErrorObservable);
   }
 
-  getUsers(sortoption): Observable<User[]>{
+  getUsers(sortoption): Observable<User[]> {
     return this.authHttp.getAuthHttp().get(BACKEND_BASEURL + '/api/users/getAllUsersSorted/' + sortoption)
       .map((res: Response) => res.json())
       .catch(this.handleErrorObservable);
