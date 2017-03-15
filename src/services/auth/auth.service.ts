@@ -1,4 +1,4 @@
-import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
+import {tokenNotExpired} from 'angular2-jwt';
 import {Injectable}                           from '@angular/core';
 import {Observable}                           from 'rxjs/Rx';
 

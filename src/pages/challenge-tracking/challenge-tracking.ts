@@ -228,7 +228,7 @@ export class ChallengeTrackingPage {
       };
       this.navCtrl.setRoot(TrackingResultPage, params);
     }
-  }
+  };
 
   private surrender(): void {
     let surrenderPacket: SurrenderPacket =

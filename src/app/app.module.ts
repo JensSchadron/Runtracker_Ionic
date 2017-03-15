@@ -24,7 +24,6 @@ import { TrackingResultPage }       from "../pages/tracking-result/tracking-resu
 import { GeocodingService }         from '../services/location/geocoding.service'
 import { CoordinateService }        from "../services/location/coordinate.service";
 
-import { AUTH_PROVIDERS }           from 'angular2-jwt';
 import { AuthService }              from '../services/auth/auth.service';
 import { UserService }              from "../services/auth/user.service";
 import { AuthHttpImpl }             from "../services/auth/auth-http-impl";

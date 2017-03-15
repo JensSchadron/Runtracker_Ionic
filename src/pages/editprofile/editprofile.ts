@@ -2,7 +2,6 @@ import {Component} from "@angular/core";
 import {NavController, AlertController, ModalController, ViewController, NavParams, Platform} from "ionic-angular";
 import {User} from "../../model/user";
 import {UserService} from "../../services/auth/user.service";
-import {AuthService} from "../../services/auth/auth.service";
 import {FriendProfilePageService} from "../../services/friendsprofile/friend-profilepage.service";
 import {CoreInfo} from "../../model/coreinfo";
 /**
@@ -41,7 +40,7 @@ export class EditprofilePage {
         this.userService.checkUsernameAvailable(this.user.username).subscribe((val: boolean) => {
             this.available = val;
             if (!val) {
-              this.errorMsg = "Username not available. Please choose another username."
+              this.errorMsg = "Username not available. Please choose another username.";
               let alert = this.alerCtrl.create({
                 title: 'Username already taken!',
                 message: 'Choose another username',
@@ -60,7 +59,7 @@ export class EditprofilePage {
   onClickUpdateUser(user: User): void {
     if (user.username == "" || !this.available) {
       if (user.username == "") {
-        this.errorMsg = "Username can't be empty. Please choose a valid username."
+        this.errorMsg = "Username can't be empty. Please choose a valid username.";
         let alert = this.alerCtrl.create({
           title: 'Username can not be empty!',
           message: 'Choose a valid username',
@@ -68,7 +67,7 @@ export class EditprofilePage {
         });
         alert.present()
       } else if (user.username.indexOf(".") >= 0) {
-        this.errorMsg = "Username may not contain \".\"."
+        this.errorMsg = "Username may not contain \".\".";
         let alert = this.alerCtrl.create({
           title: 'Username may not contain \".\"',
           message: 'Choose another username',

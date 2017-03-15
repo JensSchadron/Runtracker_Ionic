@@ -4,7 +4,6 @@ import {HomePage} from "../home/home";
 import {Tracking} from "../../model/tracking";
 import {CoordinateService} from "../../services/location/coordinate.service";
 import {Coordinate} from "../../model/coordinate";
-import {User} from "../../model/user";
 
 declare var google;
 

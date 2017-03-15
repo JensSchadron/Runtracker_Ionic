@@ -1,4 +1,4 @@
-import {Http, Headers, Response, RequestOptions} from '@angular/http';
+import {Response} from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import {Injectable} from '@angular/core';
 import {BACKEND_BASEURL} from "../../assets/globals";

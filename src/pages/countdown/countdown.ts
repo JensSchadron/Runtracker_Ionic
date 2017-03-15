@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {CoordinateService} from "../../services/location/coordinate.service";
-import {ChallengeTrackingPage} from "../challenge-tracking/challenge-tracking";
 
 @Component({
   selector: 'page-countdown',

@@ -10,7 +10,7 @@ import {UserService} from "../../services/auth/user.service";
 
 import {User} from "../../model/user";
 import {Competition} from "../../model/competition";
-import {Observable, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {Packet} from 'mqtt';
 import {
   MQTTPacketType, MQTTPacket, InviteResponsePacket, ReadyPacket,
