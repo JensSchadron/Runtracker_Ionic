@@ -37,11 +37,13 @@ describe('Ranking-page', () => {
     let btnWorld = element(by.id('button-world'));
     let btnFriends = element(by.id('button-friends'));
     let selectSort = element(by.id('orderby-select'));
-    let title = element(by.tagName('h1'));
-    expect(title.isPresent()).toBeTruthy();
+    let rankingCard = element(by.id('ranking-card'));
+    let rankingList = element(by.id('ranking-list'));
     expect(btnWorld.isPresent()).toBeTruthy();
     expect(btnFriends.isPresent()).toBeTruthy();
     expect(selectSort.isPresent()).toBeTruthy();
+    expect(rankingCard.isPresent()).toBeTruthy();
+    expect(rankingList.isPresent()).toBeTruthy();
   });
 
   afterEach(() => {
