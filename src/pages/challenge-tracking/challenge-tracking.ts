@@ -131,15 +131,18 @@ export class ChallengeTrackingPage {
   private createTracking(): Tracking {
     let tracking = new Tracking();
 
-    let avgSpeed = (this.speedStamps.length == 0) ? 0 : this.calculateAvgSpeed();
-    let avgPace = this.calculateAvgPace(avgSpeed);
+    let avgSpeed = (this.speedStamps.length === 0) ? 0 : this.calculateAvgSpeed();
+    let avgPace = (avgSpeed === 0) ? 0 : this.calculateAvgPace(avgSpeed);
 
-    let maxSpeed = this.calculateMaxSpeed();
-    this.coordinates.forEach(c => {
-      if (c.speed > maxSpeed) {
-        c.speed = maxSpeed;
-      }
-    });
+    let maxSpeed = 0;
+    if (this.speedStamps.length > 0) {
+      maxSpeed = this.calculateMaxSpeed();
+      this.coordinates.forEach(c => {
+        if (c.speed > maxSpeed) {
+          c.speed = maxSpeed;
+        }
+      });
+    }
 
     let durationInSeconds = (this.coordinates.length === 0) ? 0 : Math.round((this.coordinates[this.coordinates.length - 1].time - this.coordinates[0].time) / 1000);
 
