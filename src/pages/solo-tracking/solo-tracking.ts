@@ -177,11 +177,14 @@ export class SolotrackingPage {
     }
 
     let maxSpeed = this.calculateMaxSpeed();
-    this.coordinates.forEach(c => {
-      if (c.speed > maxSpeed) {
-        c.speed = maxSpeed;
-      }
-    });
+
+    if (this.coordinates.length > 0) {
+      this.coordinates.forEach(c => {
+        if (c.speed > maxSpeed) {
+          c.speed = maxSpeed;
+        }
+      });
+    }
 
     let tracking           = new Tracking();
     tracking.avgSpeed      = this.avgSpeed;
