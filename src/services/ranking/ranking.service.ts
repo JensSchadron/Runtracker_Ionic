@@ -7,13 +7,8 @@ import {AuthHttpImpl} from "../auth/auth-http-impl";
 
 @Injectable()
 export class RankingService {
-  private jwt = localStorage.getItem('id_token');
-  private authHeader = new Headers();
 
   constructor(private authHttp: AuthHttpImpl) {
-    if (this.jwt) {
-      this.authHeader.append('token', this.jwt);
-    }
   }
 
   getFriends(sortoption): Observable<User[]> {
