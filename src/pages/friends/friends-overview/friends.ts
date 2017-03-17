@@ -15,9 +15,7 @@ import {User} from "../../../model/user";
 export class FriendsPage implements OnInit, OnDestroy {
   public pageTitle: string = "Friends";
 
-  private potentialFriends: User[] = [];
   private friends: User[] = [];
-  private requests: User[] = [];
   friendsProfilePage = FriendsProfilePage;
   private friendsLoaded: boolean = false;
 

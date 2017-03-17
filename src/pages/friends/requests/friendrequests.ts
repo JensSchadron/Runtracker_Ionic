@@ -15,8 +15,6 @@ import {AddFriendsPage} from "../add-friends/addfriends"
 export class FriendsRequestsPage implements OnInit {
   public pageTitle:string = "Friendrequests";
 
-  private potentialFriends:User[] = [];
-  private friends:User[] = [];
   private requests:User[] = [];
   private requestsLoaded:boolean = false;
   queryString:string = "";
