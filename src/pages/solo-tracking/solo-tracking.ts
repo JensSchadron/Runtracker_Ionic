@@ -170,18 +170,20 @@ export class SolotrackingPage {
   }
 
   private createTracking(): Tracking {
-    if (this.speedStamps.length === 0) {
+    let maxSpeed: number = 0;
+
+    if (this.coordinates.length > 0) {
+      maxSpeed = this.calculateMaxSpeed();
+      this.coordinates.forEach(c => {
+        if (c.speed > maxSpeed) {
+          c.speed = maxSpeed;
+        }
+      });
+    } else {
       this.speedStamps.push(0);
       this.avgSpeed = 0;
       this.avgPace = 0;
     }
-
-    let maxSpeed = this.calculateMaxSpeed();
-    this.coordinates.forEach(c => {
-      if (c.speed > maxSpeed) {
-        c.speed = maxSpeed;
-      }
-    });
 
     let tracking           = new Tracking();
     tracking.avgSpeed      = this.avgSpeed;
