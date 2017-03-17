@@ -1,5 +1,5 @@
 import {Component, OnInit}      from '@angular/core';
-import {NavController, AlertController}  from 'ionic-angular';
+import {NavController, AlertController, LoadingController}  from 'ionic-angular';
 import {UserService} from '../../services/auth/user.service';
 import {User} from "../../model/user";
 import {TrackingchoicePage} from "../tracking-choice/tracking-choice";
@@ -69,7 +69,8 @@ export class HomePage implements OnInit{
               private userService: UserService,
               public mqttService: MQTTService,
               private configService: ConfigService,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public loadController: LoadingController) {
   }
 
   /** Callback on_connect to queue */
@@ -98,6 +99,11 @@ export class HomePage implements OnInit{
           {
             text: "Decline",
             handler: () => {
+              let loader = this.loadController.create({
+                content: "Please wait..."
+              });
+              loader.present();
+
               this.configService.getConfigWithCompTopic(compInvite.compId).then((config) => {
                 this.mqttService.disconnect().then(() => {
                   this.userMessages.unsubscribe();
@@ -114,6 +120,7 @@ export class HomePage implements OnInit{
                           this.mqttService.try_connect()
                             .then(() => {
                               this.on_connect();
+                              loader.dismiss();
                             })
                             .catch(() => {
                               this.on_error();
@@ -136,6 +143,9 @@ export class HomePage implements OnInit{
           {
             text: "Accept",
             handler: () => {
+              let loader = this.loadController.create();
+              loader.present();
+
               this.authHttp.getAuthHttp().post(BACKEND_BASEURL + "/api/competitions/running/" + compInvite.compId, null)
                 .catch(err => this.handleError(err))
                 .subscribe(() => {
@@ -148,6 +158,7 @@ export class HomePage implements OnInit{
                           this.on_connect();
                           let response = new InviteResponsePacket(compInvite.compId, this.user.userId, true);
                           this.mqttService.publishInCompTopic(JSON.stringify(response), 2);
+                          loader.dismiss();
                           this.navCtrl.push(ChallengeLoadPage, {compId: compInvite.compId});
                         })
                         .catch(() => {
