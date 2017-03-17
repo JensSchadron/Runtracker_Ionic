@@ -54,15 +54,6 @@ export class FriendsPage implements OnInit, OnDestroy {
   }
 
   private init(): void {
-    this.friendsService.getPotentialFriends().subscribe(
-      (users) => {
-        this.potentialFriends = users;
-
-      },
-      error => {
-        console.log(error as string);
-      }
-    );
 
     this.friendsService.getFriends().subscribe(
       (friends) => {
@@ -74,14 +65,6 @@ export class FriendsPage implements OnInit, OnDestroy {
       }
     );
 
-    this.friendsService.getFriendrequests().subscribe(
-      (friends) => {
-        this.requests = friends;
-      },
-      error => {
-        console.log(error as string);
-      }
-    );
   }
   doRefresh(refresher) {
     this.init();

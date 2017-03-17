@@ -31,23 +31,6 @@ export class FriendsRequestsPage implements OnInit {
   }
 
   private init():void {
-    this.friendsService.getPotentialFriends().subscribe(
-      (users) => {
-        this.potentialFriends = users;
-      },
-      error => {
-        console.log(error as string);
-      }
-    );
-
-    this.friendsService.getFriends().subscribe(
-      (friends) => {
-        this.friends = friends;
-      },
-      error => {
-        console.log(error as string);
-      }
-    );
 
     this.friendsService.getFriendrequests().subscribe(
       (friends) => {
